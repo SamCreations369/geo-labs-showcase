@@ -1,71 +1,37 @@
 import { motion } from 'framer-motion';
-import { ArrowRight, Clock } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
+import blog1 from '@/assets/blog-1.png';
+import blog2 from '@/assets/blog-2.png';
+import blog3 from '@/assets/blog-3.png';
+import blog4 from '@/assets/blog-4.png';
+
+const featuredPost = {
+  title: 'What is GEO and Why Local Businesses Can\'t Ignore It',
+  excerpt: 'Learn how Generative Engine Optimization is changing the game for local search visibility.',
+  category: 'Must Read',
+  author: 'GEO Labs Team',
+  role: 'Head of Marketing',
+  image: blog1,
+  featured: true,
+};
 
 const posts = [
   {
-    title: 'What is GEO and Why Local Businesses Can\'t Ignore It',
-    excerpt: 'Learn how Generative Engine Optimization is changing the game for local search visibility.',
-    category: 'Must Read',
-    readTime: '5 min',
+    title: 'How to Show Up in AI Search Results',
+    category: 'Tools',
+    image: blog2,
   },
   {
-    title: 'How to Show Up in AI Search Results Before Your Competitors',
-    excerpt: 'Practical strategies to get your business mentioned by ChatGPT, Gemini, and other AI tools.',
-    category: 'Strategy',
-    readTime: '7 min',
+    title: '5 Local SEO Moves for More Calls',
+    category: 'Insight',
+    image: blog3,
   },
   {
-    title: '5 Local SEO Moves to Get More Calls This Month',
-    excerpt: 'Quick wins you can implement today to boost your Google Business Profile and local rankings.',
-    category: 'Tactics',
-    readTime: '4 min',
+    title: 'Understanding Local Rankings',
+    category: 'Management',
+    image: blog4,
   },
 ];
-
-function BlogCard({ post, index }: { post: typeof posts[0]; index: number }) {
-  return (
-    <motion.article
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: index * 0.1, duration: 0.5 }}
-      whileHover={{ 
-        rotateX: -2, 
-        rotateY: index === 0 ? 2 : index === 2 ? -2 : 0, 
-        scale: 1.02,
-        transition: { type: 'spring', stiffness: 300 }
-      }}
-      className="group glass-card rounded-2xl overflow-hidden shadow-soft cursor-pointer"
-      style={{ transformStyle: 'preserve-3d' }}
-    >
-      {/* Thumbnail placeholder */}
-      <div className="h-48 bg-gradient-to-br from-accent/20 to-primary/10 relative overflow-hidden">
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="w-16 h-16 rounded-2xl bg-card/80 backdrop-blur flex items-center justify-center">
-            <span className="font-serif text-2xl text-accent">GEO</span>
-          </div>
-        </div>
-        <div className="absolute top-4 left-4">
-          <span className="chip text-xs">{post.category}</span>
-        </div>
-      </div>
-
-      <div className="p-6">
-        <div className="flex items-center gap-2 text-xs text-muted-foreground mb-3">
-          <Clock className="w-3 h-3" />
-          {post.readTime} read
-        </div>
-        <h3 className="font-serif text-xl text-foreground mb-2 group-hover:text-accent transition-colors">
-          {post.title}
-        </h3>
-        <p className="text-muted-foreground text-sm mb-4">{post.excerpt}</p>
-        <span className="inline-flex items-center text-sm font-medium text-accent group-hover:gap-2 transition-all">
-          Read article <ArrowRight className="w-4 h-4 ml-1" />
-        </span>
-      </div>
-    </motion.article>
-  );
-}
 
 export function Blog() {
   return (
@@ -75,17 +41,88 @@ export function Blog() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-6"
         >
           <span className="eyebrow">Blog</span>
-          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-foreground leading-tight">
-            GEO & SEO Insights
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl text-foreground leading-tight">
+            Ideas to level-up your local search game
           </h2>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-6">
+        {/* Blog Grid - Dreelio style */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {/* Featured Post - spans 2 columns */}
+          <motion.a
+            href="#"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            whileHover={{ scale: 1.02 }}
+            className="md:col-span-2 lg:row-span-2 glass-card rounded-2xl overflow-hidden group cursor-pointer"
+          >
+            <div className="relative h-64 lg:h-full">
+              <img
+                src={featuredPost.image}
+                alt={featuredPost.title}
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                <span className="inline-block px-3 py-1 bg-white/20 backdrop-blur rounded-full text-xs font-medium mb-3">
+                  {featuredPost.category}
+                </span>
+                <h3 className="text-xl font-semibold mb-2 group-hover:underline">
+                  {featuredPost.title}
+                </h3>
+                <p className="text-sm text-white/80 mb-4">{featuredPost.excerpt}</p>
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-full bg-white/20" />
+                  <div>
+                    <div className="text-sm font-medium">{featuredPost.author}</div>
+                    <div className="text-xs text-white/60">{featuredPost.role}</div>
+                  </div>
+                </div>
+              </div>
+              <div className="absolute top-4 right-4 bg-white/10 backdrop-blur rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                <span className="text-xs text-white font-medium px-2">Featured</span>
+              </div>
+            </div>
+          </motion.a>
+
+          {/* Other Posts */}
           {posts.map((post, i) => (
-            <BlogCard key={post.title} post={post} index={i} />
+            <motion.a
+              key={post.title}
+              href="#"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              whileHover={{ scale: 1.02, y: -5 }}
+              className="glass-card rounded-2xl overflow-hidden group cursor-pointer"
+            >
+              <div className="relative h-40">
+                <img
+                  src={post.image}
+                  alt={post.title}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="p-5">
+                <h3 className="font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
+                  {post.title}
+                </h3>
+                <span className="text-xs text-muted-foreground">{post.category}</span>
+              </div>
+            </motion.a>
           ))}
         </div>
       </div>

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,47 +6,40 @@
 
 @layer base {
   :root {
-    /* GEO Labs - Clean, professional, warm light theme */
-    --background: 40 30% 98%;
-    --foreground: 220 20% 10%;
+    /* Dreelio-style light cream/warm theme */
+    --background: 40 30% 97%;
+    --foreground: 0 0% 10%;
 
     --card: 0 0% 100%;
-    --card-foreground: 220 20% 10%;
+    --card-foreground: 0 0% 10%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 220 20% 10%;
+    --popover-foreground: 0 0% 10%;
 
-    --primary: 220 65% 18%;
-    --primary-foreground: 40 30% 98%;
+    --primary: 0 0% 10%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 40 25% 94%;
-    --secondary-foreground: 220 20% 10%;
+    --secondary: 40 20% 94%;
+    --secondary-foreground: 0 0% 10%;
 
-    --muted: 40 20% 92%;
-    --muted-foreground: 220 10% 45%;
+    --muted: 40 15% 90%;
+    --muted-foreground: 0 0% 45%;
 
-    --accent: 200 85% 45%;
+    --accent: 200 70% 50%;
     --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 40 15% 88%;
-    --input: 40 15% 88%;
-    --ring: 220 65% 18%;
+    --border: 40 10% 88%;
+    --input: 40 10% 88%;
+    --ring: 0 0% 10%;
 
     --radius: 0.75rem;
 
-    /* Custom GEO Labs tokens */
-    --hero-gradient-start: 200 60% 92%;
-    --hero-gradient-end: 40 30% 98%;
-    --glass: 0 0% 100% / 0.7;
-    --shadow-soft: 220 20% 10% / 0.06;
-    --shadow-medium: 220 20% 10% / 0.1;
-    --shadow-card: 0 20px 60px -15px hsl(var(--shadow-medium));
-    --chart-up: 150 60% 45%;
-    --chip-bg: 200 60% 95%;
-    --chip-text: 200 70% 35%;
+    /* Custom tokens */
+    --sky-start: 200 60% 88%;
+    --sky-end: 40 30% 97%;
   }
 }
 
@@ -64,58 +57,63 @@
     font-family: 'Inter', system-ui, sans-serif;
   }
 
-  h1, h2, h3 {
-    font-family: 'Instrument Serif', Georgia, serif;
+  h1, h2, h3, h4 {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-weight: 400;
   }
 }
 
 @layer components {
   .section-container {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
-  }
-
-  .glass-card {
-    @apply bg-card/80 backdrop-blur-xl border border-white/50 shadow-xl rounded-2xl;
-  }
-
-  .chip {
-    @apply inline-flex items-center px-4 py-2 rounded-full text-sm font-medium;
-    background: hsl(var(--chip-bg));
-    color: hsl(var(--chip-text));
-  }
-
-  .eyebrow {
-    @apply text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-4;
-  }
-
-  .gradient-text {
-    @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%);
-  }
-
-  .tilt-card {
-    transform-style: preserve-3d;
-    transition: transform 0.3s ease-out;
-  }
-
-  .tilt-card:hover {
-    transform: perspective(1000px) rotateX(2deg) rotateY(-2deg) scale(1.02);
+    @apply max-w-6xl mx-auto px-5 sm:px-8;
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center px-6 py-3.5 rounded-full font-medium transition-all duration-300;
-    @apply bg-primary text-primary-foreground shadow-lg;
-    @apply hover:shadow-xl hover:scale-105 active:scale-100;
+    @apply inline-flex items-center justify-center px-7 py-3.5 rounded-full font-medium text-sm transition-all duration-200;
+    @apply bg-primary text-primary-foreground;
+    @apply hover:opacity-90 active:scale-[0.98];
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center px-6 py-3.5 rounded-full font-medium transition-all duration-300;
-    @apply bg-card text-foreground border border-border;
-    @apply hover:bg-secondary hover:shadow-md;
+    @apply inline-flex items-center justify-center px-7 py-3.5 rounded-full font-medium text-sm transition-all duration-200;
+    @apply bg-transparent text-foreground;
+    @apply hover:bg-secondary;
+  }
+
+  .eyebrow {
+    @apply text-xs font-medium uppercase tracking-wider text-muted-foreground mb-4 block;
+  }
+
+  .chip {
+    @apply inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-secondary text-secondary-foreground;
   }
 
   .feature-chip {
-    @apply inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium bg-secondary text-secondary-foreground;
+    @apply inline-flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-medium bg-secondary/80 text-secondary-foreground border border-border/50;
+  }
+
+  .glass-card {
+    @apply bg-card/95 backdrop-blur-sm rounded-3xl;
+    box-shadow: 0 25px 80px -20px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(255, 255, 255, 0.8) inset;
+  }
+
+  /* Sky gradient background */
+  .sky-gradient {
+    background: linear-gradient(180deg, 
+      hsl(200 60% 88%) 0%, 
+      hsl(200 50% 92%) 30%,
+      hsl(40 30% 97%) 60%,
+      hsl(40 30% 97%) 100%
+    );
+  }
+
+  /* Cloud shapes */
+  .cloud {
+    position: absolute;
+    background: white;
+    border-radius: 9999px;
+    opacity: 0.6;
+    filter: blur(40px);
   }
 
   /* Marquee animation */
@@ -124,44 +122,32 @@
     100% { transform: translateX(-50%); }
   }
 
+  @keyframes marquee-reverse {
+    0% { transform: translateX(-50%); }
+    100% { transform: translateX(0); }
+  }
+
   .animate-marquee {
-    animation: marquee 25s linear infinite;
+    animation: marquee 30s linear infinite;
   }
 
-  /* Floating animation */
-  @keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
+  .animate-marquee-reverse {
+    animation: marquee-reverse 30s linear infinite;
   }
 
-  .animate-float {
-    animation: float 6s ease-in-out infinite;
+  /* 3D perspective wrapper */
+  .perspective-wrapper {
+    perspective: 2000px;
+    perspective-origin: center top;
   }
 
-  /* Fade in up animation */
-  @keyframes fade-in-up {
-    0% {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  .tilt-3d {
+    transform-style: preserve-3d;
+    will-change: transform;
   }
-
-  .animate-fade-in-up {
-    animation: fade-in-up 0.8s ease-out forwards;
-  }
-
-  /* Stagger children animation delays */
-  .stagger-1 { animation-delay: 0.1s; }
-  .stagger-2 { animation-delay: 0.2s; }
-  .stagger-3 { animation-delay: 0.3s; }
-  .stagger-4 { animation-delay: 0.4s; }
 }
 
-/* Custom scrollbar */
+/* Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }

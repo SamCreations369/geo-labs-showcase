@@ -1,43 +1,40 @@
 import { motion } from 'framer-motion';
-import { Building2, UtensilsCrossed, Sparkles, Stethoscope, Dumbbell, Wrench } from 'lucide-react';
 
-const industries = [
-  { name: 'Local Restaurants', icon: UtensilsCrossed },
-  { name: 'Med Spas', icon: Sparkles },
-  { name: 'Dental Clinics', icon: Stethoscope },
-  { name: 'Gyms & Studios', icon: Dumbbell },
-  { name: 'Home Services', icon: Wrench },
-  { name: 'Local Restaurants', icon: UtensilsCrossed },
-  { name: 'Med Spas', icon: Sparkles },
-  { name: 'Dental Clinics', icon: Stethoscope },
-  { name: 'Gyms & Studios', icon: Dumbbell },
-  { name: 'Home Services', icon: Wrench },
+const trustLogos = [
+  'Local Restaurants',
+  'Med Spas',
+  'Dental Clinics',
+  'Gyms & Studios',
+  'Home Services',
+  'Local Restaurants',
+  'Med Spas',
+  'Dental Clinics',
+  'Gyms & Studios',
+  'Home Services',
 ];
 
 export function TrustBar() {
   return (
-    <section className="py-12 bg-background border-y border-border/50 overflow-hidden">
-      <div className="section-container mb-8">
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="text-center text-sm text-muted-foreground"
-        >
-          Built for neighborhood businesses ready to outrank big brands.
-        </motion.p>
-      </div>
+    <section className="py-16 bg-background">
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        className="text-center mb-8"
+      >
+        <p className="text-sm text-muted-foreground">
+          Built for neighborhood businesses ready to outrank big brands
+        </p>
+      </motion.div>
 
-      {/* Marquee */}
-      <div className="relative">
+      <div className="relative overflow-hidden">
         <div className="flex animate-marquee">
-          {[...industries, ...industries].map((industry, i) => (
+          {[...trustLogos, ...trustLogos].map((logo, i) => (
             <div
               key={i}
-              className="flex items-center gap-3 mx-8 text-muted-foreground/70"
+              className="flex-shrink-0 mx-8 px-6 py-3 rounded-full bg-secondary/50 text-muted-foreground text-sm font-medium"
             >
-              <industry.icon className="w-5 h-5" />
-              <span className="text-sm font-medium whitespace-nowrap">{industry.name}</span>
+              {logo}
             </div>
           ))}
         </div>
