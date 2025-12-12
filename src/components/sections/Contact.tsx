@@ -17,12 +17,13 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="py-24 bg-gradient-to-b from-secondary/30 to-background">
+    <section id="contact" className="py-24">
       <div className="section-container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="text-center mb-16"
         >
           <span className="eyebrow">Get started</span>
@@ -40,10 +41,10 @@ export function Contact() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.2 }}
+          transition={{ delay: 0.1, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="max-w-lg mx-auto"
         >
-          <form onSubmit={handleSubmit} className="glass-card p-8 rounded-2xl shadow-card">
+          <form onSubmit={handleSubmit} className="glass-card-strong p-8 md:p-10">
             <div className="space-y-5">
               <div>
                 <label className="block text-sm font-medium text-foreground mb-2">
@@ -55,7 +56,7 @@ export function Contact() {
                     type="text"
                     value={formData.businessName}
                     onChange={(e) => setFormData({ ...formData, businessName: e.target.value })}
-                    className="w-full pl-12 pr-4 py-3 rounded-xl bg-secondary/50 border border-border focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-all text-foreground"
+                    className="w-full pl-12 pr-4 py-3.5 rounded-xl bg-white/60 border border-white/80 focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-all text-foreground placeholder:text-muted-foreground/60"
                     placeholder="Your Business Name"
                   />
                 </div>
@@ -71,7 +72,7 @@ export function Contact() {
                     type="url"
                     value={formData.website}
                     onChange={(e) => setFormData({ ...formData, website: e.target.value })}
-                    className="w-full pl-12 pr-4 py-3 rounded-xl bg-secondary/50 border border-border focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-all text-foreground"
+                    className="w-full pl-12 pr-4 py-3.5 rounded-xl bg-white/60 border border-white/80 focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-all text-foreground placeholder:text-muted-foreground/60"
                     placeholder="https://yourbusiness.com"
                   />
                 </div>
@@ -87,7 +88,7 @@ export function Contact() {
                     type="text"
                     value={formData.city}
                     onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-                    className="w-full pl-12 pr-4 py-3 rounded-xl bg-secondary/50 border border-border focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-all text-foreground"
+                    className="w-full pl-12 pr-4 py-3.5 rounded-xl bg-white/60 border border-white/80 focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-all text-foreground placeholder:text-muted-foreground/60"
                     placeholder="e.g., Beverly Hills, LA"
                   />
                 </div>
@@ -103,19 +104,21 @@ export function Contact() {
                     type="email"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full pl-12 pr-4 py-3 rounded-xl bg-secondary/50 border border-border focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-all text-foreground"
+                    className="w-full pl-12 pr-4 py-3.5 rounded-xl bg-white/60 border border-white/80 focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-all text-foreground placeholder:text-muted-foreground/60"
                     placeholder="you@email.com"
                   />
                 </div>
               </div>
 
-              <button
+              <motion.button
                 type="submit"
-                className="w-full btn-primary justify-center py-4 text-base"
+                className="w-full btn-primary justify-center py-4 text-base mt-2"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
               >
                 Get My Free GEO Audit
                 <Send className="ml-2 w-4 h-4" />
-              </button>
+              </motion.button>
             </div>
           </form>
         </motion.div>

@@ -37,12 +37,13 @@ export function Pricing() {
   const [isAnnual, setIsAnnual] = useState(true);
 
   return (
-    <section id="pricing" className="py-24 bg-background">
+    <section id="pricing" className="py-24">
       <div className="section-container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="text-center mb-6"
         >
           <span className="eyebrow">Pricing</span>
@@ -52,6 +53,7 @@ export function Pricing() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
           className="text-center mb-12 max-w-2xl mx-auto"
         >
           <h2 className="text-3xl sm:text-4xl lg:text-5xl text-foreground leading-tight mb-2">
@@ -62,7 +64,34 @@ export function Pricing() {
           </h2>
         </motion.div>
 
-        {/* Pricing Cards */}
+        {/* Toggle */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="flex justify-center items-center gap-2 mb-10"
+        >
+          <div className="glass-card p-1 flex gap-1">
+            <button
+              onClick={() => setIsAnnual(true)}
+              className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
+                isAnnual ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:text-foreground'
+              }`}
+            >
+              Annually
+            </button>
+            <button
+              onClick={() => setIsAnnual(false)}
+              className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
+                !isAnnual ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:text-foreground'
+              }`}
+            >
+              Monthly
+            </button>
+          </div>
+        </motion.div>
+
+        {/* Pricing Cards with glass borders */}
         <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
           {plans.map((plan, i) => (
             <motion.div
@@ -70,9 +99,9 @@ export function Pricing() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              whileHover={{ scale: 1.02, y: -5 }}
-              className={`glass-card p-8 rounded-2xl relative ${plan.popular ? 'ring-2 ring-primary' : ''}`}
+              transition={{ delay: i * 0.1, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              whileHover={{ scale: 1.02, y: -4 }}
+              className={`glass-card p-8 relative ${plan.popular ? 'ring-2 ring-primary' : ''}`}
             >
               {plan.discount && (
                 <div className="absolute -top-3 right-6">
@@ -104,44 +133,21 @@ export function Pricing() {
                 ))}
               </ul>
 
-              <a
+              <motion.a
                 href="#contact"
-                className={`block text-center py-3 rounded-full font-medium transition-all ${
+                className={`block text-center py-3 rounded-full font-medium transition-all duration-300 ${
                   plan.popular
                     ? 'bg-primary text-primary-foreground hover:opacity-90'
                     : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'
                 }`}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
               >
                 {plan.cta}
-              </a>
+              </motion.a>
             </motion.div>
           ))}
         </div>
-
-        {/* Toggle */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="flex justify-center items-center gap-4 mt-8"
-        >
-          <button
-            onClick={() => setIsAnnual(true)}
-            className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-              isAnnual ? 'bg-primary text-primary-foreground' : 'text-muted-foreground'
-            }`}
-          >
-            Annually
-          </button>
-          <button
-            onClick={() => setIsAnnual(false)}
-            className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-              !isAnnual ? 'bg-primary text-primary-foreground' : 'text-muted-foreground'
-            }`}
-          >
-            Monthly
-          </button>
-        </motion.div>
       </div>
     </section>
   );

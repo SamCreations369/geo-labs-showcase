@@ -1,5 +1,7 @@
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
+import { SkyBackground } from '@/components/layout/SkyBackground';
+import { Main3DWrapper } from '@/components/layout/Main3DWrapper';
 import { Hero } from '@/components/sections/Hero';
 import { TrustBar } from '@/components/sections/TrustBar';
 import { DeviceFeature } from '@/components/sections/DeviceFeature';
@@ -15,22 +17,25 @@ import { Contact } from '@/components/sections/Contact';
 const Index = () => {
   return (
     <>
+      <SkyBackground />
       <Navbar />
-      <main>
-        <Hero />
-        <TrustBar />
-        <DeviceFeature />
-        <ProjectSection />
-        <FinancialSection />
-        <Benefits />
-        <Testimonials />
-        <Pricing />
-        <TrustBar />
-        <Blog />
-        <FAQ />
-        <Contact />
-      </main>
-      <Footer />
+      <Main3DWrapper>
+        <main>
+          <Hero />
+          <TrustBar />
+          <DeviceFeature />
+          <ProjectSection />
+          <FinancialSection />
+          <Benefits />
+          <Testimonials />
+          <Pricing />
+          <TrustBar />
+          <Blog />
+          <FAQ />
+          <Contact />
+        </main>
+        <Footer />
+      </Main3DWrapper>
     </>
   );
 };
