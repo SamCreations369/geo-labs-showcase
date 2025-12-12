@@ -37,9 +37,10 @@
 
     --radius: 0.75rem;
 
-    /* Custom tokens */
-    --sky-start: 200 60% 88%;
-    --sky-end: 40 30% 97%;
+    /* Sky gradient tokens */
+    --sky-blue: 199 89% 80%;
+    --sky-light: 199 70% 92%;
+    --cream: 40 30% 97%;
   }
 }
 
@@ -53,8 +54,9 @@
   }
 
   body {
-    @apply bg-background text-foreground antialiased;
+    @apply text-foreground antialiased;
     font-family: 'Inter', system-ui, sans-serif;
+    background: hsl(var(--cream));
   }
 
   h1, h2, h3, h4 {
@@ -69,15 +71,15 @@
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center px-7 py-3.5 rounded-full font-medium text-sm transition-all duration-200;
+    @apply inline-flex items-center justify-center px-7 py-3.5 rounded-full font-medium text-sm transition-all duration-300;
     @apply bg-primary text-primary-foreground;
-    @apply hover:opacity-90 active:scale-[0.98];
+    @apply hover:opacity-90 hover:scale-[1.02] active:scale-[0.98];
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center px-7 py-3.5 rounded-full font-medium text-sm transition-all duration-200;
+    @apply inline-flex items-center justify-center px-7 py-3.5 rounded-full font-medium text-sm transition-all duration-300;
     @apply bg-transparent text-foreground;
-    @apply hover:bg-secondary;
+    @apply hover:bg-secondary hover:scale-[1.02];
   }
 
   .eyebrow {
@@ -85,35 +87,101 @@
   }
 
   .chip {
-    @apply inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-secondary text-secondary-foreground;
+    @apply inline-flex items-center px-4 py-2 rounded-full text-sm font-medium;
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
   }
 
   .feature-chip {
-    @apply inline-flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-medium bg-secondary/80 text-secondary-foreground border border-border/50;
+    @apply inline-flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-medium;
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   }
 
+  /* Glassmorphic card - Dreelio style */
   .glass-card {
-    @apply bg-card/95 backdrop-blur-sm rounded-3xl;
-    box-shadow: 0 25px 80px -20px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(255, 255, 255, 0.8) inset;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.95);
+    box-shadow: 
+      0 4px 24px rgba(0, 0, 0, 0.06),
+      0 1px 2px rgba(0, 0, 0, 0.04),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.8);
+    border-radius: 24px;
   }
 
-  /* Sky gradient background */
-  .sky-gradient {
-    background: linear-gradient(180deg, 
-      hsl(200 60% 88%) 0%, 
-      hsl(200 50% 92%) 30%,
-      hsl(40 30% 97%) 60%,
+  .glass-card-strong {
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1.5px solid rgba(255, 255, 255, 1);
+    box-shadow: 
+      0 8px 40px rgba(0, 0, 0, 0.08),
+      0 2px 4px rgba(0, 0, 0, 0.04),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.9);
+    border-radius: 32px;
+  }
+
+  /* Fixed sky background - full viewport */
+  .sky-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -10;
+    background: linear-gradient(
+      180deg,
+      hsl(199 89% 85%) 0%,
+      hsl(199 75% 90%) 15%,
+      hsl(199 60% 94%) 30%,
+      hsl(40 30% 97%) 50%,
       hsl(40 30% 97%) 100%
     );
+    overflow: hidden;
   }
 
-  /* Cloud shapes */
+  /* Cloud shapes - Dreelio style */
   .cloud {
     position: absolute;
     background: white;
     border-radius: 9999px;
-    opacity: 0.6;
-    filter: blur(40px);
+    opacity: 0.7;
+    filter: blur(60px);
+  }
+
+  .cloud-1 {
+    width: 500px;
+    height: 180px;
+    top: 40px;
+    left: 5%;
+  }
+
+  .cloud-2 {
+    width: 700px;
+    height: 220px;
+    top: 20px;
+    right: 5%;
+  }
+
+  .cloud-3 {
+    width: 400px;
+    height: 150px;
+    top: 100px;
+    left: 35%;
+  }
+
+  .cloud-4 {
+    width: 350px;
+    height: 120px;
+    top: 150px;
+    left: 60%;
+    opacity: 0.5;
   }
 
   /* Marquee animation */
@@ -128,22 +196,47 @@
   }
 
   .animate-marquee {
-    animation: marquee 30s linear infinite;
+    animation: marquee 40s linear infinite;
   }
 
   .animate-marquee-reverse {
-    animation: marquee-reverse 30s linear infinite;
+    animation: marquee-reverse 40s linear infinite;
   }
 
-  /* 3D perspective wrapper */
-  .perspective-wrapper {
-    perspective: 2000px;
-    perspective-origin: center top;
+  /* 3D perspective system */
+  .perspective-container {
+    perspective: 2500px;
+    perspective-origin: center 40%;
   }
 
   .tilt-3d {
     transform-style: preserve-3d;
     will-change: transform;
+  }
+
+  /* Global content wrapper for 3D effect */
+  .main-content-3d {
+    transform-style: preserve-3d;
+    will-change: transform;
+    transition: transform 0.1s ease-out;
+  }
+
+  /* Dashboard image styling */
+  .dashboard-image {
+    border-radius: 20px;
+    box-shadow: 
+      0 60px 120px -30px rgba(0, 0, 0, 0.18),
+      0 30px 60px -20px rgba(0, 0, 0, 0.12),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.6);
+  }
+
+  /* Section backgrounds */
+  .section-cream {
+    background: hsl(40 30% 97%);
+  }
+
+  .section-light {
+    background: hsl(40 25% 96%);
   }
 }
 
