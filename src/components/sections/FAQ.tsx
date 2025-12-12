@@ -29,19 +29,17 @@ function FAQItem({ faq, index }: { faq: typeof faqs[0]; index: number }) {
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ delay: index * 0.08, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-      className="border-b border-border/50 last:border-0"
+      transition={{ delay: index * 0.1 }}
+      className="border-b border-border last:border-0"
     >
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full py-6 flex items-center justify-between text-left group"
+        className="w-full py-6 flex items-center justify-between text-left"
       >
-        <span className="font-serif text-lg text-foreground pr-4 group-hover:text-primary transition-colors">
-          {faq.question}
-        </span>
+        <span className="font-serif text-lg text-foreground pr-4">{faq.question}</span>
         <motion.div
           animate={{ rotate: isOpen ? 180 : 0 }}
-          transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.2 }}
           className="shrink-0"
         >
           <ChevronDown className="w-5 h-5 text-muted-foreground" />
@@ -53,7 +51,7 @@ function FAQItem({ faq, index }: { faq: typeof faqs[0]; index: number }) {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.3 }}
             className="overflow-hidden"
           >
             <p className="pb-6 text-muted-foreground leading-relaxed">{faq.answer}</p>
@@ -66,13 +64,12 @@ function FAQItem({ faq, index }: { faq: typeof faqs[0]; index: number }) {
 
 export function FAQ() {
   return (
-    <section id="faq" className="py-24">
+    <section id="faq" className="py-24 bg-background">
       <div className="section-container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="text-center mb-16"
         >
           <span className="eyebrow">FAQ</span>
@@ -81,17 +78,11 @@ export function FAQ() {
           </h2>
         </motion.div>
 
-        <motion.div 
-          className="max-w-3xl mx-auto glass-card-strong p-8 md:p-10"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-        >
+        <div className="max-w-3xl mx-auto">
           {faqs.map((faq, i) => (
             <FAQItem key={faq.question} faq={faq} index={i} />
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

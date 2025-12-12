@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { ArrowUpRight } from 'lucide-react';
 import blog1 from '@/assets/blog-1.png';
 import blog2 from '@/assets/blog-2.png';
 import blog3 from '@/assets/blog-3.png';
@@ -34,13 +35,12 @@ const posts = [
 
 export function Blog() {
   return (
-    <section id="blog" className="py-24">
+    <section id="blog" className="py-24 bg-secondary/30">
       <div className="section-container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="text-center mb-6"
         >
           <span className="eyebrow">Blog</span>
@@ -50,7 +50,6 @@ export function Blog() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
           className="text-center mb-16"
         >
           <h2 className="text-3xl sm:text-4xl lg:text-5xl text-foreground leading-tight">
@@ -58,7 +57,7 @@ export function Blog() {
           </h2>
         </motion.div>
 
-        {/* Blog Grid - Dreelio style with glass borders */}
+        {/* Blog Grid - Dreelio style */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {/* Featured Post - spans 2 columns */}
           <motion.a
@@ -66,19 +65,18 @@ export function Blog() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            whileHover={{ scale: 1.02, y: -4 }}
-            className="md:col-span-2 lg:row-span-2 glass-card overflow-hidden group cursor-pointer"
+            whileHover={{ scale: 1.02 }}
+            className="md:col-span-2 lg:row-span-2 glass-card rounded-2xl overflow-hidden group cursor-pointer"
           >
-            <div className="relative h-64 lg:h-full min-h-[400px]">
+            <div className="relative h-64 lg:h-full">
               <img
                 src={featuredPost.image}
                 alt={featuredPost.title}
                 className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                <span className="inline-block px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-xs font-medium mb-3">
+                <span className="inline-block px-3 py-1 bg-white/20 backdrop-blur rounded-full text-xs font-medium mb-3">
                   {featuredPost.category}
                 </span>
                 <h3 className="text-xl font-semibold mb-2 group-hover:underline">
@@ -93,6 +91,9 @@ export function Blog() {
                   </div>
                 </div>
               </div>
+              <div className="absolute top-4 right-4 bg-white/10 backdrop-blur rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                <span className="text-xs text-white font-medium px-2">Featured</span>
+              </div>
             </div>
           </motion.a>
 
@@ -104,9 +105,9 @@ export function Blog() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.1 + i * 0.1, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              whileHover={{ scale: 1.02, y: -4 }}
-              className="glass-card overflow-hidden group cursor-pointer"
+              transition={{ delay: i * 0.1 }}
+              whileHover={{ scale: 1.02, y: -5 }}
+              className="glass-card rounded-2xl overflow-hidden group cursor-pointer"
             >
               <div className="relative h-40">
                 <img

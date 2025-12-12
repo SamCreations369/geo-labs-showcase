@@ -2,6 +2,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import mobileApp from '@/assets/mobile-app.png';
 import webApp from '@/assets/web-app.png';
+import decorativeShape from '@/assets/decorative-shape.png';
 
 export function DeviceFeature() {
   const ref = useRef<HTMLDivElement>(null);
@@ -10,17 +11,16 @@ export function DeviceFeature() {
     offset: ['start end', 'end start'],
   });
 
-  const y1 = useTransform(scrollYProgress, [0, 1], [80, -80]);
-  const y2 = useTransform(scrollYProgress, [0, 1], [40, -40]);
+  const y1 = useTransform(scrollYProgress, [0, 1], [100, -100]);
+  const y2 = useTransform(scrollYProgress, [0, 1], [60, -60]);
 
   return (
-    <section ref={ref} id="features" className="py-24 overflow-hidden">
+    <section ref={ref} id="features" className="py-24 bg-background overflow-hidden">
       <div className="section-container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="text-center mb-6"
         >
           <span className="eyebrow">Seamless across platforms</span>
@@ -30,7 +30,6 @@ export function DeviceFeature() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
           className="text-center mb-16 max-w-3xl mx-auto"
         >
           <h2 className="text-3xl sm:text-4xl lg:text-5xl text-foreground leading-tight mb-4">
@@ -41,66 +40,72 @@ export function DeviceFeature() {
           </h2>
         </motion.div>
 
-        {/* Device mockups layout - Dreelio style with glass container */}
-        <motion.div 
-          className="glass-card-strong p-8 md:p-12"
-          initial={{ opacity: 0, y: 40 }}
+        {/* Device mockups layout */}
+        <div className="relative flex justify-center items-center min-h-[600px]">
+          {/* Decorative shape behind */}
+          <motion.img
+            src={decorativeShape}
+            alt=""
+            className="absolute left-0 top-1/2 -translate-y-1/2 w-64 opacity-30 -z-10"
+            style={{ y: y2 }}
+          />
+
+          {/* Mobile App */}
+          <motion.div
+            style={{ y: y1 }}
+            className="relative z-10"
+          >
+            <motion.img
+              src={mobileApp}
+              alt="GEO Labs mobile app showing Google Maps integration"
+              className="w-64 sm:w-80 rounded-3xl shadow-2xl"
+              whileHover={{ scale: 1.02, rotateY: -3 }}
+              transition={{ type: 'spring', stiffness: 200 }}
+            />
+          </motion.div>
+
+          {/* Web App */}
+          <motion.div
+            style={{ y: y2 }}
+            className="relative -ml-16 z-20"
+          >
+            <motion.img
+              src={webApp}
+              alt="GEO Labs web dashboard showing AI search results"
+              className="w-[500px] sm:w-[600px] rounded-2xl shadow-2xl"
+              whileHover={{ scale: 1.02, rotateY: 3 }}
+              transition={{ type: 'spring', stiffness: 200 }}
+            />
+          </motion.div>
+
+          {/* Decorative shape right */}
+          <motion.img
+            src={decorativeShape}
+            alt=""
+            className="absolute right-0 top-1/3 w-48 opacity-20 -z-10"
+            style={{ y: y1 }}
+          />
+        </div>
+
+        {/* Feature chips */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="flex flex-wrap justify-center gap-3 mt-12"
         >
-          <div className="relative flex justify-center items-center min-h-[500px]">
-            {/* Mobile App */}
-            <motion.div
-              style={{ y: y1 }}
-              className="relative z-10"
-            >
-              <motion.img
-                src={mobileApp}
-                alt="GEO Labs mobile app showing Google Maps integration"
-                className="w-56 sm:w-72 rounded-3xl shadow-2xl"
-                whileHover={{ scale: 1.03, rotateY: -4 }}
-                transition={{ type: 'spring', stiffness: 250, damping: 20 }}
-              />
-            </motion.div>
-
-            {/* Web App */}
-            <motion.div
-              style={{ y: y2 }}
-              className="relative -ml-20 z-20"
-            >
-              <motion.img
-                src={webApp}
-                alt="GEO Labs web dashboard showing AI search results"
-                className="w-[450px] sm:w-[550px] rounded-2xl shadow-2xl"
-                whileHover={{ scale: 1.03, rotateY: 4 }}
-                transition={{ type: 'spring', stiffness: 250, damping: 20 }}
-              />
-            </motion.div>
+          <div className="feature-chip">
+            <span className="w-2 h-2 rounded-full bg-accent" />
+            Google & Maps Optimization
           </div>
-
-          {/* Feature chips inside glass container */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3 }}
-            className="flex flex-wrap justify-center gap-3 mt-8"
-          >
-            {['Google & Maps Optimization', 'AI & GEO Optimization', 'Review & Reputation Engine'].map((label, i) => (
-              <motion.div 
-                key={label}
-                className="feature-chip"
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.4 + i * 0.1 }}
-              >
-                <span className="w-2 h-2 rounded-full bg-accent" />
-                {label}
-              </motion.div>
-            ))}
-          </motion.div>
+          <div className="feature-chip">
+            <span className="w-2 h-2 rounded-full bg-accent" />
+            AI & GEO Optimization
+          </div>
+          <div className="feature-chip">
+            <span className="w-2 h-2 rounded-full bg-accent" />
+            Review & Reputation Engine
+          </div>
         </motion.div>
       </div>
     </section>

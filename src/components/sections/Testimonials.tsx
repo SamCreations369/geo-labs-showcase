@@ -34,15 +34,14 @@ const testimonials = [
 
 export function Testimonials() {
   return (
-    <section className="py-24 overflow-hidden">
+    <section className="py-24 bg-background overflow-hidden">
       <div className="section-container">
-        {/* Featured Testimonial - Dreelio style with glass border */}
+        {/* Featured Testimonial - Dreelio style */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="glass-card-strong p-8 md:p-12 mb-12 grid md:grid-cols-2 gap-8 items-center"
+          className="glass-card rounded-3xl p-8 md:p-12 mb-12 grid md:grid-cols-2 gap-8 items-center"
         >
           <div>
             <p className="text-xl md:text-2xl text-foreground leading-relaxed mb-8">
@@ -54,12 +53,10 @@ export function Testimonials() {
             </div>
           </div>
           <div className="flex justify-center">
-            <motion.img
+            <img
               src={testimonialFeatured}
               alt="Featured testimonial"
-              className="w-64 h-80 object-cover rounded-2xl shadow-lg"
-              whileHover={{ scale: 1.03 }}
-              transition={{ type: 'spring', stiffness: 250, damping: 20 }}
+              className="w-64 h-80 object-cover rounded-2xl"
             />
           </div>
         </motion.div>
@@ -73,11 +70,10 @@ export function Testimonials() {
             {[...testimonials, ...testimonials].map((testimonial, i) => (
               <motion.div
                 key={i}
-                whileHover={{ scale: 1.02, y: -4 }}
-                transition={{ type: 'spring', stiffness: 300, damping: 25 }}
-                className="glass-card p-6 w-80 flex-shrink-0"
+                whileHover={{ scale: 1.02, y: -5 }}
+                className="glass-card p-6 rounded-2xl w-80 flex-shrink-0"
               >
-                <p className="text-foreground mb-6 leading-relaxed">"{testimonial.quote}"</p>
+                <p className="text-foreground mb-6">"{testimonial.quote}"</p>
                 <div className="flex items-center gap-4">
                   <img
                     src={testimonial.image}
