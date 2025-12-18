@@ -53,7 +53,7 @@ export function ProjectSection() {
 
             </h2>
             <p className="text-lg text-muted-foreground mb-8">
-              Stop guessing how customers find you. GEO Labs combines SEO foundations, local optimization, and GEO (Generative Engine Optimization) so your business shows up more often — and in all the right places.
+              Most businesses have the same problems: terrible site structure, weak content, zero local presence. We audit the damage, prioritize what matters, and rebuild your visibility from the foundation up.
             </p>
             <div className="flex flex-wrap gap-3 mb-8">
               {features.map(feature => <div key={feature} className="chip">
