@@ -22,34 +22,61 @@ export function Hero() {
 
   return (
     <section ref={ref} className="relative sky-gradient overflow-hidden min-h-screen">
-      {/* Animated Cloud decorations with parallax */}
+      {/* Animated Cloud decorations with parallax - many more clouds */}
+      {/* Left side clouds */}
       <motion.div 
-        className="cloud cloud-large cloud-animate-1"
-        style={{ top: 40, left: '-5%', y: cloud1Y }}
+        className="cloud cloud-xlarge cloud-animate-1"
+        style={{ top: -50, left: '-10%', y: cloud1Y }}
       />
       <motion.div 
         className="cloud cloud-large cloud-animate-2"
-        style={{ top: 60, right: '-5%', y: cloud2Y }}
+        style={{ top: 80, left: '-5%', y: cloud2Y }}
       />
       <motion.div 
         className="cloud cloud-medium cloud-animate-3"
-        style={{ top: 20, left: '25%', y: cloud3Y }}
+        style={{ top: 180, left: '5%', y: cloud3Y }}
+      />
+      
+      {/* Center clouds */}
+      <motion.div 
+        className="cloud cloud-xlarge cloud-animate-2"
+        style={{ top: -30, left: '20%', y: cloud3Y }}
       />
       <motion.div 
-        className="cloud cloud-medium cloud-animate-1"
-        style={{ top: 100, right: '20%', y: cloud4Y }}
+        className="cloud cloud-large cloud-animate-1"
+        style={{ top: 50, left: '35%', y: cloud4Y }}
       />
+      <motion.div 
+        className="cloud cloud-medium cloud-animate-3"
+        style={{ top: 150, left: '45%', y: cloud5Y }}
+      />
+      
+      {/* Right side clouds */}
+      <motion.div 
+        className="cloud cloud-xlarge cloud-animate-3"
+        style={{ top: -40, right: '-10%', y: cloud2Y }}
+      />
+      <motion.div 
+        className="cloud cloud-large cloud-animate-1"
+        style={{ top: 60, right: '0%', y: cloud1Y }}
+      />
+      <motion.div 
+        className="cloud cloud-medium cloud-animate-2"
+        style={{ top: 160, right: '15%', y: cloud4Y }}
+      />
+      <motion.div 
+        className="cloud cloud-small cloud-animate-1"
+        style={{ top: 220, right: '25%', y: cloud3Y }}
+      />
+      
+      {/* Extra scattered clouds */}
       <motion.div 
         className="cloud cloud-small cloud-animate-2"
-        style={{ top: 150, left: '45%', y: cloud5Y }}
+        style={{ top: 100, left: '55%', y: cloud5Y }}
       />
       <motion.div 
         className="cloud cloud-small cloud-animate-3"
-        style={{ top: 80, left: '60%', y: cloud3Y }}
-      />
-      <motion.div 
-        className="cloud cloud-medium cloud-animate-1"
-        style={{ top: 30, left: '70%', y: cloud1Y }}
+        style={{ top: 200, left: '70%', y: cloud1Y }}
       />
 
       <div className="section-container relative z-10 pt-32 pb-8">
