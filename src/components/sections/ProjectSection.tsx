@@ -52,7 +52,7 @@ export function ProjectSection() {
               Fix what's broken, optimize what works
 
             </h2>
-            <p className="text-lg text-muted-foreground mb-8">
+            <p className="text-lg mb-8 text-secondary-foreground">
               Most businesses have the same problems: terrible site structure, weak content, zero local presence. We audit the damage, prioritize what matters, and rebuild your visibility from the foundation up.
             </p>
             <div className="flex flex-wrap gap-3 mb-8">
@@ -61,7 +61,7 @@ export function ProjectSection() {
                 </div>)}
             </div>
             <a href="#contact" className="btn-primary">
-              Get a FREE GEO Audit
+              Get Your Visibility Audit
             </a>
           </motion.div>
         </div>
