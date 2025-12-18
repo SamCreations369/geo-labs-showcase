@@ -97,14 +97,15 @@
     box-shadow: 0 25px 80px -20px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(255, 255, 255, 0.8) inset;
   }
 
-  /* Sky gradient background - top (Dreelio style - more visible blue) */
+  /* Sky gradient background - top (Dreelio style - vivid sky blue) */
   .sky-gradient {
     background: linear-gradient(180deg, 
-      hsl(205 85% 75%) 0%, 
-      hsl(205 75% 82%) 15%,
-      hsl(200 65% 88%) 30%,
-      hsl(195 50% 92%) 50%,
-      hsl(40 30% 97%) 80%,
+      hsl(200 90% 70%) 0%, 
+      hsl(200 85% 75%) 10%,
+      hsl(200 80% 80%) 25%,
+      hsl(200 70% 85%) 40%,
+      hsl(195 55% 90%) 60%,
+      hsl(40 30% 97%) 85%,
       hsl(40 30% 97%) 100%
     );
   }
@@ -112,42 +113,51 @@
   /* Sky gradient background - bottom (inverted for footer) */
   .sky-gradient-bottom {
     background: linear-gradient(0deg, 
-      hsl(205 85% 75%) 0%, 
-      hsl(205 75% 82%) 15%,
-      hsl(200 65% 88%) 30%,
-      hsl(195 50% 92%) 50%,
-      hsl(40 30% 97%) 80%,
+      hsl(200 90% 70%) 0%, 
+      hsl(200 85% 75%) 10%,
+      hsl(200 80% 80%) 25%,
+      hsl(200 70% 85%) 40%,
+      hsl(195 55% 90%) 60%,
+      hsl(40 30% 97%) 85%,
       hsl(40 30% 97%) 100%
     );
   }
 
-  /* Cloud shapes - more visible like Dreelio */
+  /* Cloud shapes - highly visible fluffy clouds */
   .cloud {
     position: absolute;
-    background: rgba(255, 255, 255, 0.95);
+    background: white;
     border-radius: 9999px;
     pointer-events: none;
+    box-shadow: 0 0 80px 40px rgba(255, 255, 255, 0.8);
   }
 
   .cloud-small {
-    width: 200px;
-    height: 100px;
-    filter: blur(40px);
-    opacity: 0.8;
+    width: 180px;
+    height: 90px;
+    filter: blur(25px);
+    opacity: 0.95;
   }
 
   .cloud-medium {
-    width: 400px;
-    height: 180px;
-    filter: blur(50px);
-    opacity: 0.85;
+    width: 350px;
+    height: 160px;
+    filter: blur(35px);
+    opacity: 0.95;
   }
 
   .cloud-large {
-    width: 600px;
-    height: 250px;
-    filter: blur(60px);
-    opacity: 0.9;
+    width: 550px;
+    height: 220px;
+    filter: blur(45px);
+    opacity: 0.95;
+  }
+
+  .cloud-xlarge {
+    width: 700px;
+    height: 280px;
+    filter: blur(50px);
+    opacity: 0.95;
   }
 
   /* Cloud scroll animation */
