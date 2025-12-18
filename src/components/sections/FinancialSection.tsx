@@ -34,7 +34,8 @@ export function FinancialSection() {
 
             </h2>
             <p className="text-lg text-muted-foreground mb-8">
-              Track how search visibility translates into calls, bookings, and visits. We connect traffic insights with real-world results so you can see the ROI of your SEO and GEO investment.
+              Traditional SEO isn't enough. AI platforms are answering questions without sending traffic which cuts into the clicks businesses normally earn from search. We optimize your content so you're part of the answer, not left out of the conversation entirely.
+
             </p>
             <div className="flex flex-wrap gap-3 mb-8">
               {features.map(feature => <div key={feature} className="chip">
