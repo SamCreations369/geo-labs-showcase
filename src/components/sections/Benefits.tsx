@@ -29,7 +29,7 @@ const integrationLogos = [{
   bg: 'bg-emerald-100'
 }];
 const features = [{
-  title: 'Collaborate in realtime',
+  title: 'Visibility that compounds',
   description: 'Keep every conversation in sync use comments, messages, and project chats to stay on the same page.'
 }, {
   title: 'Speaks your language',
