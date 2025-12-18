@@ -31,7 +31,7 @@ export function Contact() {
             <span className="text-muted-foreground">where it counts?</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-xl mx-auto">
-            Tell us about your business and we'll send a free GEO + SEO visibility snapshot.
+            Tell us about your business and we'll schedule a GEO + SEO visibility audit.
           </p>
         </motion.div>
 
