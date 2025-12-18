@@ -33,7 +33,7 @@ export function FinancialSection() {
               Optimize for AI discovery while competitors catch up
 
             </h2>
-            <p className="text-lg text-muted-foreground mb-8">
+            <p className="text-lg mb-8 text-secondary-foreground">
               Traditional SEO isn't enough. AI platforms are answering questions without sending traffic which cuts into the clicks businesses normally earn from search. We optimize your content so you're part of the answer, not left out of the conversation entirely.
 
             </p>
@@ -43,7 +43,7 @@ export function FinancialSection() {
                 </div>)}
             </div>
             <a href="#contact" className="btn-primary">
-              Get a FREE GEO Audit
+              Get Your Visibility Audit
             </a>
           </motion.div>
 
