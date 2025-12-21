@@ -11,7 +11,7 @@ export function Hero() {
   });
   const imageY = useTransform(scrollYProgress, [0, 1], [0, 200]);
   const imageScale = useTransform(scrollYProgress, [0, 1], [1, 0.9]);
-  const imageRotateX = useTransform(scrollYProgress, [0, 1], [0, 10]);
+  const imageRotateX = useTransform(scrollYProgress, [0, 1], [30, 0]);
 
   // Cloud parallax transforms
   const cloud1Y = useTransform(scrollYProgress, [0, 1], [0, 100]);
@@ -131,19 +131,11 @@ export function Hero() {
         scale: imageScale,
         rotateX: imageRotateX
       }} className="perspective-wrapper mx-auto max-w-5xl">
-          <motion.div className="tilt-3d" whileHover={{
-          rotateX: -2,
-          rotateY: 2,
-          scale: 1.01
-        }} transition={{
-          type: 'spring',
-          stiffness: 200,
-          damping: 20
-        }}>
+          <div className="tilt-3d">
             <img alt="GEO Labs Dashboard showing search visibility metrics" className="w-full rounded-2xl shadow-2xl" style={{
             boxShadow: '0 50px 100px -30px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.5) inset'
           }} src="/lovable-uploads/40529a62-99b6-4a96-91f2-28b64058f07f.png" />
-          </motion.div>
+          </div>
         </motion.div>
       </div>
     </section>;
