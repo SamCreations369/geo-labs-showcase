@@ -4,7 +4,6 @@ import googleMapsLogo from '@/assets/google-maps-logo.png';
 import youtubeLogo from '@/assets/youtube-logo.jpg';
 import chatgptLogo from '@/assets/chatgpt-logo.png';
 import copilotLogo from '@/assets/copilot-logo.jpg';
-
 const integrationLogos = [{
   name: 'Google Maps',
   logo: googleMapsLogo
@@ -18,7 +17,6 @@ const integrationLogos = [{
   name: 'Copilot',
   logo: copilotLogo
 }];
-
 const features = [{
   title: 'Visibility that compounds',
   description: 'Keep every conversation in sync use comments, messages, and project chats to stay on the same page.'
@@ -29,7 +27,6 @@ const features = [{
   title: 'View things your way',
   description: 'Easily toggle between various views, including Kanban, cards, list, table, timeline, and calendar.'
 }];
-
 export function Benefits() {
   return <section id="benefits" className="py-24 bg-secondary/30">
       <div className="section-container">
@@ -109,7 +106,7 @@ export function Benefits() {
                   <img src={logo.logo} alt={logo.name} className="w-10 h-10 object-contain" />
                 </div>)}
             </div>
-            <p className="text-foreground">Real integrations with real tools, your analytics, your business listings, your content systems. We plug into what you use instead of forcing you into ours.<strong>Real integrations with real tools
+            <p className="text-foreground">Real integrations with real tools Your analytics, your business listings, your content systems. We plug into what you use instead of forcing you into ours.<strong>Real integrations with real tools
             </strong> Your analytics, your business listings, your content systems. We plug into what you use instead of forcing you into ours.
 
             </p>
