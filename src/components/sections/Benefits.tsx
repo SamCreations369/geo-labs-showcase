@@ -117,8 +117,7 @@ export function Benefits() {
                   {logo.name.slice(0, 2)}
                 </div>)}
             </div>
-            <p className="text-foreground">
-              <strong>Real integrations with real tools
+            <p className="text-foreground">Real integrations with real tools, your analytics, your business listings, your content systems. We plug into what you use instead of forcing you into ours.<strong>Real integrations with real tools
             </strong> Your analytics, your business listings, your content systems. We plug into what you use instead of forcing you into ours.
 
             </p>
