@@ -4,29 +4,20 @@ const integrationLogos = [{
   name: 'Google',
   bg: 'bg-red-100'
 }, {
-  name: 'Maps',
-  bg: 'bg-green-100'
+  name: 'Copilot',
+  bg: 'bg-blue-100'
 }, {
   name: 'ChatGPT',
   bg: 'bg-emerald-100'
 }, {
-  name: 'Gemini',
-  bg: 'bg-blue-100'
+  name: 'YouTube',
+  bg: 'bg-red-100'
 }, {
-  name: 'Bing',
-  bg: 'bg-cyan-100'
+  name: 'Google Maps',
+  bg: 'bg-green-100'
 }, {
   name: 'Yelp',
   bg: 'bg-red-100'
-}, {
-  name: 'Google',
-  bg: 'bg-red-100'
-}, {
-  name: 'Maps',
-  bg: 'bg-green-100'
-}, {
-  name: 'ChatGPT',
-  bg: 'bg-emerald-100'
 }];
 const features = [{
   title: 'Visibility that compounds',
