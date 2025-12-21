@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-const trustLogos = ['Local Restaurants', 'Med Spas', 'Dental Clinics', 'Gyms & Studios', 'Home Services', 'Local Restaurants', 'Med Spas', 'Dental Clinics', 'Gyms & Studios', 'Home Services'];
+const trustLogos = ['Google', 'Copilot', 'ChatGPT', 'YouTube', 'Google Maps', 'Google', 'Copilot', 'ChatGPT', 'YouTube', 'Google Maps'];
 export function TrustBar() {
   return <section className="py-16 bg-background">
       <motion.div initial={{
