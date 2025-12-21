@@ -11,7 +11,7 @@ export function Hero() {
 
   const imageY = useTransform(scrollYProgress, [0, 1], [0, 200]);
   const imageScale = useTransform(scrollYProgress, [0, 1], [1, 0.9]);
-  const imageRotateX = useTransform(scrollYProgress, [0, 0.5], [15, 0]);
+  const imageRotateX = useTransform(scrollYProgress, [0, 0.4], [6, 0]);
   
   // Cloud parallax transforms
   const cloud1Y = useTransform(scrollYProgress, [0, 1], [0, 100]);
