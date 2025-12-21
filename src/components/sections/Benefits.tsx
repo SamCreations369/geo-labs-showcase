@@ -1,24 +1,30 @@
 import { motion } from 'framer-motion';
 import customizationFeature from '@/assets/customization-feature.svg';
+import googleMapsLogo from '@/assets/google-maps-logo.png';
+import youtubeLogo from '@/assets/youtube-logo.jpg';
+import chatgptLogo from '@/assets/chatgpt-logo.png';
+import copilotLogo from '@/assets/copilot-logo.jpg';
+
 const integrationLogos = [{
-  name: 'Google',
-  bg: 'bg-red-100'
-}, {
-  name: 'Copilot',
-  bg: 'bg-blue-100'
-}, {
-  name: 'ChatGPT',
-  bg: 'bg-emerald-100'
+  name: 'Google Maps',
+  logo: googleMapsLogo
 }, {
   name: 'YouTube',
-  bg: 'bg-red-100'
+  logo: youtubeLogo
+}, {
+  name: 'ChatGPT',
+  logo: chatgptLogo
+}, {
+  name: 'Copilot',
+  logo: copilotLogo
 }, {
   name: 'Google Maps',
-  bg: 'bg-green-100'
+  logo: googleMapsLogo
 }, {
-  name: 'Yelp',
-  bg: 'bg-red-100'
+  name: 'YouTube',
+  logo: youtubeLogo
 }];
+
 const features = [{
   title: 'Visibility that compounds',
   description: 'Keep every conversation in sync use comments, messages, and project chats to stay on the same page.'
@@ -29,6 +35,7 @@ const features = [{
   title: 'View things your way',
   description: 'Easily toggle between various views, including Kanban, cards, list, table, timeline, and calendar.'
 }];
+
 export function Benefits() {
   return <section id="benefits" className="py-24 bg-secondary/30">
       <div className="section-container">
@@ -104,8 +111,8 @@ export function Benefits() {
             <p className="text-sm mb-4 text-secondary-foreground">Works with what you already have
           </p>
             <div className="flex flex-wrap gap-3 mb-6">
-              {integrationLogos.slice(0, 6).map((logo, i) => <div key={i} className={`w-12 h-12 rounded-xl ${logo.bg} flex items-center justify-center text-xs font-medium text-foreground/70`}>
-                  {logo.name.slice(0, 2)}
+              {integrationLogos.map((logo, i) => <div key={i} className="w-12 h-12 rounded-xl bg-white flex items-center justify-center overflow-hidden">
+                  <img src={logo.logo} alt={logo.name} className="w-10 h-10 object-contain" />
                 </div>)}
             </div>
             <p className="text-foreground">Real integrations with real tools, your analytics, your business listings, your content systems. We plug into what you use instead of forcing you into ours.<strong>Real integrations with real tools
