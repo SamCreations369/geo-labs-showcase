@@ -76,7 +76,7 @@ export function Benefits() {
           scale: 1.02,
           rotateY: 2
         }} className="glass-card p-8 rounded-2xl">
-            <img alt="Customization options" className="mb-6 h-16" src="/lovable-uploads/c0570515-3b96-456d-a1c1-4b832a62b5d0.png" />
+            <img src={customizationFeature} alt="Customization options" className="mb-6 h-16" />
             <p className="text-foreground">
               <strong>Custom because cookie-cutter doesn't work.</strong> Your industry is different. Your competitors are specific. Your customers search differently. We build strategy around your actual situation, not a recycled framework
 
