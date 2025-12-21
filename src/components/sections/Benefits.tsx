@@ -55,8 +55,7 @@ export function Benefits() {
             Built for businesses that understand customers can't buy what they can't find
           </h2>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl text-muted-foreground leading-tight mb-6">
-            powered by simplicity
-          </h2>
+        </h2>
           <p className="text-lg text-muted-foreground">
             Smart, flexible, and built around your business workflow
           </p>
