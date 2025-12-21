@@ -40,7 +40,7 @@ export function Testimonials() {
       }} className="glass-card rounded-3xl p-8 md:p-12 mb-12 grid md:grid-cols-2 gap-8 items-center">
           <div>
             <p className="text-xl md:text-2xl text-foreground leading-relaxed mb-8">
-              "Eudaimonia is by far the best local SEO partner we have ever worked with"
+              "Eudaimonia is by far the best local SEO partner we have ever worked with."
             </p>
             <div>
               <div className="font-semibold text-foreground">Martha P.</div>
