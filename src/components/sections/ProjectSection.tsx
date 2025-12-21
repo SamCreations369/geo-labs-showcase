@@ -24,14 +24,14 @@ export function ProjectSection() {
             <motion.div style={{
             y
           }}>
-              <motion.img src={projectUI} alt="GEO Labs project management dashboard" className="w-full max-w-md mx-auto rounded-2xl shadow-xl" whileHover={{
+              <motion.img alt="GEO Labs project management dashboard" className="w-full max-w-md mx-auto rounded-2xl shadow-xl" whileHover={{
               scale: 1.02,
               rotateY: 3,
               rotateX: -2
             }} transition={{
               type: 'spring',
               stiffness: 200
-            }} />
+            }} src="/lovable-uploads/7422380c-abf2-4438-8550-982ae4627b8d.png" />
             </motion.div>
           </div>
 

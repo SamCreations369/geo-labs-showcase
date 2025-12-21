@@ -55,14 +55,14 @@ export function FinancialSection() {
             <motion.div style={{
             y
           }}>
-              <motion.img src={budgetUI} alt="GEO Labs revenue tracking dashboard" className="w-full max-w-md mx-auto rounded-2xl shadow-xl" whileHover={{
+              <motion.img alt="GEO Labs revenue tracking dashboard" className="w-full max-w-md mx-auto rounded-2xl shadow-xl" whileHover={{
               scale: 1.02,
               rotateY: -3,
               rotateX: 2
             }} transition={{
               type: 'spring',
               stiffness: 200
-            }} />
+            }} src="/lovable-uploads/7a79f66c-fb98-440b-829f-9418c7816f34.png" />
             </motion.div>
           </div>
         </div>
