@@ -52,14 +52,14 @@ export function DeviceFeature() {
           />
 
           {/* Image container */}
-          <div className="relative z-10 flex justify-center items-center min-h-[500px]">
+          <div className="relative z-10 flex justify-center items-center min-h-[600px] sm:min-h-[700px] lg:min-h-[800px]">
             <AnimatePresence mode="wait">
               {activeTab === 'mobile' ? (
                 <motion.img
                   key="mobile"
                   src={mobileApp}
                   alt="GEO Labs mobile app showing Google Maps integration"
-                  className="w-64 sm:w-80 rounded-3xl shadow-2xl"
+                  className="w-80 sm:w-96 lg:w-[420px] rounded-3xl shadow-2xl"
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.9 }}
@@ -70,7 +70,7 @@ export function DeviceFeature() {
                   key="web"
                   src={webApp}
                   alt="GEO Labs web dashboard showing AI search results"
-                  className="w-[500px] sm:w-[600px] rounded-2xl shadow-2xl"
+                  className="w-[700px] sm:w-[850px] lg:w-[1000px] rounded-2xl shadow-2xl"
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.9 }}
