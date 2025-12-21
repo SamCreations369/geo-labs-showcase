@@ -59,7 +59,7 @@ export function DeviceFeature() {
                   key="mobile"
                   src={mobileApp}
                   alt="GEO Labs mobile app showing Google Maps integration"
-                  className="w-80 sm:w-96 lg:w-[420px] rounded-3xl shadow-2xl"
+                  className="w-[700px] sm:w-[850px] lg:w-[1000px] rounded-3xl shadow-2xl"
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.9 }}
