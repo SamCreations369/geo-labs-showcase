@@ -1,6 +1,16 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Send, Building2, Globe, MapPin, Mail } from 'lucide-react';
 import { useState, useRef } from 'react';
+import { z } from 'zod';
+
+const contactSchema = z.object({
+  businessName: z.string().trim().min(1, 'Business name is required').max(100, 'Business name must be less than 100 characters'),
+  website: z.string().trim().url('Please enter a valid URL').max(255, 'URL must be less than 255 characters').or(z.literal('')),
+  city: z.string().trim().min(1, 'City is required').max(100, 'City must be less than 100 characters'),
+  email: z.string().trim().email('Please enter a valid email address').max(255, 'Email must be less than 255 characters')
+});
+
+type ContactFormData = z.infer<typeof contactSchema>;
 
 export function Contact() {
   const ref = useRef<HTMLDivElement>(null);
@@ -15,16 +25,43 @@ export function Contact() {
   const cloud3Y = useTransform(scrollYProgress, [0, 1], [80, 0]);
   const cloud4Y = useTransform(scrollYProgress, [0, 1], [120, 0]);
 
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<ContactFormData>({
     businessName: '',
     website: '',
     city: '',
     email: ''
   });
 
+  const [errors, setErrors] = useState<Partial<Record<keyof ContactFormData, string>>>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
+    setErrors({});
+    
+    const result = contactSchema.safeParse(formData);
+    
+    if (!result.success) {
+      const fieldErrors: Partial<Record<keyof ContactFormData, string>> = {};
+      result.error.errors.forEach((error) => {
+        const field = error.path[0] as keyof ContactFormData;
+        if (!fieldErrors[field]) {
+          fieldErrors[field] = error.message;
+        }
+      });
+      setErrors(fieldErrors);
+      return;
+    }
+
+    setIsSubmitting(true);
+    // Simulate submission - replace with actual API call when backend is added
+    setTimeout(() => {
+      setIsSubmitting(false);
+      setSubmitSuccess(true);
+      setFormData({ businessName: '', website: '', city: '', email: '' });
+      setTimeout(() => setSubmitSuccess(false), 3000);
+    }, 500);
   };
 
   return (
@@ -96,10 +133,12 @@ export function Contact() {
                     type="text"
                     value={formData.businessName}
                     onChange={(e) => setFormData({ ...formData, businessName: e.target.value })}
-                    className="w-full pl-12 pr-4 py-3 rounded-xl bg-secondary/50 border border-border focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-all text-foreground"
+                    className={`w-full pl-12 pr-4 py-3 rounded-xl bg-secondary/50 border ${errors.businessName ? 'border-destructive' : 'border-border'} focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-all text-foreground`}
                     placeholder="Your Business Name"
+                    maxLength={100}
                   />
                 </div>
+                {errors.businessName && <p className="text-sm text-destructive mt-1">{errors.businessName}</p>}
               </div>
 
               <div>
@@ -112,10 +151,12 @@ export function Contact() {
                     type="url"
                     value={formData.website}
                     onChange={(e) => setFormData({ ...formData, website: e.target.value })}
-                    className="w-full pl-12 pr-4 py-3 rounded-xl bg-secondary/50 border border-border focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-all text-foreground"
+                    className={`w-full pl-12 pr-4 py-3 rounded-xl bg-secondary/50 border ${errors.website ? 'border-destructive' : 'border-border'} focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-all text-foreground`}
                     placeholder="https://yourbusiness.com"
+                    maxLength={255}
                   />
                 </div>
+                {errors.website && <p className="text-sm text-destructive mt-1">{errors.website}</p>}
               </div>
 
               <div>
@@ -128,10 +169,12 @@ export function Contact() {
                     type="text"
                     value={formData.city}
                     onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-                    className="w-full pl-12 pr-4 py-3 rounded-xl bg-secondary/50 border border-border focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-all text-foreground"
+                    className={`w-full pl-12 pr-4 py-3 rounded-xl bg-secondary/50 border ${errors.city ? 'border-destructive' : 'border-border'} focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-all text-foreground`}
                     placeholder="e.g., Beverly Hills, LA"
+                    maxLength={100}
                   />
                 </div>
+                {errors.city && <p className="text-sm text-destructive mt-1">{errors.city}</p>}
               </div>
 
               <div>
@@ -144,15 +187,17 @@ export function Contact() {
                     type="email"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full pl-12 pr-4 py-3 rounded-xl bg-secondary/50 border border-border focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-all text-foreground"
+                    className={`w-full pl-12 pr-4 py-3 rounded-xl bg-secondary/50 border ${errors.email ? 'border-destructive' : 'border-border'} focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-all text-foreground`}
                     placeholder="you@email.com"
+                    maxLength={255}
                   />
                 </div>
+                {errors.email && <p className="text-sm text-destructive mt-1">{errors.email}</p>}
               </div>
 
-              <button type="submit" className="w-full btn-primary justify-center py-4 text-base">
-                Get Your Visibility Audit
-                <Send className="ml-2 w-4 h-4" />
+              <button type="submit" disabled={isSubmitting} className="w-full btn-primary justify-center py-4 text-base disabled:opacity-50">
+                {isSubmitting ? 'Submitting...' : submitSuccess ? 'Thank you!' : 'Get Your Visibility Audit'}
+                {!isSubmitting && !submitSuccess && <Send className="ml-2 w-4 h-4" />}
               </button>
             </div>
           </form>
