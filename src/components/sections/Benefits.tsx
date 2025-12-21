@@ -17,12 +17,6 @@ const integrationLogos = [{
 }, {
   name: 'Copilot',
   logo: copilotLogo
-}, {
-  name: 'Google Maps',
-  logo: googleMapsLogo
-}, {
-  name: 'YouTube',
-  logo: youtubeLogo
 }];
 
 const features = [{
