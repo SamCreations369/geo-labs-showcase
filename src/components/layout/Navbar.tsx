@@ -33,7 +33,12 @@ export function Navbar() {
           {/* Logo */}
           <a href="#" className="flex items-center gap-2 text-xl font-semibold text-foreground">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="text-foreground">
-              <path d="M12 3L22 21H2L12 3Z" fill="currentColor" />
+              {/* Left face - darker */}
+              <path d="M12 3L2 21L12 16Z" fill="currentColor" opacity="0.6" />
+              {/* Right face - medium */}
+              <path d="M12 3L22 21L12 16Z" fill="currentColor" opacity="0.85" />
+              {/* Bottom face - lightest */}
+              <path d="M2 21L22 21L12 16Z" fill="currentColor" opacity="1" />
             </svg>
             Eudaimonia
           </a>
