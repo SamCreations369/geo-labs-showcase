@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
-import logo from '@/assets/logo.png';
 const navLinks = [{
   name: 'Features',
   href: '#features'
@@ -33,7 +32,9 @@ export function Navbar() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <a href="#" className="flex items-center gap-2 text-xl font-semibold text-foreground">
-            <img src={logo} alt="Eudaimonia logo" className="h-8 w-8 object-contain" />
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="text-foreground">
+              <path d="M12 3L22 21H2L12 3Z" fill="currentColor" />
+            </svg>
             Eudaimonia
           </a>
 
