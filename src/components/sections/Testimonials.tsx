@@ -57,10 +57,10 @@ export function Testimonials() {
             {[...testimonials, ...testimonials].map((testimonial, i) => <motion.div key={i} whileHover={{
             scale: 1.02,
             y: -5
-          }} className="glass-card p-6 rounded-2xl w-80 flex-shrink-0">
+          }} className="glass-card p-6 rounded-2xl w-80 h-72 flex-shrink-0 flex flex-col">
                 <h4 className="font-semibold text-foreground text-lg mb-2">{testimonial.title}</h4>
-                <p className="text-muted-foreground mb-6">{testimonial.quote}</p>
-                <div className="flex items-center gap-4">
+                <p className="text-muted-foreground mb-6 flex-1">{testimonial.quote}</p>
+                <div className="flex items-center gap-4 mt-auto">
                   <img src={testimonial.image} alt={testimonial.name} className="w-12 h-12 rounded-full object-cover" />
                   <div>
                     <div className="font-semibold text-foreground">{testimonial.name}</div>
