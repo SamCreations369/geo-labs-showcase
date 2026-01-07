@@ -1,15 +1,14 @@
 import { motion } from 'framer-motion';
 import testimonialFeatured from '@/assets/testimonial-featured.png';
-import testimonial1 from '@/assets/testimonial-1.jpg';
+import hvacLogo from '@/assets/hvac-logo.png';
 import testimonial2 from '@/assets/testimonial-2.jpg';
-import testimonial3 from '@/assets/testimonial-3.jpg';
-import testimonial4 from '@/assets/testimonial-4.jpg';
+import mobileDetailLogo from '@/assets/mobile-detail-logo.png';
 const testimonials = [{
   name: 'Brandon Routh',
   role: 'HVAC Company Director',
   title: 'Absolutely worth it!',
   quote: "No sugar-coating, just results. They explained exactly why we weren't ranking and what it would take to fix it. Six months later, we're finally getting the business traffic we needed.",
-  image: testimonial1
+  image: hvacLogo
 }, {
   name: 'Juan Hernandez',
   role: 'Clothing Brand Owner',
@@ -21,7 +20,7 @@ const testimonials = [{
   role: 'Mobile Detail Owner',
   title: 'Real help for small businesses',
   quote: "Honest feedback we actually needed. Our content was mediocre and our local SEO was a mess. They helped fix both, and now we rank where we should have been all along. Profits have increased and I've had more calls consistently ever since.",
-  image: testimonial3
+  image: mobileDetailLogo
 }];
 export function Testimonials() {
   return <section className="py-24 bg-background overflow-hidden">
