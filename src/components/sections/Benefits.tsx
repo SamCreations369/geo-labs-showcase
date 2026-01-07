@@ -51,19 +51,14 @@ export function Benefits() {
       }} viewport={{
         once: true
       }} className="text-center mb-16 max-w-3xl mx-auto">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl text-foreground leading-tight mb-2">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl text-foreground leading-tight mb-6">
             Built for businesses that understand customers can't buy what they can't find
           </h2>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl text-muted-foreground leading-tight mb-6">
-        </h2>
-          <p className="text-lg text-muted-foreground">
-            Smart, flexible, and built around your business workflow
-          </p>
         </motion.div>
 
-        {/* Feature Cards Grid - Dreelio style */}
+        {/* Feature Cards Grid - Two column layout matching reference */}
         <div className="grid md:grid-cols-2 gap-6 mb-12">
-          {/* Customization Card */}
+          {/* Left Card - Customization */}
           <motion.div initial={{
           opacity: 0,
           y: 30
@@ -73,17 +68,45 @@ export function Benefits() {
         }} viewport={{
           once: true
         }} whileHover={{
-          scale: 1.02,
-          rotateY: 2
-        }} className="glass-card p-8 rounded-2xl">
-            <img src={customizationFeature} alt="Customization options" className="mb-6 h-16" />
-            <p className="text-foreground">
-              <strong>Custom because cookie-cutter doesn't work.</strong> Your industry is different. Your competitors are specific. Your customers search differently. We build strategy around your actual situation, not a recycled framework
+          scale: 1.02
+        }} className="bg-secondary/50 p-8 rounded-2xl">
+            <h3 className="text-2xl font-semibold text-foreground mb-8">
+              Smart, flexible, and built around your business workflow
+            </h3>
+            
+            <div className="bg-white rounded-xl p-4 mb-6 inline-block">
+              <div className="flex items-center gap-2 mb-4">
+                <div className="w-8 h-8 rounded-full bg-[#5C4033] flex items-center justify-center">
+                  <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <div className="w-8 h-8 rounded-full bg-gray-500"></div>
+                <div className="w-8 h-8 rounded-full bg-yellow-400"></div>
+                <div className="w-8 h-8 rounded-full bg-green-400"></div>
+                <div className="w-8 h-8 rounded-full bg-cyan-400"></div>
+                <div className="w-8 h-8 rounded-full bg-blue-500"></div>
+                <div className="w-6 h-6 rounded-full border-2 border-muted-foreground flex items-center justify-center">
+                  <div className="w-3 h-3 rounded-full border border-muted-foreground"></div>
+                </div>
+                <svg className="w-5 h-5 text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
+                </svg>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-5 bg-green-500 rounded-full relative">
+                  <div className="absolute right-0.5 top-0.5 w-4 h-4 bg-white rounded-full"></div>
+                </div>
+                <span className="text-sm text-foreground">Hide branding</span>
+              </div>
+            </div>
 
+            <p className="text-foreground">
+              <strong>Personalize every detail,</strong> From branding and interface layout to colors and menus, so your presence feels like an extension of your brand.
             </p>
           </motion.div>
 
-          {/* Integrations Card */}
+          {/* Right Card - Integrations */}
           <motion.div initial={{
           opacity: 0,
           y: 30
@@ -95,19 +118,42 @@ export function Benefits() {
         }} transition={{
           delay: 0.1
         }} whileHover={{
-          scale: 1.02,
-          rotateY: -2
-        }} className="glass-card p-8 rounded-2xl">
-            <p className="text-sm mb-4 text-secondary-foreground">Works with what you already have
-          </p>
-            <div className="flex flex-wrap gap-3 mb-6">
-              {integrationLogos.map((logo, i) => <div key={i} className="w-12 h-12 rounded-xl bg-white flex items-center justify-center overflow-hidden">
-                  <img src={logo.logo} alt={logo.name} className="w-10 h-10 object-contain" />
-                </div>)}
+          scale: 1.02
+        }} className="bg-secondary/50 p-8 rounded-2xl">
+            <h3 className="text-2xl font-semibold text-foreground mb-8">
+              Integrates seamlessly with the tools you already use
+            </h3>
+            
+            <div className="flex items-center gap-2 mb-6">
+              <button className="w-8 h-8 rounded-full border border-muted-foreground/30 flex items-center justify-center text-muted-foreground">
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+              <div className="flex gap-3">
+                {integrationLogos.map((logo, i) => (
+                  <div key={i} className="w-12 h-12 rounded-xl bg-white shadow-sm flex items-center justify-center overflow-hidden">
+                    <img src={logo.logo} alt={logo.name} className="w-8 h-8 object-contain" />
+                  </div>
+                ))}
+              </div>
+              <button className="w-8 h-8 rounded-full border border-muted-foreground/30 flex items-center justify-center text-muted-foreground">
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
             </div>
-            <p className="text-foreground">Real integrations with real tools Your analytics, your business listings, your content systems. We plug into what you use instead of forcing you into ours.<strong>Real integrations with real tools
-            </strong> Your analytics, your business listings, your content systems. We plug into what you use instead of forcing you into ours.
 
+            <div className="flex gap-3 mb-6">
+              {integrationLogos.map((logo, i) => (
+                <div key={i} className="w-12 h-12 rounded-xl bg-white shadow-sm flex items-center justify-center overflow-hidden">
+                  <img src={logo.logo} alt={logo.name} className="w-8 h-8 object-contain" />
+                </div>
+              ))}
+            </div>
+
+            <p className="text-foreground">
+              <strong>Seamless integrations.</strong> Plug into the tools you love. Set up automations, sync your data, and make your systems work smarter together.
             </p>
           </motion.div>
         </div>
