@@ -117,7 +117,7 @@ export function Blog() {
                   <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors">
                     {post.title}
                   </h3>
-                  <span className="text-xs font-semibold uppercase tracking-wide text-[#2563EB] bg-[#DBEAFE] px-3 py-1 rounded-full">{post.category}</span>
+                  <span className="text-xs text-muted-foreground bg-muted px-3 py-1 rounded-full">{post.category}</span>
                 </div>
               </motion.a>)}
           </div>
