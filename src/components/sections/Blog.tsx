@@ -117,7 +117,7 @@ export function Blog() {
                   <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors">
                     {post.title}
                   </h3>
-                  <span className={`text-xs text-white px-3 py-1 rounded-full font-medium ${post.category === 'Insight' ? 'bg-[#C9A227]' : 'bg-[#3B82F6]'}`}>{post.category}</span>
+                  <span className={`text-xs text-white px-3 py-1 rounded-full font-medium ${post.category === 'Insight' ? 'bg-[#C9A227]' : post.category === 'Management' ? 'bg-[#22C55E]' : 'bg-[#3B82F6]'}`}>{post.category}</span>
                 </div>
               </motion.a>)}
           </div>
