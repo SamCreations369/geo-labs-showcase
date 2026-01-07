@@ -32,13 +32,13 @@ export function Navbar() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <a href="#" className="flex items-center gap-2 text-xl font-semibold text-foreground">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="text-foreground">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
               {/* Left face - darker */}
-              <path d="M12 3L2 21L12 16Z" fill="currentColor" opacity="0.6" />
+              <path d="M12 3L2 21L12 16Z" fill="#B8860B" />
               {/* Right face - medium */}
-              <path d="M12 3L22 21L12 16Z" fill="currentColor" opacity="0.85" />
+              <path d="M12 3L22 21L12 16Z" fill="#DAA520" />
               {/* Bottom face - lightest */}
-              <path d="M2 21L22 21L12 16Z" fill="currentColor" opacity="1" />
+              <path d="M2 21L22 21L12 16Z" fill="#FFD700" />
             </svg>
             Eudaimonia
           </a>
