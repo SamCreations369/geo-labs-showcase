@@ -124,32 +124,24 @@ export function Benefits() {
               Integrates seamlessly with the tools you already use
             </h3>
             
-            <div className="flex items-center gap-2 mb-6">
-              <button className="w-8 h-8 rounded-full border border-muted-foreground/30 flex items-center justify-center text-muted-foreground">
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div className="flex items-center gap-4 mb-6">
+              <button className="w-10 h-10 rounded-full border border-muted-foreground/30 flex items-center justify-center text-muted-foreground">
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                 </svg>
               </button>
-              <div className="flex gap-3">
+              <div className="flex gap-4">
                 {integrationLogos.map((logo, i) => (
-                  <div key={i} className="w-12 h-12 rounded-xl bg-white shadow-sm flex items-center justify-center overflow-hidden">
-                    <img src={logo.logo} alt={logo.name} className="w-8 h-8 object-contain" />
+                  <div key={i} className="w-16 h-16 rounded-xl bg-white shadow-sm flex items-center justify-center overflow-hidden">
+                    <img src={logo.logo} alt={logo.name} className="w-12 h-12 object-contain" />
                   </div>
                 ))}
               </div>
-              <button className="w-8 h-8 rounded-full border border-muted-foreground/30 flex items-center justify-center text-muted-foreground">
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <button className="w-10 h-10 rounded-full border border-muted-foreground/30 flex items-center justify-center text-muted-foreground">
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
               </button>
-            </div>
-
-            <div className="flex gap-3 mb-6">
-              {integrationLogos.map((logo, i) => (
-                <div key={i} className="w-12 h-12 rounded-xl bg-white shadow-sm flex items-center justify-center overflow-hidden">
-                  <img src={logo.logo} alt={logo.name} className="w-8 h-8 object-contain" />
-                </div>
-              ))}
             </div>
 
             <p className="text-foreground">
