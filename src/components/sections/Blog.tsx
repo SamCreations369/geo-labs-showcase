@@ -57,47 +57,8 @@ export function Blog() {
           </h2>
         </motion.div>
 
-        {/* Blog Grid - Dreelio style */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {/* Featured Post - spans 2 columns */}
-          <motion.a
-            href="#"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            whileHover={{ scale: 1.02 }}
-            className="md:col-span-2 lg:row-span-2 glass-card rounded-2xl overflow-hidden group cursor-pointer"
-          >
-            <div className="relative h-64 lg:h-full">
-              <img
-                src={featuredPost.image}
-                alt={featuredPost.title}
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-              <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                <span className="inline-block px-3 py-1 bg-white/20 backdrop-blur rounded-full text-xs font-medium mb-3">
-                  {featuredPost.category}
-                </span>
-                <h3 className="text-xl font-semibold mb-2 group-hover:underline">
-                  {featuredPost.title}
-                </h3>
-                <p className="text-sm text-white/80 mb-4">{featuredPost.excerpt}</p>
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full bg-white/20" />
-                  <div>
-                    <div className="text-sm font-medium">{featuredPost.author}</div>
-                    <div className="text-xs text-white/60">{featuredPost.role}</div>
-                  </div>
-                </div>
-              </div>
-              <div className="absolute top-4 right-4 bg-white/10 backdrop-blur rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                <span className="text-xs text-white font-medium px-2">Featured</span>
-              </div>
-            </div>
-          </motion.a>
-
-          {/* Other Posts */}
+        {/* Blog Grid - 3 equal cards */}
+        <div className="grid md:grid-cols-3 gap-6">
           {posts.map((post, i) => (
             <motion.a
               key={post.title}
@@ -106,21 +67,27 @@ export function Blog() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              whileHover={{ scale: 1.02, y: -5 }}
-              className="glass-card rounded-2xl overflow-hidden group cursor-pointer"
+              whileHover={{ scale: 1.02 }}
+              className="group cursor-pointer"
             >
-              <div className="relative h-40">
+              <div className="relative h-56 rounded-2xl overflow-hidden mb-4">
                 <img
                   src={post.image}
                   alt={post.title}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                 />
               </div>
-              <div className="p-5">
-                <h3 className="font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
+              <div className="flex items-center justify-between gap-4">
+                <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors">
                   {post.title}
                 </h3>
-                <span className="text-xs text-muted-foreground">{post.category}</span>
+                <span className={`shrink-0 px-4 py-1.5 rounded-full text-xs font-semibold text-white ${
+                  post.category === 'Tools' ? 'bg-blue-500' :
+                  post.category === 'Insight' ? 'bg-yellow-500' :
+                  'bg-green-500'
+                }`}>
+                  {post.category.toUpperCase()}
+                </span>
               </div>
             </motion.a>
           ))}
