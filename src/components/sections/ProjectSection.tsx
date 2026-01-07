@@ -15,16 +15,17 @@ export function ProjectSection() {
   const shapeY = useTransform(scrollYProgress, [0, 1], [40, -40]);
   return <section ref={ref} className="py-24 bg-secondary/30 overflow-hidden">
       <div className="section-container">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left - Image */}
-          <div className="relative order-2 lg:order-1">
+        <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-center">
+          {/* Left - Image (takes half the width) */}
+          <div className="relative w-full lg:w-1/2">
             <motion.img src={decorativeShape} alt="" className="absolute -left-20 top-0 w-72 opacity-20 -z-10" style={{
             y: shapeY
           }} />
             <motion.div style={{
             y
-          }}>
-              <motion.img alt="GEO Labs project management dashboard" className="w-full max-w-md mx-auto rounded-2xl shadow-xl" whileHover={{
+          }} className="relative">
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-100 to-amber-50 rounded-3xl -z-10 transform -rotate-3"></div>
+              <motion.img alt="GEO Labs project management dashboard" className="w-full rounded-2xl shadow-xl" whileHover={{
               scale: 1.02,
               rotateY: 3,
               rotateX: -2
@@ -35,7 +36,7 @@ export function ProjectSection() {
             </motion.div>
           </div>
 
-          {/* Right - Content */}
+          {/* Right - Content (takes half the width) */}
           <motion.div initial={{
           opacity: 0,
           x: 30
@@ -46,11 +47,10 @@ export function ProjectSection() {
           once: true
         }} transition={{
           duration: 0.6
-        }} className="order-1 lg:order-2">
+        }} className="w-full lg:w-1/2">
             <span className="eyebrow text-secondary-foreground">SEO SERVICES</span>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl text-foreground leading-tight mb-6">
               Fix what's broken, optimize what works
-
             </h2>
             <p className="text-lg mb-8 text-secondary-foreground">
               Most businesses have the same problems: terrible site structure, weak content, zero local presence. We audit the damage, prioritize what matters, and rebuild your visibility from the foundation up.
