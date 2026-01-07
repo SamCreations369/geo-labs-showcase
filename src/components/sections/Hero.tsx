@@ -104,15 +104,13 @@ export function Hero() {
             Your competitors aren't smarter. They just show up first.
           </h1>
           <p className="text-lg sm:text-xl max-w-2xl mx-auto mb-10 text-muted-foreground">
-            Complete visibility strategy for businesses tired of being invisible. From comprehensive audit to sustainable organic growth, we deliver honest assessments and effective solutions.
+            Complete visibility strategy for LA businesses tired of being invisible in local search. From comprehensive SEO audit to sustainable organic growth across Google, Bing, and AI platforms, we deliver honest assessments and effective solutions for businesses throughout Los Angeles County.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <a href="#contact" className="btn-primary">
               Get Your Visibility Audit
             </a>
-            <a href="#features" className="btn-secondary">
-              See How It Works
-            </a>
+            
           </div>
         </motion.div>
 
