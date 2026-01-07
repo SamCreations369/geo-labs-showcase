@@ -88,8 +88,8 @@ export function Blog() {
                   </div>
                 </div>
               </div>
-              <div className="absolute top-4 right-4 bg-white/10 backdrop-blur rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                <span className="text-xs text-white font-medium px-2">Featured</span>
+              <div className="absolute top-4 right-4 bg-[#C85A3B] rounded-full px-4 py-1.5">
+                <span className="text-xs text-white font-semibold uppercase tracking-wide">Featured</span>
               </div>
             </div>
           </motion.a>
