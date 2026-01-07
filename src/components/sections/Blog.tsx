@@ -57,7 +57,7 @@ export function Blog() {
 
         {/* Blog Grid - Dreelio style */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {/* Featured Post - spans 2 columns */}
+          {/* Featured Post - side by side layout */}
           <motion.a href="#" initial={{
           opacity: 0,
           y: 30
@@ -67,29 +67,40 @@ export function Blog() {
         }} viewport={{
           once: true
         }} whileHover={{
-          scale: 1.02
-        }} className="md:col-span-2 lg:row-span-2 glass-card rounded-2xl overflow-hidden group cursor-pointer">
-            <div className="relative h-64 lg:h-full">
-              <img src={featuredPost.image} alt={featuredPost.title} className="w-full h-full object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-              <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                <span className="inline-block px-3 py-1 bg-white/20 backdrop-blur rounded-full text-xs font-medium mb-3">
-                  {featuredPost.category}
-                </span>
-                <h3 className="text-xl font-semibold mb-2 group-hover:underline">
-                  {featuredPost.title}
-                </h3>
+          scale: 1.01
+        }} className="md:col-span-3 glass-card rounded-2xl overflow-hidden group cursor-pointer">
+            <div className="grid md:grid-cols-2 h-full">
+              {/* Image Left */}
+              <div className="relative h-64 md:h-80">
+                <img src={featuredPost.image} alt={featuredPost.title} className="w-full h-full object-cover" />
+              </div>
+              
+              {/* Content Right */}
+              <div className="p-6 md:p-8 flex flex-col justify-between">
+                <div>
+                  <span className="inline-block px-4 py-1.5 bg-foreground text-background rounded-full text-xs font-semibold uppercase tracking-wide mb-4">
+                    {featuredPost.category}
+                  </span>
+                  <h3 className="text-2xl md:text-3xl font-semibold text-foreground mb-3 group-hover:text-primary transition-colors">
+                    {featuredPost.title}
+                  </h3>
+                  <p className="text-muted-foreground">
+                    {featuredPost.excerpt}
+                  </p>
+                </div>
                 
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full bg-white/20" />
-                  <div>
-                    <div className="text-sm font-medium">{featuredPost.author}</div>
-                    <div className="text-xs text-white/60">{featuredPost.role}</div>
+                <div className="flex items-center justify-between mt-6">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-muted" />
+                    <div>
+                      <div className="text-sm font-medium text-foreground">{featuredPost.author}</div>
+                      <div className="text-xs text-muted-foreground">{featuredPost.role}</div>
+                    </div>
+                  </div>
+                  <div className="bg-[#C85A3B] rounded-full px-4 py-1.5">
+                    <span className="text-xs text-white font-semibold uppercase tracking-wide">Featured</span>
                   </div>
                 </div>
-              </div>
-              <div className="absolute top-4 right-4 bg-[#C85A3B] rounded-full px-4 py-1.5">
-                <span className="text-xs text-white font-semibold uppercase tracking-wide">Featured</span>
               </div>
             </div>
           </motion.a>
