@@ -27,9 +27,9 @@ export function Navbar() {
     opacity: 1
   }} transition={{
     duration: 0.4
-  }} className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg">
-      <div className="section-container">
-        <div className="flex items-center justify-between h-16">
+  }} className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-6xl">
+      <div className="bg-background/90 backdrop-blur-lg rounded-full border border-border/50 shadow-lg px-6">
+        <div className="flex items-center justify-between h-14">
           {/* Logo */}
           <a href="#" className="flex items-center gap-2 text-xl font-semibold text-foreground">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
