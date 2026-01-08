@@ -55,10 +55,7 @@
   body {
     @apply text-foreground antialiased;
     font-family: 'Inter', system-ui, sans-serif;
-    background: url('/images/clouds-bg.png') no-repeat bottom center;
-    background-size: 100% auto;
     background-color: hsl(200 85% 85%);
-    background-attachment: fixed;
     min-height: 100vh;
   }
 
