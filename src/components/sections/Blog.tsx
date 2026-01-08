@@ -27,7 +27,7 @@ const posts = [{
   image: blog4
 }];
 export function Blog() {
-  return <section id="blog" className="py-24 bg-secondary/30">
+  return <section id="blog" className="py-24">
       <div className="section-container">
         <motion.div initial={{
         opacity: 0,

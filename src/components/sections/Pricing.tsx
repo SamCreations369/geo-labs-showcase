@@ -29,7 +29,7 @@ const plans = [{
 }];
 export function Pricing() {
   const [isAnnual, setIsAnnual] = useState(true);
-  return <section id="pricing" className="py-24 bg-background">
+  return <section id="pricing" className="py-24">
       <div className="section-container">
         <motion.div initial={{
         opacity: 0,
