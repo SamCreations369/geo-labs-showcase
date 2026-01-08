@@ -11,10 +11,12 @@ import { Pricing } from '@/components/sections/Pricing';
 import { Blog } from '@/components/sections/Blog';
 import { FAQ } from '@/components/sections/FAQ';
 import { Contact } from '@/components/sections/Contact';
+import { ParallaxBackground } from '@/components/ParallaxBackground';
 
 const Index = () => {
   return (
     <>
+      <ParallaxBackground />
       <Navbar />
       <main>
         <Hero />
