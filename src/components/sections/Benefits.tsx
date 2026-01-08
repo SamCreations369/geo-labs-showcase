@@ -1,13 +1,12 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import seoAuditIcon from '@/assets/seo-audit-icon.png';
-import geoVisibilityIcon from '@/assets/geo-visibility-icon.png';
+import customizationFeature from '@/assets/customization-feature.svg';
 import googleMapsLogo from '@/assets/google-maps-logo.png';
 import youtubeLogo from '@/assets/youtube-logo.jpg';
 import chatgptLogo from '@/assets/chatgpt-logo.png';
 import copilotLogo from '@/assets/copilot-logo.jpg';
 
-const platformLogos = [{
+const integrationLogos = [{
   name: 'Google Maps',
   logo: googleMapsLogo
 }, {
@@ -22,14 +21,14 @@ const platformLogos = [{
 }];
 
 const features = [{
-  title: 'Clear Diagnosis',
-  description: 'Our audits reveal exactly where you\'re losing visibility and why. No guesswork, just a clear roadmap built on real competitive data.'
+  title: 'Visibility that compounds',
+  description: 'Keep every conversation in sync use comments, messages, and project chats to stay on the same page.'
 }, {
-  title: 'Stronger Foundations',
-  description: 'We fix the structural issues that keep algorithms from trusting your site, then optimize elements that make search engines choose you.'
+  title: 'Speaks your language',
+  description: 'Set your language, currency, time, and date preferences for a seamless experience that feels truly local.'
 }, {
-  title: 'Scalable Visibility',
-  description: 'Build content strategies that expand your keyword coverage and create momentum that keeps working long after we publish.'
+  title: 'View things your way',
+  description: 'Easily toggle between various views, including Kanban, cards, list, table, timeline, and calendar.'
 }];
 
 export function Benefits() {
@@ -45,7 +44,6 @@ export function Benefits() {
   const y3 = useTransform(scrollYProgress, [0, 1], [30, -30]);
   const y4 = useTransform(scrollYProgress, [0, 1], [50, -50]);
   const parallaxValues = [y1, y2, y3, y4];
-
   return <section ref={sectionRef} id="benefits" className="py-24 bg-secondary/30">
       <div className="section-container">
         <motion.div initial={{
@@ -57,7 +55,7 @@ export function Benefits() {
       }} viewport={{
         once: true
       }} className="text-center mb-6">
-          <span className="eyebrow">How We Help</span>
+          <span className="eyebrow">Features</span>
         </motion.div>
 
         <motion.div initial={{
@@ -70,16 +68,13 @@ export function Benefits() {
         once: true
       }} className="text-center mb-16 max-w-3xl mx-auto">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl text-foreground leading-tight mb-6">
-            Built for today's search landscape: Local SEO, AI optimization, and Google's latest algorithms
+            Built for businesses that understand customers can't buy what they can't find
           </h2>
-          <p className="text-muted-foreground text-lg">
-            Your customers find businesses through Google, ChatGPT, Maps, voice assistants, and AI overviews. We make sure you're visible across all of them.
-          </p>
         </motion.div>
 
-        {/* Feature Cards Grid - Two column layout */}
+        {/* Feature Cards Grid - Two column layout matching reference */}
         <div className="grid md:grid-cols-2 gap-6 mb-12">
-          {/* Left Card - SEO Audit */}
+          {/* Left Card - Customization */}
           <motion.div initial={{
           opacity: 0,
           y: 30
@@ -92,23 +87,42 @@ export function Benefits() {
           scale: 1.02
         }} className="bg-secondary/50 p-8 rounded-2xl">
             <h3 className="text-2xl font-semibold text-foreground mb-8">
-              You can't fix what you can't see. Our SEO audits reveal where you're losing visibility.
+              Smart, flexible, and built around your business workflow
             </h3>
             
-            <div className="flex justify-center mb-6">
-              <img 
-                src={seoAuditIcon} 
-                alt="SEO Audit" 
-                className="w-32 h-32 object-contain rounded-xl"
-              />
+            <div className="bg-white rounded-xl p-4 mb-6 inline-block">
+              <div className="flex items-center gap-2 mb-4">
+                <div className="w-8 h-8 rounded-full bg-[#5C4033] flex items-center justify-center">
+                  <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <div className="w-8 h-8 rounded-full bg-gray-500"></div>
+                <div className="w-8 h-8 rounded-full bg-yellow-400"></div>
+                <div className="w-8 h-8 rounded-full bg-green-400"></div>
+                <div className="w-8 h-8 rounded-full bg-cyan-400"></div>
+                <div className="w-8 h-8 rounded-full bg-blue-500"></div>
+                <div className="w-6 h-6 rounded-full border-2 border-muted-foreground flex items-center justify-center">
+                  <div className="w-3 h-3 rounded-full border border-muted-foreground"></div>
+                </div>
+                <svg className="w-5 h-5 text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
+                </svg>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-5 bg-green-500 rounded-full relative">
+                  <div className="absolute right-0.5 top-0.5 w-4 h-4 bg-white rounded-full"></div>
+                </div>
+                <span className="text-sm text-foreground">Hide branding</span>
+              </div>
             </div>
 
             <p className="text-foreground">
-              <strong>Complete visibility diagnosis.</strong> We measure your performance across traditional search, local results, and AI-powered platforms, then show you the specific gaps between where you rank now and where you need to be.
+              <strong>Personalize every detail,</strong> From branding and interface layout to colors and menus, so your presence feels like an extension of your brand.
             </p>
           </motion.div>
 
-          {/* Right Card - Geo Visibility */}
+          {/* Right Card - Integrations */}
           <motion.div initial={{
           opacity: 0,
           y: 30
@@ -123,12 +137,17 @@ export function Benefits() {
           scale: 1.02
         }} className="bg-secondary/50 p-8 rounded-2xl">
             <h3 className="text-2xl font-semibold text-foreground mb-8">
-              Increased visibility where your customers are actually searching
+              Integrates seamlessly with the tools you already use
             </h3>
             
-            <div className="flex items-center justify-center gap-4 mb-6">
+            <div className="flex items-center gap-4 mb-6">
+              <button className="w-10 h-10 rounded-full border border-muted-foreground/30 flex items-center justify-center text-muted-foreground">
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
               <div className="flex gap-4">
-                {platformLogos.map((logo, i) => (
+                {integrationLogos.map((logo, i) => (
                   <motion.div 
                     key={i} 
                     style={{ y: parallaxValues[i] }}
@@ -138,10 +157,15 @@ export function Benefits() {
                   </motion.div>
                 ))}
               </div>
+              <button className="w-10 h-10 rounded-full border border-muted-foreground/30 flex items-center justify-center text-muted-foreground">
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
             </div>
 
             <p className="text-foreground">
-              <strong>Multi-platform optimization.</strong> Get discovered on Google, Bing, ChatGPT, Maps, and AI overviews. We close the visibility gap that's costing you customers every day.
+              <strong>Seamless integrations.</strong> Plug into the tools you love. Set up automations, sync your data, and make your systems work smarter together.
             </p>
           </motion.div>
         </div>
