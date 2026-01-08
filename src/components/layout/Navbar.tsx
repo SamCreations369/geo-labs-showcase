@@ -20,9 +20,13 @@ const navLinks = [{
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const { scrollY } = useScroll();
-  const backgroundColor = useTransform(scrollY, [0, 100], ['rgba(255, 255, 255, 0.8)', 'rgba(255, 255, 255, 0.95)']);
-  const backdropBlur = useTransform(scrollY, [0, 100], ['blur(8px)', 'blur(16px)']);
-  
+
+  // Glass: more see-through at the top, more solid as you scroll
+  const bgAlpha = useTransform(scrollY, [0, 100], [0.25, 0.85]);
+  const backgroundColor = useTransform(bgAlpha, a => `hsl(var(--background) / ${a})`);
+  const blurPx = useTransform(scrollY, [0, 100], [10, 18]);
+  const backdropFilter = useTransform(blurPx, b => `blur(${b}px) saturate(1.4)`);
+
   return <motion.nav initial={{
     y: -20,
     opacity: 0
@@ -36,8 +40,8 @@ export function Navbar() {
         <motion.div 
           style={{ 
             backgroundColor,
-            backdropFilter: backdropBlur,
-            WebkitBackdropFilter: backdropBlur
+            backdropFilter,
+            WebkitBackdropFilter: backdropFilter
           }}
           className="flex items-center justify-between h-14 rounded-full px-6 shadow-lg border border-white/20">
           {/* Logo */}
