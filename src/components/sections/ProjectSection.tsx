@@ -13,7 +13,7 @@ export function ProjectSection() {
   });
   const y = useTransform(scrollYProgress, [0, 1], [80, -80]);
   const shapeY = useTransform(scrollYProgress, [0, 1], [40, -40]);
-  return <section ref={ref} className="py-24 overflow-hidden">
+  return <section ref={ref} className="py-24 bg-secondary/50 backdrop-blur-sm overflow-hidden">
       <div className="section-container">
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-center">
           {/* Left - Image (takes half the width) */}
