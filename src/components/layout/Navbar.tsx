@@ -29,7 +29,7 @@ export function Navbar() {
     duration: 0.4
   }} className="fixed top-0 left-0 right-0 z-50 py-4">
       <div className="section-container">
-        <div className="flex items-center justify-between h-14 bg-background/60 backdrop-blur-md rounded-full px-6 shadow-lg border border-white/20">
+        <div className="flex items-center justify-between h-14 bg-background/50 backdrop-blur-md rounded-full px-6 shadow-lg border border-white/20">
           {/* Logo */}
           <a href="#" className="flex items-center gap-2 text-xl font-semibold text-foreground">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
