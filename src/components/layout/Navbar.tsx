@@ -20,8 +20,8 @@ const navLinks = [{
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const { scrollY } = useScroll();
-  const backgroundOpacity = useTransform(scrollY, [0, 100], [0.8, 0.95]);
-  const blur = useTransform(scrollY, [0, 100], [8, 16]);
+  const backgroundColor = useTransform(scrollY, [0, 100], ['rgba(255, 255, 255, 0.8)', 'rgba(255, 255, 255, 0.95)']);
+  const backdropBlur = useTransform(scrollY, [0, 100], ['blur(8px)', 'blur(16px)']);
   
   return <motion.nav initial={{
     y: -20,
@@ -35,8 +35,9 @@ export function Navbar() {
       <div className="section-container">
         <motion.div 
           style={{ 
-            backgroundColor: useTransform(backgroundOpacity, (v) => `hsl(0 0% 100% / ${v})`),
-            backdropFilter: useTransform(blur, (v) => `blur(${v}px)`)
+            backgroundColor,
+            backdropFilter: backdropBlur,
+            WebkitBackdropFilter: backdropBlur
           }}
           className="flex items-center justify-between h-14 rounded-full px-6 shadow-lg border border-white/20">
           {/* Logo */}
