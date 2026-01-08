@@ -22,8 +22,8 @@ export function Navbar() {
   const { scrollY } = useScroll();
 
   // Glass: more see-through at the top, more solid as you scroll
-  const bgAlpha = useTransform(scrollY, [0, 100], [0.25, 0.85]);
-  const backgroundColor = useTransform(bgAlpha, a => `hsl(var(--background) / ${a})`);
+  const bgAlpha = useTransform(scrollY, [0, 100], [0.1, 0.85]);
+  const backgroundColor = useTransform(bgAlpha, a => `hsl(0 0% 100% / ${a})`);
   const blurPx = useTransform(scrollY, [0, 100], [10, 18]);
   const backdropFilter = useTransform(blurPx, b => `blur(${b}px) saturate(1.4)`);
 
