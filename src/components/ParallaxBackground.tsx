@@ -3,18 +3,21 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 export function ParallaxBackground() {
   const { scrollYProgress } = useScroll();
   
-  // Move the clouds upward as you scroll down (creates depth effect)
-  const y = useTransform(scrollYProgress, [0, 1], ['0%', '-30%']);
+  // Move the clouds upward faster as you scroll down
+  const y = useTransform(scrollYProgress, [0, 1], ['20%', '-50%']);
   
   return (
-    <motion.div
-      className="fixed inset-0 -z-10 pointer-events-none"
-      style={{
-        background: 'linear-gradient(180deg, hsl(200 85% 85%) 0%, hsl(200 80% 88%) 50%, hsl(200 75% 92%) 100%)',
-      }}
-    >
+    <div className="fixed inset-0 -z-10 pointer-events-none">
+      {/* Cream/white to sky blue gradient */}
+      <div 
+        className="absolute inset-0"
+        style={{
+          background: 'linear-gradient(180deg, hsl(40 30% 97%) 0%, hsl(40 30% 97%) 40%, hsl(200 70% 90%) 70%, hsl(200 80% 85%) 100%)',
+        }}
+      />
+      {/* Parallax cloud layer */}
       <motion.div
-        className="absolute inset-0 w-full h-[130%]"
+        className="absolute inset-x-0 bottom-0 h-[150%]"
         style={{
           backgroundImage: 'url(/images/clouds-bg.png)',
           backgroundSize: '100% auto',
@@ -23,6 +26,6 @@ export function ParallaxBackground() {
           y,
         }}
       />
-    </motion.div>
+    </div>
   );
 }

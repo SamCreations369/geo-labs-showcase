@@ -13,7 +13,7 @@ export function FinancialSection() {
   });
   const y = useTransform(scrollYProgress, [0, 1], [60, -60]);
   const shapeY = useTransform(scrollYProgress, [0, 1], [30, -30]);
-  return <section ref={ref} className="py-24 overflow-hidden">
+  return <section ref={ref} className="py-24 bg-background/80 backdrop-blur-sm overflow-hidden">
       <div className="section-container">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left - Content */}

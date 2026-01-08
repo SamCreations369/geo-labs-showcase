@@ -46,7 +46,7 @@ export function Benefits() {
   const y4 = useTransform(scrollYProgress, [0, 1], [50, -50]);
   const parallaxValues = [y1, y2, y3, y4];
 
-  return <section ref={sectionRef} id="benefits" className="py-24">
+  return <section ref={sectionRef} id="benefits" className="py-24 bg-secondary/50 backdrop-blur-sm">
       <div className="section-container">
         <motion.div initial={{
         opacity: 0,
