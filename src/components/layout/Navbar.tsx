@@ -20,7 +20,7 @@ const navLinks = [{
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const { scrollY } = useScroll();
-  const backgroundOpacity = useTransform(scrollY, [0, 100], [0.5, 0.95]);
+  const backgroundOpacity = useTransform(scrollY, [0, 100], [0.8, 0.95]);
   const blur = useTransform(scrollY, [0, 100], [8, 16]);
   
   return <motion.nav initial={{
