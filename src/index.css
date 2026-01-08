@@ -53,10 +53,8 @@
   }
 
   body {
-    @apply text-foreground antialiased;
+    @apply bg-background text-foreground antialiased;
     font-family: 'Inter', system-ui, sans-serif;
-    background-color: hsl(40 30% 97%);
-    min-height: 100vh;
   }
 
   h1, h2, h3, h4 {
@@ -99,25 +97,30 @@
     box-shadow: 0 25px 80px -20px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(255, 255, 255, 0.8) inset;
   }
 
-  /* Cream surface that fades into the sky (Dreelio-style) */
-  .hero-blend {
-    background: linear-gradient(
-      180deg,
-      hsl(var(--background) / 0.98) 0%,
-      hsl(var(--background) / 0.96) 55%,
-      hsl(200 75% 90% / 0.35) 78%,
-      transparent 100%
+  /* Sky gradient background - top (Dreelio style - vivid sky blue) */
+  .sky-gradient {
+    background: linear-gradient(180deg, 
+      hsl(200 90% 70%) 0%, 
+      hsl(200 85% 75%) 10%,
+      hsl(200 80% 80%) 25%,
+      hsl(200 70% 85%) 40%,
+      hsl(195 55% 90%) 60%,
+      hsl(40 30% 97%) 85%,
+      hsl(40 30% 97%) 100%
     );
   }
 
-  /* Sky gradient background - top (transparent to show body bg) */
-  .sky-gradient {
-    background: transparent;
-  }
-
-  /* Sky gradient background - bottom (transparent to show body bg) */
+  /* Sky gradient background - bottom (inverted for footer) */
   .sky-gradient-bottom {
-    background: transparent;
+    background: linear-gradient(0deg, 
+      hsl(200 90% 70%) 0%, 
+      hsl(200 85% 75%) 10%,
+      hsl(200 80% 80%) 25%,
+      hsl(200 70% 85%) 40%,
+      hsl(195 55% 90%) 60%,
+      hsl(40 30% 97%) 85%,
+      hsl(40 30% 97%) 100%
+    );
   }
 
   /* Cloud shapes - highly visible fluffy clouds */

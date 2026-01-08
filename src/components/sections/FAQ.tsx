@@ -30,11 +30,11 @@ function FAQItem({ faq, index }: { faq: typeof faqs[0]; index: number }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.1 }}
-      className="glass-card rounded-2xl mb-4 last:mb-0"
+      className="border-b border-border last:border-0"
     >
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full px-6 py-5 flex items-center justify-between text-left"
+        className="w-full py-6 flex items-center justify-between text-left"
       >
         <span className="font-serif text-lg text-foreground pr-4">{faq.question}</span>
         <motion.div
@@ -52,9 +52,9 @@ function FAQItem({ faq, index }: { faq: typeof faqs[0]; index: number }) {
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="overflow-hidden px-6"
+            className="overflow-hidden"
           >
-            <p className="pb-5 text-muted-foreground leading-relaxed">{faq.answer}</p>
+            <p className="pb-6 text-muted-foreground leading-relaxed">{faq.answer}</p>
           </motion.div>
         )}
       </AnimatePresence>
@@ -64,7 +64,7 @@ function FAQItem({ faq, index }: { faq: typeof faqs[0]; index: number }) {
 
 export function FAQ() {
   return (
-    <section id="faq" className="py-24">
+    <section id="faq" className="py-24 bg-background">
       <div className="section-container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

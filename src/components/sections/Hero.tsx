@@ -19,8 +19,7 @@ export function Hero() {
   const cloud3Y = useTransform(scrollYProgress, [0, 1], [0, 80]);
   const cloud4Y = useTransform(scrollYProgress, [0, 1], [0, 120]);
   const cloud5Y = useTransform(scrollYProgress, [0, 1], [0, 60]);
-  return <section ref={ref} className="relative overflow-hidden min-h-screen">
-      <div aria-hidden className="absolute inset-0 hero-blend" />
+  return <section ref={ref} className="relative sky-gradient overflow-hidden min-h-screen">
       {/* Animated Cloud decorations with parallax - many more clouds */}
       {/* Left side clouds */}
       <motion.div className="cloud cloud-xlarge cloud-animate-1" style={{

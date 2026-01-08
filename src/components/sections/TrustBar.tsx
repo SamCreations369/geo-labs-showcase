@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 const trustLogos = ['Google', 'Copilot', 'ChatGPT', 'YouTube', 'Google Maps', 'Google', 'Copilot', 'ChatGPT', 'YouTube', 'Google Maps'];
 export function TrustBar() {
-  return <section className="py-16">
+  return <section className="py-16 bg-background">
       <motion.div initial={{
       opacity: 0
     }} whileInView={{

@@ -23,7 +23,7 @@ const testimonials = [{
   image: mobileDetailLogo
 }];
 export function Testimonials() {
-  return <section className="py-24 overflow-hidden">
+  return <section className="py-24 bg-background overflow-hidden">
       <div className="section-container">
         {/* Featured Testimonial - Dreelio style */}
         <motion.div initial={{
