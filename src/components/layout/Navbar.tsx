@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 const navLinks = [{
   name: 'Features',
@@ -19,14 +19,6 @@ const navLinks = [{
 }];
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const { scrollY } = useScroll();
-
-  // Glass: more see-through at the top, more solid as you scroll
-  const bgAlpha = useTransform(scrollY, [0, 100], [0.8, 0.95]);
-  const backgroundColor = useTransform(bgAlpha, a => `hsl(0 0% 100% / ${a})`);
-  const blurPx = useTransform(scrollY, [0, 100], [10, 18]);
-  const backdropFilter = useTransform(blurPx, b => `blur(${b}px) saturate(1.4)`);
-
   return <motion.nav initial={{
     y: -20,
     opacity: 0
@@ -37,13 +29,7 @@ export function Navbar() {
     duration: 0.4
   }} className="fixed top-0 left-0 right-0 z-50 py-4">
       <div className="section-container">
-        <motion.div 
-          style={{ 
-            backgroundColor,
-            backdropFilter,
-            WebkitBackdropFilter: backdropFilter
-          }}
-          className="flex items-center justify-between h-14 rounded-full px-6 shadow-lg border border-white/20">
+        <div className="flex items-center justify-between h-14 bg-background/60 backdrop-blur-md rounded-full px-6 shadow-lg border border-white/20">
           {/* Logo */}
           <a href="#" className="flex items-center gap-2 text-xl font-semibold text-foreground">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -75,7 +61,7 @@ export function Navbar() {
           <button onClick={() => setIsOpen(!isOpen)} className="md:hidden p-2 rounded-lg hover:bg-secondary">
             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
-        </motion.div>
+        </div>
       </div>
 
       {/* Mobile Menu */}

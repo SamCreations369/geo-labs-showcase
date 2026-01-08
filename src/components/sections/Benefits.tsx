@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import customizationFeature from '@/assets/customization-feature.svg';
 import googleMapsLogo from '@/assets/google-maps-logo.png';
@@ -31,7 +32,11 @@ const features = [{
 }];
 
 export function Benefits() {
-  const { scrollYProgress } = useScroll();
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"]
+  });
   
   // Create different parallax speeds for each icon
   const y1 = useTransform(scrollYProgress, [0, 1], [40, -40]);
@@ -39,8 +44,7 @@ export function Benefits() {
   const y3 = useTransform(scrollYProgress, [0, 1], [30, -30]);
   const y4 = useTransform(scrollYProgress, [0, 1], [50, -50]);
   const parallaxValues = [y1, y2, y3, y4];
-  
-  return <section id="benefits" className="py-24 bg-secondary/30">
+  return <section ref={sectionRef} id="benefits" className="py-24 bg-secondary/30">
       <div className="section-container">
         <motion.div initial={{
         opacity: 0,
