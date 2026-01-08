@@ -19,7 +19,7 @@ export function DeviceFeature() {
   const y2 = useTransform(scrollYProgress, [0, 1], [60, -60]);
 
   return (
-    <section ref={ref} id="features" className="py-24 bg-background overflow-hidden">
+    <section ref={ref} id="features" className="py-24 overflow-hidden">
       <div className="section-container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
