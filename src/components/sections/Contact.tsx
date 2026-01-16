@@ -200,7 +200,7 @@ export function Contact() {
                 disabled={isSubmitting} 
                 className="group w-full inline-flex items-center justify-center px-7 py-4 rounded-full font-medium text-base transition-all duration-200 overflow-hidden bg-primary text-primary-foreground hover:bg-primary/90 active:scale-[0.98] disabled:opacity-50"
               >
-                <span className="relative inline-flex items-center overflow-hidden h-[1.2em]">
+                <span className="relative inline-flex items-center overflow-hidden h-[1.5em]">
                   <span className="transition-transform duration-300 ease-out group-hover:-translate-y-full flex items-center">
                     {isSubmitting ? 'Submitting...' : submitSuccess ? 'Thank you!' : 'Get Your Visibility Audit'}
                     {!isSubmitting && !submitSuccess && <Send className="ml-2 w-4 h-4" />}

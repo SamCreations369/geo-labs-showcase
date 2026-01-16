@@ -47,7 +47,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     
     return (
       <Comp className={cn(buttonVariants({ variant, size, className }), "group")} ref={ref} {...props}>
-        <span className="relative inline-flex flex-col items-center overflow-hidden h-[1.2em]">
+        <span className="relative inline-flex flex-col items-center overflow-hidden h-[1.5em]">
           <span className="transition-transform duration-300 ease-out group-hover:-translate-y-full">
             {children}
           </span>
