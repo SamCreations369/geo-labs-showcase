@@ -89,28 +89,30 @@ export function Benefits() {
               Smart, flexible, and built around your business workflow
             </h3>
             
-            <div className="bg-white rounded-xl p-4 mb-6 inline-block shadow-sm">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
-                  <svg className="w-4 h-4 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h7" />
+            <div className="bg-white rounded-xl p-4 mb-6 inline-block">
+              <div className="flex items-center gap-2 mb-4">
+                <div className="w-8 h-8 rounded-full bg-[#5C4033] flex items-center justify-center">
+                  <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
-                <span className="text-sm font-medium text-foreground">Layout Settings</span>
+                <div className="w-8 h-8 rounded-full bg-gray-500"></div>
+                <div className="w-8 h-8 rounded-full bg-yellow-400"></div>
+                <div className="w-8 h-8 rounded-full bg-green-400"></div>
+                <div className="w-8 h-8 rounded-full bg-cyan-400"></div>
+                <div className="w-8 h-8 rounded-full bg-blue-500"></div>
+                <div className="w-6 h-6 rounded-full border-2 border-muted-foreground flex items-center justify-center">
+                  <div className="w-3 h-3 rounded-full border border-muted-foreground"></div>
+                </div>
+                <svg className="w-5 h-5 text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
+                </svg>
               </div>
-              <div className="space-y-2">
-                <div className="flex items-center justify-between gap-8">
-                  <span className="text-xs text-muted-foreground">Kanban View</span>
-                  <div className="w-8 h-4 bg-primary rounded-full relative">
-                    <div className="absolute right-0.5 top-0.5 w-3 h-3 bg-white rounded-full"></div>
-                  </div>
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-5 bg-green-500 rounded-full relative">
+                  <div className="absolute right-0.5 top-0.5 w-4 h-4 bg-white rounded-full"></div>
                 </div>
-                <div className="flex items-center justify-between gap-8">
-                  <span className="text-xs text-muted-foreground">Timeline</span>
-                  <div className="w-8 h-4 bg-muted rounded-full relative">
-                    <div className="absolute left-0.5 top-0.5 w-3 h-3 bg-white rounded-full"></div>
-                  </div>
-                </div>
+                <span className="text-sm text-foreground">Hide branding</span>
               </div>
             </div>
 
