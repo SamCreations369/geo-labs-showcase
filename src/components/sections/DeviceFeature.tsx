@@ -60,7 +60,7 @@ export function DeviceFeature() {
                   initial={{ opacity: 0, x: 100 }}
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -100 }}
-                  transition={{ duration: 0.4, ease: 'easeInOut' }}
+                  transition={{ duration: 0.25, ease: 'easeOut' }}
                   src="/lovable-uploads/3a3051e7-aaef-4391-bc0e-63b6971f8fce.png" 
                 />
               ) : (
@@ -72,7 +72,7 @@ export function DeviceFeature() {
                   initial={{ opacity: 0, x: -100 }}
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: 100 }}
-                  transition={{ duration: 0.4, ease: 'easeInOut' }}
+                  transition={{ duration: 0.25, ease: 'easeOut' }}
                 />
               )}
             </AnimatePresence>
