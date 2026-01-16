@@ -97,25 +97,28 @@
     box-shadow: 0 25px 80px -20px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(255, 255, 255, 0.8) inset;
   }
 
-  /* Sky gradient background - top (using real sky image) */
+  /* Sky gradient background - top (soft blue to cream like Dreelio) */
   .sky-gradient {
-    background-image: url('/images/sky-background.png');
-    background-size: cover;
-    background-position: center top;
-    background-repeat: no-repeat;
+    background: linear-gradient(
+      180deg,
+      hsl(200 70% 85%) 0%,
+      hsl(200 50% 90%) 15%,
+      hsl(200 30% 94%) 35%,
+      hsl(40 30% 97%) 60%,
+      hsl(40 30% 97%) 100%
+    );
   }
 
   /* Sky gradient background - bottom (inverted for footer) */
   .sky-gradient-bottom {
-    background-image: url('/images/sky-background.png');
-    background-size: cover;
-    background-position: center bottom;
-    background-repeat: no-repeat;
-    transform: scaleY(-1);
-  }
-  
-  .sky-gradient-bottom > * {
-    transform: scaleY(-1);
+    background: linear-gradient(
+      0deg,
+      hsl(200 70% 85%) 0%,
+      hsl(200 50% 90%) 15%,
+      hsl(200 30% 94%) 35%,
+      hsl(40 30% 97%) 60%,
+      hsl(40 30% 97%) 100%
+    );
   }
 
   /* Cloud shapes - highly visible fluffy clouds */
