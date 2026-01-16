@@ -56,7 +56,7 @@ export function Navbar() {
             href="#" 
             className="flex items-center gap-2 text-xl font-semibold text-foreground"
             animate={{
-              marginRight: scrolled ? '16px' : '32px',
+              marginRight: scrolled ? '24px' : '80px',
             }}
             transition={{ duration: 0.5, ease: 'easeInOut' }}
           >
@@ -94,7 +94,7 @@ export function Navbar() {
           <motion.div 
             className="hidden md:block"
             animate={{
-              marginLeft: scrolled ? '16px' : '32px',
+              marginLeft: scrolled ? '24px' : '80px',
             }}
             transition={{ duration: 0.5, ease: 'easeInOut' }}
           >
