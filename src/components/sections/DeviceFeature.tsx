@@ -57,9 +57,9 @@ export function DeviceFeature() {
                   key="mobile" 
                   alt="GEO Labs mobile app showing Google Maps integration" 
                   className="absolute inset-0 w-full h-full object-cover" 
-                  initial={{ opacity: 0, x: -100 }}
+                  initial={{ opacity: 0, x: 100 }}
                   animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: 100 }}
+                  exit={{ opacity: 0, x: -100 }}
                   transition={{ duration: 0.4, ease: 'easeInOut' }}
                   src="/lovable-uploads/3a3051e7-aaef-4391-bc0e-63b6971f8fce.png" 
                 />
@@ -69,9 +69,9 @@ export function DeviceFeature() {
                   src={webApp} 
                   alt="GEO Labs web dashboard showing AI search results" 
                   className="absolute inset-0 w-full h-full object-cover" 
-                  initial={{ opacity: 0, x: 100 }}
+                  initial={{ opacity: 0, x: -100 }}
                   animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -100 }}
+                  exit={{ opacity: 0, x: 100 }}
                   transition={{ duration: 0.4, ease: 'easeInOut' }}
                 />
               )}
