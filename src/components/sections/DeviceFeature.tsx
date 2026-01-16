@@ -49,36 +49,36 @@ export function DeviceFeature() {
           y: y2
         }} />
 
-          {/* Image container */}
-          <div className="relative z-10 flex justify-center items-center min-h-[600px] sm:min-h-[700px] lg:min-h-[800px]">
+          {/* Image container with fixed aspect ratio */}
+          <div className="relative z-10 w-[700px] sm:w-[850px] lg:w-[1000px] aspect-[16/10] rounded-3xl shadow-2xl overflow-hidden">
             <AnimatePresence mode="wait">
-              {activeTab === 'mobile' ? <motion.img key="mobile" alt="GEO Labs mobile app showing Google Maps integration" className="w-[700px] sm:w-[850px] lg:w-[1000px] rounded-3xl shadow-2xl" initial={{
-              opacity: 0,
-              scale: 0.9
-            }} animate={{
-              opacity: 1,
-              scale: 1
-            }} exit={{
-              opacity: 0,
-              scale: 0.9
-            }} transition={{
-              duration: 0.3
-            }} src="/lovable-uploads/3a3051e7-aaef-4391-bc0e-63b6971f8fce.png" /> : <motion.img key="web" src={webApp} alt="GEO Labs web dashboard showing AI search results" className="w-[700px] sm:w-[850px] lg:w-[1000px] rounded-2xl shadow-2xl" initial={{
-              opacity: 0,
-              scale: 0.9
-            }} animate={{
-              opacity: 1,
-              scale: 1
-            }} exit={{
-              opacity: 0,
-              scale: 0.9
-            }} transition={{
-              duration: 0.3
-            }} />}
+              {activeTab === 'mobile' ? (
+                <motion.img 
+                  key="mobile" 
+                  alt="GEO Labs mobile app showing Google Maps integration" 
+                  className="w-full h-full object-cover" 
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.3 }}
+                  src="/lovable-uploads/3a3051e7-aaef-4391-bc0e-63b6971f8fce.png" 
+                />
+              ) : (
+                <motion.img 
+                  key="web" 
+                  src={webApp} 
+                  alt="GEO Labs web dashboard showing AI search results" 
+                  className="w-full h-full object-cover" 
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.3 }}
+                />
+              )}
             </AnimatePresence>
 
-            {/* Tab buttons - overlaying bottom of image */}
-            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-1 p-1 bg-white/30 backdrop-blur-md rounded-full shadow-lg">
+            {/* Tab buttons - inside image at bottom */}
+            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-1 p-1 bg-white/30 backdrop-blur-md rounded-full shadow-lg z-20">
               <button onClick={() => setActiveTab('mobile')} className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${activeTab === 'mobile' ? 'bg-foreground text-background' : 'text-foreground/80 hover:text-foreground'}`}>
                 Mobile App
               </button>
