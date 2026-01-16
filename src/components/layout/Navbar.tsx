@@ -45,14 +45,21 @@ export function Navbar() {
             backgroundColor: scrolled ? 'rgba(255, 255, 255, 0.3)' : 'transparent',
             borderRadius: scrolled ? '9999px' : '0px',
             boxShadow: scrolled ? '0 10px 40px -10px rgba(0, 0, 0, 0.1)' : 'none',
-            paddingLeft: scrolled ? '24px' : '8px',
-            paddingRight: scrolled ? '24px' : '8px',
+            paddingLeft: scrolled ? '20px' : '8px',
+            paddingRight: scrolled ? '8px' : '8px',
           }}
           transition={{ duration: 0.5, ease: 'easeInOut' }}
-          className={`flex items-center justify-between h-14 transition-all duration-500 ${scrolled ? 'backdrop-blur-md border border-white/10' : ''}`}
+          className={`flex items-center justify-center h-14 transition-all duration-500 ${scrolled ? 'backdrop-blur-md border border-white/10' : ''}`}
         >
           {/* Logo */}
-          <a href="#" className="flex items-center gap-2 text-xl font-semibold text-foreground">
+          <motion.a 
+            href="#" 
+            className="flex items-center gap-2 text-xl font-semibold text-foreground"
+            animate={{
+              marginRight: scrolled ? '24px' : '80px',
+            }}
+            transition={{ duration: 0.5, ease: 'easeInOut' }}
+          >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
               {/* Left face - darker */}
               <path d="M12 3L2 21L12 16Z" fill="#B8860B" />
@@ -62,13 +69,13 @@ export function Navbar() {
               <path d="M2 21L22 21L12 16Z" fill="#FFD700" />
             </svg>
             Eudaimonia
-          </a>
+          </motion.a>
 
           {/* Desktop Nav */}
           <motion.div 
             className="hidden md:flex items-center"
             animate={{
-              gap: scrolled ? '24px' : '40px',
+              gap: scrolled ? '20px' : '32px',
             }}
             transition={{ duration: 0.5, ease: 'easeInOut' }}
           >
@@ -84,16 +91,22 @@ export function Navbar() {
           </motion.div>
 
           {/* CTA Button */}
-          <div className="hidden md:block">
+          <motion.div 
+            className="hidden md:block"
+            animate={{
+              marginLeft: scrolled ? '24px' : '80px',
+            }}
+            transition={{ duration: 0.5, ease: 'easeInOut' }}
+          >
             <a href="#contact" className="btn-primary text-sm">
               Get Your Visibility Audit
             </a>
-          </div>
+          </motion.div>
 
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 rounded-lg hover:bg-secondary"
+            className="md:hidden p-2 rounded-lg hover:bg-secondary ml-auto"
           >
             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
