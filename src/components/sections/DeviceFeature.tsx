@@ -14,6 +14,7 @@ export function DeviceFeature() {
   });
   const y1 = useTransform(scrollYProgress, [0, 1], [100, -100]);
   const y2 = useTransform(scrollYProgress, [0, 1], [60, -60]);
+  const imageScale = useTransform(scrollYProgress, [0, 0.5], [0.85, 1]);
   return <section ref={ref} id="features" className="py-24 bg-background overflow-hidden">
       <div className="section-container">
         <motion.div initial={{
@@ -50,7 +51,10 @@ export function DeviceFeature() {
         }} />
 
           {/* Image container with fixed aspect ratio */}
-          <div className="relative z-10 w-[700px] sm:w-[850px] lg:w-[1000px] aspect-[16/10] rounded-3xl shadow-2xl overflow-hidden">
+          <motion.div 
+            className="relative z-10 w-[700px] sm:w-[850px] lg:w-[1000px] aspect-[16/10] rounded-3xl shadow-2xl overflow-hidden"
+            style={{ scale: imageScale }}
+          >
             {/* Sliding container with both images side by side */}
             <motion.div 
               className="flex w-[200%] h-full"
@@ -78,7 +82,7 @@ export function DeviceFeature() {
                 Web App
               </button>
             </div>
-          </div>
+          </motion.div>
 
           {/* Decorative shape right */}
           <motion.img src={decorativeShape} alt="" className="absolute right-0 top-1/3 w-48 opacity-20 -z-10" style={{
