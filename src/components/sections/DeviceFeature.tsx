@@ -81,7 +81,7 @@ export function DeviceFeature() {
           {/* Tab buttons */}
           <div className="flex gap-2 mt-8">
             <button onClick={() => setActiveTab('mobile')} className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${activeTab === 'mobile' ? 'bg-foreground text-background' : 'bg-muted text-muted-foreground hover:bg-muted/80'}`}>
-              Mobile App
+              Mobile
             </button>
             <button onClick={() => setActiveTab('web')} className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${activeTab === 'web' ? 'bg-foreground text-background' : 'bg-muted text-muted-foreground hover:bg-muted/80'}`}>
               Web App
