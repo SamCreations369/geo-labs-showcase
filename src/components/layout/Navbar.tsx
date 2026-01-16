@@ -25,7 +25,7 @@ export function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      setScrolled(window.scrollY > 150);
     };
     
     window.addEventListener('scroll', handleScroll);
@@ -46,8 +46,8 @@ export function Navbar() {
             borderRadius: scrolled ? '9999px' : '0px',
             boxShadow: scrolled ? '0 10px 40px -10px rgba(0, 0, 0, 0.1)' : 'none',
           }}
-          transition={{ duration: 0.3, ease: 'easeInOut' }}
-          className={`flex items-center justify-between h-14 px-6 ${scrolled ? 'backdrop-blur-md border border-white/10' : ''}`}
+          transition={{ duration: 0.5, ease: 'easeInOut' }}
+          className={`flex items-center justify-between h-14 px-6 transition-all duration-500 ${scrolled ? 'backdrop-blur-md border border-white/10' : ''}`}
         >
           {/* Logo */}
           <a href="#" className="flex items-center gap-2 text-xl font-semibold text-foreground">
