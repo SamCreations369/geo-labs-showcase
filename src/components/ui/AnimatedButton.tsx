@@ -26,7 +26,7 @@ export function AnimatedButton({
         className
       )}
     >
-      <span className="relative inline-flex overflow-hidden h-[1.2em]">
+      <span className="relative inline-flex overflow-hidden h-[1.5em]">
         <span className="transition-transform duration-300 ease-out group-hover:-translate-y-full">
           {children}
         </span>
