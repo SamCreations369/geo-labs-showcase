@@ -76,16 +76,16 @@ export function DeviceFeature() {
               duration: 0.3
             }} />}
             </AnimatePresence>
-          </div>
 
-          {/* Tab buttons */}
-          <div className="flex gap-2 mt-8">
-            <button onClick={() => setActiveTab('mobile')} className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${activeTab === 'mobile' ? 'bg-foreground text-background' : 'bg-muted text-muted-foreground hover:bg-muted/80'}`}>
-              Mobile
-            </button>
-            <button onClick={() => setActiveTab('web')} className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${activeTab === 'web' ? 'bg-foreground text-background' : 'bg-muted text-muted-foreground hover:bg-muted/80'}`}>
-              Web
-            </button>
+            {/* Tab buttons - overlaying bottom of image */}
+            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-1 p-1 bg-white/30 backdrop-blur-md rounded-full shadow-lg">
+              <button onClick={() => setActiveTab('mobile')} className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${activeTab === 'mobile' ? 'bg-foreground text-background' : 'text-foreground/80 hover:text-foreground'}`}>
+                Mobile App
+              </button>
+              <button onClick={() => setActiveTab('web')} className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${activeTab === 'web' ? 'bg-foreground text-background' : 'text-foreground/80 hover:text-foreground'}`}>
+                Web App
+              </button>
+            </div>
           </div>
 
           {/* Decorative shape right */}
