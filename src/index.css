@@ -69,13 +69,13 @@
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center px-7 py-3.5 rounded-full font-medium text-sm transition-all duration-200;
+    @apply inline-flex items-center justify-center px-7 py-3.5 rounded-full font-medium text-sm transition-all duration-200 overflow-hidden;
     @apply bg-primary text-primary-foreground;
     @apply hover:opacity-90 active:scale-[0.98];
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center px-7 py-3.5 rounded-full font-medium text-sm transition-all duration-200;
+    @apply inline-flex items-center justify-center px-7 py-3.5 rounded-full font-medium text-sm transition-all duration-200 overflow-hidden;
     @apply bg-transparent text-foreground;
     @apply hover:bg-secondary;
   }

@@ -5,7 +5,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 overflow-hidden",
   {
     variants: {
       variant: {
@@ -37,9 +37,26 @@ export interface ButtonProps
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
+  ({ className, variant, size, asChild = false, children, ...props }, ref) => {
     const Comp = asChild ? Slot : "button";
-    return <Comp className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props} />;
+    
+    // For link variant or asChild, don't apply text animation
+    if (asChild || variant === "link") {
+      return <Comp className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props}>{children}</Comp>;
+    }
+    
+    return (
+      <Comp className={cn(buttonVariants({ variant, size, className }), "group")} ref={ref} {...props}>
+        <span className="relative inline-flex flex-col items-center overflow-hidden h-[1.2em]">
+          <span className="transition-transform duration-300 ease-out group-hover:-translate-y-full">
+            {children}
+          </span>
+          <span className="absolute top-full transition-transform duration-300 ease-out group-hover:-translate-y-full" aria-hidden="true">
+            {children}
+          </span>
+        </span>
+      </Comp>
+    );
   },
 );
 Button.displayName = "Button";
