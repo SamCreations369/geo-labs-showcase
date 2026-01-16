@@ -5,10 +5,10 @@ import { AnimatedButton } from '@/components/ui/AnimatedButton';
 
 const navLinks = [{
   name: 'Features',
-  href: '#features'
+  href: '#benefits'
 }, {
   name: 'Benefits',
-  href: '#benefits'
+  href: '#seo-services'
 }, {
   name: 'Pricing',
   href: '#pricing'
