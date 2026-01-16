@@ -148,9 +148,7 @@ export function Benefits() {
                     <img src={logo.logo} alt={logo.name} className="w-12 h-12 object-contain" />
                   </motion.div>)}
               </div>
-              <button className="w-10 h-10 rounded-full border border-muted-foreground/30 flex items-center justify-center text-muted-foreground">
-                
-              </button>
+              
             </div>
 
             <p className="text-foreground">
