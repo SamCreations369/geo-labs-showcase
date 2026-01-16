@@ -5,7 +5,6 @@ import googleMapsLogo from '@/assets/google-maps-logo.png';
 import youtubeLogo from '@/assets/youtube-logo.jpg';
 import chatgptLogo from '@/assets/chatgpt-logo.png';
 import copilotLogo from '@/assets/copilot-logo.jpg';
-
 const integrationLogos = [{
   name: 'Google Maps',
   logo: googleMapsLogo
@@ -19,7 +18,6 @@ const integrationLogos = [{
   name: 'Copilot',
   logo: copilotLogo
 }];
-
 const features = [{
   title: 'Visibility that compounds',
   description: 'Keep every conversation in sync use comments, messages, and project chats to stay on the same page.'
@@ -30,14 +28,15 @@ const features = [{
   title: 'View things your way',
   description: 'Easily toggle between various views, including Kanban, cards, list, table, timeline, and calendar.'
 }];
-
 export function Benefits() {
   const sectionRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
+  const {
+    scrollYProgress
+  } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"]
   });
-  
+
   // Create different parallax speeds for each icon
   const y1 = useTransform(scrollYProgress, [0, 1], [40, -40]);
   const y2 = useTransform(scrollYProgress, [0, 1], [60, -60]);
@@ -141,26 +140,16 @@ export function Benefits() {
             </h3>
             
             <div className="flex items-center gap-4 mb-6">
-              <button className="w-10 h-10 rounded-full border border-muted-foreground/30 flex items-center justify-center text-muted-foreground">
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                </svg>
-              </button>
+              
               <div className="flex gap-4">
-                {integrationLogos.map((logo, i) => (
-                  <motion.div 
-                    key={i} 
-                    style={{ y: parallaxValues[i] }}
-                    className="w-16 h-16 rounded-xl bg-white shadow-sm flex items-center justify-center overflow-hidden"
-                  >
+                {integrationLogos.map((logo, i) => <motion.div key={i} style={{
+                y: parallaxValues[i]
+              }} className="w-16 h-16 rounded-xl bg-white shadow-sm flex items-center justify-center overflow-hidden">
                     <img src={logo.logo} alt={logo.name} className="w-12 h-12 object-contain" />
-                  </motion.div>
-                ))}
+                  </motion.div>)}
               </div>
               <button className="w-10 h-10 rounded-full border border-muted-foreground/30 flex items-center justify-center text-muted-foreground">
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
+                
               </button>
             </div>
 
