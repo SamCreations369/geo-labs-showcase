@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef, useState } from 'react';
 import mobileApp from '@/assets/mobile-app.png';
 import webApp from '@/assets/web-app.png';
@@ -51,31 +51,23 @@ export function DeviceFeature() {
 
           {/* Image container with fixed aspect ratio */}
           <div className="relative z-10 w-[700px] sm:w-[850px] lg:w-[1000px] aspect-[16/10] rounded-3xl shadow-2xl overflow-hidden">
-            <AnimatePresence mode="wait" initial={false}>
-              {activeTab === 'mobile' ? (
-                <motion.img 
-                  key="mobile" 
-                  alt="GEO Labs mobile app showing Google Maps integration" 
-                  className="absolute inset-0 w-full h-full object-cover" 
-                  initial={{ opacity: 0, x: 100 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -100 }}
-                  transition={{ duration: 0.25, ease: 'easeOut' }}
-                  src="/lovable-uploads/3a3051e7-aaef-4391-bc0e-63b6971f8fce.png" 
-                />
-              ) : (
-                <motion.img 
-                  key="web" 
-                  src={webApp} 
-                  alt="GEO Labs web dashboard showing AI search results" 
-                  className="absolute inset-0 w-full h-full object-cover" 
-                  initial={{ opacity: 0, x: -100 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: 100 }}
-                  transition={{ duration: 0.25, ease: 'easeOut' }}
-                />
-              )}
-            </AnimatePresence>
+            {/* Sliding container with both images side by side */}
+            <motion.div 
+              className="flex w-[200%] h-full"
+              animate={{ x: activeTab === 'mobile' ? '0%' : '-50%' }}
+              transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
+            >
+              <img 
+                alt="GEO Labs mobile app showing Google Maps integration" 
+                className="w-1/2 h-full object-cover flex-shrink-0" 
+                src="/lovable-uploads/3a3051e7-aaef-4391-bc0e-63b6971f8fce.png" 
+              />
+              <img 
+                src={webApp} 
+                alt="GEO Labs web dashboard showing AI search results" 
+                className="w-1/2 h-full object-cover flex-shrink-0" 
+              />
+            </motion.div>
 
             {/* Tab buttons - inside image at bottom */}
             <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-1 p-1 bg-white/30 backdrop-blur-md rounded-full shadow-lg z-20">
