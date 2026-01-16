@@ -45,12 +45,9 @@ export function Navbar() {
             backgroundColor: scrolled ? 'rgba(255, 255, 255, 0.3)' : 'transparent',
             borderRadius: scrolled ? '9999px' : '0px',
             boxShadow: scrolled ? '0 10px 40px -10px rgba(0, 0, 0, 0.1)' : 'none',
-            paddingLeft: scrolled ? '24px' : '48px',
-            paddingRight: scrolled ? '24px' : '48px',
-            scale: scrolled ? 1 : 1.02,
           }}
           transition={{ duration: 0.5, ease: 'easeInOut' }}
-          className={`flex items-center justify-between h-14 transition-all duration-500 ${scrolled ? 'backdrop-blur-md border border-white/10' : ''}`}
+          className={`flex items-center justify-between h-14 px-6 transition-all duration-500 ${scrolled ? 'backdrop-blur-md border border-white/10' : ''}`}
         >
           {/* Logo */}
           <a href="#" className="flex items-center gap-2 text-xl font-semibold text-foreground">
