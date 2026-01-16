@@ -51,16 +51,16 @@ export function DeviceFeature() {
 
           {/* Image container with fixed aspect ratio */}
           <div className="relative z-10 w-[700px] sm:w-[850px] lg:w-[1000px] aspect-[16/10] rounded-3xl shadow-2xl overflow-hidden">
-            <AnimatePresence mode="wait">
+            <AnimatePresence mode="wait" initial={false}>
               {activeTab === 'mobile' ? (
                 <motion.img 
                   key="mobile" 
                   alt="GEO Labs mobile app showing Google Maps integration" 
-                  className="w-full h-full object-cover" 
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ duration: 0.3 }}
+                  className="absolute inset-0 w-full h-full object-cover" 
+                  initial={{ opacity: 0, x: -100 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 100 }}
+                  transition={{ duration: 0.4, ease: 'easeInOut' }}
                   src="/lovable-uploads/3a3051e7-aaef-4391-bc0e-63b6971f8fce.png" 
                 />
               ) : (
@@ -68,11 +68,11 @@ export function DeviceFeature() {
                   key="web" 
                   src={webApp} 
                   alt="GEO Labs web dashboard showing AI search results" 
-                  className="w-full h-full object-cover" 
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ duration: 0.3 }}
+                  className="absolute inset-0 w-full h-full object-cover" 
+                  initial={{ opacity: 0, x: 100 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -100 }}
+                  transition={{ duration: 0.4, ease: 'easeInOut' }}
                 />
               )}
             </AnimatePresence>
