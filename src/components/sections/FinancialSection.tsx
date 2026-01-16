@@ -2,6 +2,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import budgetUI from '@/assets/budget-ui.png';
 import decorativeShape from '@/assets/decorative-shape.png';
+import { AnimatedButton } from '@/components/ui/AnimatedButton';
 const features = ['Call & Lead Tracking', 'Traffic & Visibility Reports', 'Conversion Insights', 'Monthly Strategy Adjustments'];
 export function FinancialSection() {
   const ref = useRef<HTMLDivElement>(null);
@@ -42,9 +43,9 @@ export function FinancialSection() {
                   {feature}
                 </div>)}
             </div>
-            <a href="#contact" className="btn-primary">
+            <AnimatedButton href="#contact">
               Get Your Visibility Audit
-            </a>
+            </AnimatedButton>
           </motion.div>
 
           {/* Right - Image */}

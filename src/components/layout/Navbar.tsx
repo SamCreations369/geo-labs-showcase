@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
+import { AnimatedButton } from '@/components/ui/AnimatedButton';
 
 const navLinks = [{
   name: 'Features',
@@ -77,9 +78,9 @@ export function Navbar() {
 
           {/* CTA Button */}
           <div className="hidden md:block">
-            <a href="#contact" className="btn-primary text-sm">
+            <AnimatedButton href="#contact" className="text-sm">
               Get Your Visibility Audit
-            </a>
+            </AnimatedButton>
           </div>
 
           {/* Mobile Menu Button */}
@@ -112,9 +113,9 @@ export function Navbar() {
                   {link.name}
                 </a>
               ))}
-              <a href="#contact" className="btn-primary text-sm w-full text-center">
+              <AnimatedButton href="#contact" className="text-sm w-full text-center">
                 Get a FREE GEO Audit
-              </a>
+              </AnimatedButton>
             </div>
           </motion.div>
         )}

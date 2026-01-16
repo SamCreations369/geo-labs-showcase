@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Check } from 'lucide-react';
+import { AnimatedButton } from '@/components/ui/AnimatedButton';
 const plans = [{
   name: 'GEO Labs Basic',
   price: 'Free',
@@ -100,9 +101,13 @@ export function Pricing() {
                   </li>)}
               </ul>
 
-              <a href="#contact" className={`block text-center py-3 rounded-full font-medium transition-all ${plan.popular ? 'bg-primary text-primary-foreground hover:opacity-90' : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'}`}>
+              <AnimatedButton 
+                href="#contact" 
+                variant={plan.popular ? "primary" : "secondary"}
+                className="w-full text-center"
+              >
                 {plan.cta}
-              </a>
+              </AnimatedButton>
             </motion.div>)}
         </div>
 

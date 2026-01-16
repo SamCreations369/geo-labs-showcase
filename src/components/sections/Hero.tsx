@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import dashboardImage from '@/assets/dreelio-dashboard.png';
+import { AnimatedButton } from '@/components/ui/AnimatedButton';
 export function Hero() {
   const ref = useRef<HTMLDivElement>(null);
   const {
@@ -107,10 +108,9 @@ export function Hero() {
             Complete visibility strategy for LA businesses tired of being invisible in local search. From comprehensive SEO audit to sustainable organic growth across Google, Bing, and AI platforms, we deliver honest assessments and effective solutions for businesses throughout Los Angeles County.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <a href="#contact" className="btn-primary">
+            <AnimatedButton href="#contact">
               Get Your Visibility Audit
-            </a>
-            
+            </AnimatedButton>
           </div>
         </motion.div>
 
