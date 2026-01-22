@@ -11,7 +11,7 @@ const plans = [{
   cta: 'Try GEO Labs free',
   popular: false
 }, {
-  name: 'GEO Labs Premium',
+  name: 'Growth Optimization',
   price: '$189',
   priceAnnual: '$87',
   description: 'For pro use with advanced needs.',
