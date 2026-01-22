@@ -17,7 +17,7 @@ const testimonials = [{
   quote: 'They identified our biggest visibility gaps, fixed them, and taught us how to keep them fixed. Would definitely recommend.',
   image: testimonial2
 }, {
-  name: 'Monica T.',
+  name: 'Monica Thorne',
   role: 'Home Services Business Owner',
   quote: 'We went from invisible to fully booked weekends. It felt like flipping a switch on our online presence.',
   image: testimonial3
