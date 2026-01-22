@@ -67,7 +67,7 @@ export function Testimonials() {
           viewport={{ once: true }}
           className="glass-card rounded-3xl p-12 md:p-16 mb-12 text-center"
         >
-          <p className="text-2xl md:text-4xl lg:text-5xl text-foreground leading-tight mb-10 max-w-4xl mx-auto font-medium">
+          <p className="text-3xl md:text-5xl lg:text-6xl text-foreground leading-tight mb-10 max-w-4xl mx-auto font-medium">
             "GEO Labs is by far the best local SEO partner we have ever worked with."
           </p>
           <div className="flex flex-col items-center">
