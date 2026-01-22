@@ -34,7 +34,7 @@ export function TrustBar() {
               x: {
                 repeat: Infinity,
                 repeatType: "loop",
-                duration: isHovered ? 60 : 30,
+                duration: isHovered ? 120 : 30,
                 ease: "linear",
               },
             }}
