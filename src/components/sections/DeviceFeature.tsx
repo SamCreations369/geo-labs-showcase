@@ -71,7 +71,7 @@ export function DeviceFeature() {
                 Mobile
               </button>
               <button onClick={() => setActiveTab('web')} className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${activeTab === 'web' ? 'bg-foreground text-background' : 'text-foreground/80 hover:text-foreground'}`}>
-                Web App
+                Web
               </button>
             </div>
           </motion.div>
