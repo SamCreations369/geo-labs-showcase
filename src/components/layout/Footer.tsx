@@ -97,7 +97,7 @@ export function Footer() {
 
         <div className="mt-12 pt-8 border-t border-primary-foreground/20 text-center">
           <p className="text-primary-foreground/60 text-sm">
-            © {new Date().getFullYear()} GEO Labs. All rights reserved.
+            © {new Date().getFullYear()} Eudaimonia. All rights reserved.
           </p>
         </div>
       </div>
