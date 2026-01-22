@@ -2,6 +2,8 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { Send, Building2, Globe, MapPin, Mail } from 'lucide-react';
 import { useState, useRef } from 'react';
 import { z } from 'zod';
+import { supabase } from '@/integrations/supabase/client';
+import { useToast } from '@/hooks/use-toast';
 
 const contactSchema = z.object({
   businessName: z.string().trim().min(1, 'Business name is required').max(100, 'Business name must be less than 100 characters'),
@@ -13,6 +15,7 @@ const contactSchema = z.object({
 type ContactFormData = z.infer<typeof contactSchema>;
 
 export function Contact() {
+  const { toast } = useToast();
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -36,7 +39,7 @@ export function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrors({});
     
@@ -55,13 +58,31 @@ export function Contact() {
     }
 
     setIsSubmitting(true);
-    // Simulate submission - replace with actual API call when backend is added
-    setTimeout(() => {
-      setIsSubmitting(false);
+    
+    try {
+      const { data, error } = await supabase.functions.invoke('send-contact-email', {
+        body: formData
+      });
+
+      if (error) throw error;
+
       setSubmitSuccess(true);
       setFormData({ businessName: '', website: '', city: '', email: '' });
+      toast({
+        title: "Request submitted!",
+        description: "Check your email for confirmation. We'll be in touch soon.",
+      });
       setTimeout(() => setSubmitSuccess(false), 3000);
-    }, 500);
+    } catch (error: any) {
+      console.error('Error submitting form:', error);
+      toast({
+        title: "Something went wrong",
+        description: "Please try again or contact us directly.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
