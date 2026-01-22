@@ -6,7 +6,7 @@ const plans = [{
   name: 'Starter Audit',
   price: '$50',
   priceAnnual: '$50',
-  description: 'For solo use with light needs.',
+  description: 'Get clarity before you commit to anything.',
   features: ['Unlimited projects', 'Unlimited clients', 'Time tracking', 'CRM', 'iOS & Android app'],
   cta: 'Try GEO Labs free',
   popular: false
