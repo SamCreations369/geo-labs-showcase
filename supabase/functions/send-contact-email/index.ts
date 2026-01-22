@@ -2,12 +2,18 @@ import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { Resend } from "https://esm.sh/resend@2.0.0";
 import { z } from "https://deno.land/x/zod@v3.22.4/mod.ts";
 
-const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
+const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
+const resend = new Resend(RESEND_API_KEY);
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers":
     "authorization, x-client-info, apikey, content-type",
+};
+
+const extractResendId = (resp: unknown): string | null => {
+  const r = resp as any;
+  return (r?.data?.id ?? r?.id ?? null) as string | null;
 };
 
 // Server-side validation schema
@@ -44,6 +50,14 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   try {
+    if (!RESEND_API_KEY) {
+      console.error("Missing RESEND_API_KEY secret");
+      return new Response(
+        JSON.stringify({ error: "Email service is not configured." }),
+        { status: 500, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
+
     // Rate limiting by IP
     const clientIP = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
     
@@ -72,7 +86,7 @@ const handler = async (req: Request): Promise<Response> => {
     console.log("Processing contact form:", { businessName, city, timestamp: new Date().toISOString() });
 
     // Send confirmation email to the user
-    await resend.emails.send({
+    const userEmailResponse = await resend.emails.send({
       from: "Eudaimonia <onboarding@resend.dev>",
       to: [email],
       subject: "We received your visibility audit request!",
@@ -99,10 +113,16 @@ const handler = async (req: Request): Promise<Response> => {
       `,
     });
 
-    console.log("User confirmation email sent successfully");
+    if ((userEmailResponse as any)?.error) {
+      console.error("Resend user email send failed", { error: (userEmailResponse as any).error });
+      throw new Error("EMAIL_SEND_FAILED");
+    }
+
+    const userEmailId = extractResendId(userEmailResponse);
+    console.log("User confirmation email sent successfully", { id: userEmailId });
 
     // Send notification email to the owner
-    await resend.emails.send({
+    const ownerEmailResponse = await resend.emails.send({
       from: "Eudaimonia Contact Form <onboarding@resend.dev>",
       to: ["eudaimoniavisiblity@gmail.com"],
       subject: `New Visibility Audit Request: ${businessName}`,
@@ -122,11 +142,21 @@ const handler = async (req: Request): Promise<Response> => {
       `,
     });
 
-    console.log("Owner notification email sent successfully");
+    if ((ownerEmailResponse as any)?.error) {
+      console.error("Resend owner email send failed", { error: (ownerEmailResponse as any).error });
+      throw new Error("EMAIL_SEND_FAILED");
+    }
+
+    const ownerEmailId = extractResendId(ownerEmailResponse);
+    console.log("Owner notification email sent successfully", { id: ownerEmailId });
 
     // Return minimal success response
     return new Response(
-      JSON.stringify({ success: true }),
+      JSON.stringify({
+        success: true,
+        userEmailId,
+        ownerEmailId,
+      }),
       { status: 200, headers: { "Content-Type": "application/json", ...corsHeaders } }
     );
   } catch (error: unknown) {
