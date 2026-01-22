@@ -24,7 +24,7 @@ const plans = [{
   price: 'Flexible',
   priceAnnual: 'Flexible',
   description: 'For team use with custom needs.',
-  features: ['Everything in Premium', 'Custom data import', 'Advanced onboarding', 'Hubspot integration', 'Timesheets'],
+  features: ['Ongoing content creation', 'Strategic funnel expansion', 'Monthly performance reporting', 'Continuous optimization'],
   cta: 'Contact sales',
   popular: false
 }];
