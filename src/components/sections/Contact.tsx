@@ -66,6 +66,9 @@ export function Contact() {
 
       if (error) throw error;
 
+       // Helpful for debugging deliverability / Resend dashboard visibility
+       console.log('send-contact-email response:', data);
+
       setSubmitSuccess(true);
       setFormData({ businessName: '', website: '', city: '', email: '' });
       toast({
