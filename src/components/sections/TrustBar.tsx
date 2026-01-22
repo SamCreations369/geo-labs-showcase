@@ -17,10 +17,25 @@ export function TrustBar() {
       </motion.div>
 
       <div className="relative overflow-hidden">
-        <div className="flex animate-marquee">
-          {[...trustLogos, ...trustLogos].map((logo, i) => <div key={i} className="flex-shrink-0 mx-8 px-6 py-3 rounded-full bg-secondary/50 text-muted-foreground text-sm font-medium">
-              {logo}
-            </div>)}
+        <div className="flex w-max">
+          <motion.div 
+            className="flex"
+            animate={{ x: [0, -50 * trustLogos.length * 2] }}
+            transition={{
+              x: {
+                repeat: Infinity,
+                repeatType: "loop",
+                duration: 20,
+                ease: "linear",
+              },
+            }}
+          >
+            {[...trustLogos, ...trustLogos, ...trustLogos, ...trustLogos].map((logo, i) => (
+              <div key={i} className="flex-shrink-0 mx-4 px-6 py-3 rounded-full bg-secondary/50 text-muted-foreground text-sm font-medium">
+                {logo}
+              </div>
+            ))}
+          </motion.div>
         </div>
       </div>
     </section>;
