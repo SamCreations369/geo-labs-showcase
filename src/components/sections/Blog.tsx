@@ -84,7 +84,11 @@ export function Blog() {
                 </h3>
                 <p className="text-sm text-white/80 mb-4">{featuredPost.excerpt}</p>
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full bg-white/20" />
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                    <path d="M12 3L2 21L12 16Z" fill="#B8860B" />
+                    <path d="M12 3L22 21L12 16Z" fill="#DAA520" />
+                    <path d="M2 21L22 21L12 16Z" fill="#FFD700" />
+                  </svg>
                   <div>
                     <div className="text-sm font-medium">{featuredPost.author}</div>
                     <div className="text-xs text-white/60">{featuredPost.role}</div>
