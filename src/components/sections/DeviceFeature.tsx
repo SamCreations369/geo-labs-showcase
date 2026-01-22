@@ -68,7 +68,7 @@ export function DeviceFeature() {
             {/* Tab buttons - inside image at bottom */}
             <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-1 p-1 bg-white/30 backdrop-blur-md rounded-full shadow-lg z-20">
               <button onClick={() => setActiveTab('mobile')} className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${activeTab === 'mobile' ? 'bg-foreground text-background' : 'text-foreground/80 hover:text-foreground'}`}>
-                Mobile App
+                Mobile
               </button>
               <button onClick={() => setActiveTab('web')} className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${activeTab === 'web' ? 'bg-foreground text-background' : 'text-foreground/80 hover:text-foreground'}`}>
                 Web App
