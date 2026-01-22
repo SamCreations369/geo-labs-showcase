@@ -24,7 +24,7 @@ const testimonials = [{
 }, {
   name: 'Sarah K.',
   role: 'Owner, Fitness Studio',
-  quote: 'Managing our online presence used to mean spreadsheets and missed opportunities. GEO Labs keeps everything tight and our clients impressed.',
+  quote: 'They identified our biggest visibility gaps, fixed them, and taught us how to keep them fixed. Would definitely recommend.',
   image: testimonial4
 }];
 
