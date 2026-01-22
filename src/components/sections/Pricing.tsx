@@ -3,17 +3,17 @@ import { motion } from 'framer-motion';
 import { Check } from 'lucide-react';
 import { AnimatedButton } from '@/components/ui/AnimatedButton';
 const plans = [{
-  name: 'Starter Audit',
-  price: '$50',
-  priceAnnual: '$50',
-  description: 'Get clarity before you commit to anything.',
-  features: ['Full technical audit', 'GEO audit', 'Competitive visibility review', 'Action plan'],
-  cta: 'GET STARTED',
+  name: 'GEO Labs Basic',
+  price: 'Free',
+  priceAnnual: 'Free',
+  description: 'For solo use with light needs.',
+  features: ['Unlimited projects', 'Unlimited clients', 'Time tracking', 'CRM', 'iOS & Android app'],
+  cta: 'Try GEO Labs free',
   popular: false
 }, {
-  name: 'Growth Optimization',
-  price: 'Custom',
-  priceAnnual: 'Custom',
+  name: 'GEO Labs Premium',
+  price: '$189',
+  priceAnnual: '$87',
   description: 'For pro use with advanced needs.',
   features: ['Everything in Basic', 'Invoices & payments', 'Expense tracking', 'Income tracking', 'Scheduling'],
   cta: 'Get started',
@@ -78,9 +78,7 @@ export function Pricing() {
           y: -5
         }} className={`glass-card p-8 rounded-2xl relative ${plan.popular ? 'ring-2 ring-primary' : ''}`}>
               {plan.discount && <div className="absolute -top-3 right-6">
-                  <span className="bg-primary text-primary-foreground text-xs font-medium px-3 py-1 rounded-full">
-                    {plan.discount}
-                  </span>
+                  
                 </div>}
 
               <div className="mb-6">
@@ -89,7 +87,7 @@ export function Pricing() {
                   <span className="text-4xl font-semibold text-foreground">
                     {isAnnual ? plan.priceAnnual : plan.price}
                   </span>
-                  {plan.price !== '$50' && plan.price !== 'Flexible' && <span className="text-muted-foreground">/mo</span>}
+                  {plan.price !== 'Free' && plan.price !== 'Flexible' && <span className="text-muted-foreground">/mo</span>}
                 </div>
                 <p className="text-sm text-muted-foreground">{plan.description}</p>
               </div>
@@ -101,31 +99,14 @@ export function Pricing() {
                   </li>)}
               </ul>
 
-              <AnimatedButton 
-                href="#contact" 
-                variant={plan.popular ? "primary" : "secondary"}
-                className="w-full text-center"
-              >
+              <AnimatedButton href="#contact" variant={plan.popular ? "primary" : "secondary"} className="w-full text-center">
                 {plan.cta}
               </AnimatedButton>
             </motion.div>)}
         </div>
 
         {/* Toggle */}
-        <motion.div initial={{
-        opacity: 0
-      }} whileInView={{
-        opacity: 1
-      }} viewport={{
-        once: true
-      }} className="flex justify-center items-center gap-4 mt-8">
-          <button onClick={() => setIsAnnual(true)} className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${isAnnual ? 'bg-primary text-primary-foreground' : 'text-muted-foreground'}`}>
-            Annually
-          </button>
-          <button onClick={() => setIsAnnual(false)} className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${!isAnnual ? 'bg-primary text-primary-foreground' : 'text-muted-foreground'}`}>
-            Monthly
-          </button>
-        </motion.div>
+        
       </div>
     </section>;
 }
