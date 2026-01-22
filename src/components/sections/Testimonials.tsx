@@ -4,7 +4,7 @@ import testimonialFeatured from '@/assets/testimonial-featured.png';
 import testimonialBill from '@/assets/testimonial-bill.png';
 import testimonial2 from '@/assets/testimonial-2.jpg';
 import testimonial3 from '@/assets/testimonial-3.jpg';
-import testimonial4 from '@/assets/testimonial-4.jpg';
+import testimonialBrandon from '@/assets/testimonial-brandon.png';
 
 const testimonials = [{
   name: 'Bill Williams',
@@ -25,7 +25,7 @@ const testimonials = [{
   name: 'Brandon Routh',
   role: 'HVAC Company Director',
   quote: 'No sugar-coating, just results. They explained exactly why we weren\'t ranking and what it would take to fix it. Six months later, we\'re finally getting the business traffic we needed.',
-  image: testimonial4
+  image: testimonialBrandon
 }];
 
 export function Testimonials() {
