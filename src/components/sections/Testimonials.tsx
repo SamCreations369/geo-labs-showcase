@@ -24,7 +24,7 @@ const testimonials = [{
 }, {
   name: 'Sarah K.',
   role: 'Owner, Fitness Studio',
-  quote: 'They identified our biggest visibility gaps, fixed them, and taught us how to keep them fixed. Would definitely recommend.',
+  quote: 'No sugar-coating, just results. They explained exactly why we weren\'t ranking and what it would take to fix it. Six months later, we\'re finally getting the business traffic we needed.',
   image: testimonial4
 }];
 
