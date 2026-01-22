@@ -72,7 +72,7 @@ export function Testimonials() {
           </p>
           <div className="flex flex-col items-center">
             <img src={testimonialFeatured} alt="Martha P." className="w-16 h-16 rounded-full object-cover mb-4" />
-            <div className="font-semibold text-foreground">Martha P.</div>
+            <div className="font-semibold text-foreground">Martha Patel</div>
             <div className="text-sm text-muted-foreground">VP Marketing, Local Business Network</div>
           </div>
         </motion.div>
