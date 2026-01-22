@@ -106,12 +106,7 @@ export function Benefits() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
                 </svg>
               </div>
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-5 bg-green-500 rounded-full relative">
-                  <div className="absolute right-0.5 top-0.5 w-4 h-4 bg-white rounded-full"></div>
-                </div>
-                <span className="text-sm text-foreground">Hide branding</span>
-              </div>
+              
             </div>
 
             <p className="text-foreground">
