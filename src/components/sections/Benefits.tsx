@@ -25,7 +25,7 @@ const features = [{
   title: 'Transparency',
   description: 'You\'ll always know what we\'re doing, why we\'re implementing specific optimizations, and how your rankings are performing. Clear monthly reporting, regular strategy updates, and honest conversations about what\'s working and what needs adjustment.'
 }, {
-  title: 'View things your way',
+  title: 'Custom SEO Strategy',
   description: 'Easily toggle between various views, including Kanban, cards, list, table, timeline, and calendar.'
 }];
 export function Benefits() {
