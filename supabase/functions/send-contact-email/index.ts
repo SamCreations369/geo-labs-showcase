@@ -87,7 +87,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Send confirmation email to the user
     const userEmailResponse = await resend.emails.send({
-      from: "Eudaimonia <onboarding@resend.dev>",
+      from: "Eudaimonia <noreply@eudaimonia.website>",
       to: [email],
       subject: "We received your visibility audit request!",
       html: `
@@ -123,7 +123,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Send notification email to the owner
     const ownerEmailResponse = await resend.emails.send({
-      from: "Eudaimonia Contact Form <onboarding@resend.dev>",
+      from: "Eudaimonia Contact Form <noreply@eudaimonia.website>",
       to: ["eudaimoniavisiblity@gmail.com"],
       subject: `New Visibility Audit Request: ${businessName}`,
       html: `
