@@ -1,20 +1,22 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef, useState } from 'react';
-import mobileApp from '@/assets/mobile-app.png';
-import webApp from '@/assets/web-app.png';
+import { useIsMobile } from '@/hooks/use-mobile';
 import decorativeShape from '@/assets/decorative-shape.png';
+
 export function DeviceFeature() {
   const ref = useRef<HTMLDivElement>(null);
   const [activeTab, setActiveTab] = useState<'mobile' | 'web'>('mobile');
-  const {
-    scrollYProgress
-  } = useScroll({
+  const isMobile = useIsMobile();
+  
+  const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start end', 'end start']
   });
-  const y1 = useTransform(scrollYProgress, [0, 1], [100, -100]);
-  const y2 = useTransform(scrollYProgress, [0, 1], [60, -60]);
-  const imageScale = useTransform(scrollYProgress, [0, 0.6], [0.65, 1.02]);
+  
+  // Disable parallax on mobile
+  const y1 = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [100, -100]);
+  const y2 = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [60, -60]);
+  const imageScale = useTransform(scrollYProgress, [0, 0.6], isMobile ? [1, 1] : [0.65, 1.02]);
   return <section ref={ref} id="features" className="py-24 bg-background overflow-hidden">
       <div className="section-container">
         <motion.div initial={{

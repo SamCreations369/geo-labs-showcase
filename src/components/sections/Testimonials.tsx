@@ -1,5 +1,6 @@
 import { motion, useAnimationFrame, useMotionValue } from 'framer-motion';
 import { useLayoutEffect, useRef, useState } from 'react';
+import { useIsMobile } from '@/hooks/use-mobile';
 import testimonialMartha from '@/assets/testimonial-martha.png';
 import testimonialBill from '@/assets/testimonial-bill.png';
 import testimonial2 from '@/assets/testimonial-2.jpg';
@@ -33,6 +34,7 @@ export function Testimonials() {
   const x = useMotionValue(0);
   const loopRef = useRef<HTMLDivElement>(null);
   const [loopWidth, setLoopWidth] = useState(0);
+  const isMobile = useIsMobile();
 
   useLayoutEffect(() => {
     const el = loopRef.current;
@@ -47,7 +49,8 @@ export function Testimonials() {
     return () => ro.disconnect();
   }, []);
 
-  const speed = isHovered ? 0 : 50;
+  // Slower speed on mobile for better performance
+  const speed = isHovered ? 0 : (isMobile ? 25 : 50);
 
   useAnimationFrame((_, delta) => {
     if (!loopWidth || speed === 0) return;
