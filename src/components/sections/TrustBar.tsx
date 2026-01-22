@@ -29,15 +29,16 @@ export function TrustBar() {
         <div className="flex w-max">
           <motion.div 
             className="flex"
-            animate={{ x: [0, -50 * trustLogos.length * 2] }}
+            animate={{ x: isHovered ? undefined : [0, -50 * trustLogos.length * 2] }}
             transition={{
               x: {
                 repeat: Infinity,
                 repeatType: "loop",
-                duration: isHovered ? 120 : 30,
+                duration: 30,
                 ease: "linear",
               },
             }}
+            style={{ animationPlayState: isHovered ? 'paused' : 'running' }}
           >
             {[...trustLogos, ...trustLogos, ...trustLogos, ...trustLogos].map((logo, i) => (
               <div key={i} className="flex-shrink-0 mx-4 px-6 py-3 rounded-full bg-secondary/50 text-muted-foreground text-sm font-medium">
