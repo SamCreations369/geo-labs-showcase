@@ -17,7 +17,7 @@ const testimonials = [{
   quote: 'GEO Labs helped us show up in AI-powered search results and local searches. We\'re seeing more booked consultations every week.',
   image: testimonial2
 }, {
-  name: 'David P.',
+  name: 'Monica T.',
   role: 'Home Services Business Owner',
   quote: 'We went from invisible to fully booked weekends. It felt like flipping a switch on our online presence.',
   image: testimonial3
