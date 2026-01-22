@@ -16,7 +16,7 @@ const plans = [{
   priceAnnual: 'Custom',
   description: 'Strengthen your foundation so everything else works better',
   features: ['On-page optimization', 'Local SEO improvements', 'GEO optimization'],
-  cta: 'Get Started',
+  cta: 'Get started',
   popular: true,
   discount: 'Save 20%'
 }, {
