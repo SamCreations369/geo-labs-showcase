@@ -9,7 +9,7 @@ import testimonial4 from '@/assets/testimonial-4.jpg';
 const testimonials = [{
   name: 'Alex R.',
   role: 'Owner, Neighborhood Café',
-  quote: 'Our calls from Google and Maps almost doubled within a few months. We\'re finally showing up above chains we could never beat before.',
+  quote: 'Honest feedback we actually needed. Our content was mediocre and our local SEO was a mess. They helped fix both, and now we rank where we should have been all along. Profits have increased and I\'ve had more calls consistently ever since.',
   image: testimonial1
 }, {
   name: 'Monica T.',
