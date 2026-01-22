@@ -65,19 +65,15 @@ export function Testimonials() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="glass-card rounded-3xl p-8 md:p-12 mb-12 grid md:grid-cols-2 gap-8 items-center"
+          className="glass-card rounded-3xl p-12 md:p-16 mb-12 text-center"
         >
-          <div>
-            <p className="text-xl md:text-2xl text-foreground leading-relaxed mb-8">
-              "Eudaimonia is by far the best local SEO partner we have ever worked with."
-            </p>
-            <div>
-              <div className="font-semibold text-foreground">Martha P.</div>
-              <div className="text-sm text-muted-foreground">VP Marketing, Local Business Network</div>
-            </div>
-          </div>
-          <div className="flex justify-center">
-            <img src={testimonialFeatured} alt="Featured testimonial" className="w-64 h-80 object-cover rounded-2xl" />
+          <p className="text-2xl md:text-4xl lg:text-5xl text-foreground leading-tight mb-10 max-w-4xl mx-auto font-medium">
+            "GEO Labs is by far the best local SEO partner we have ever worked with."
+          </p>
+          <div className="flex flex-col items-center">
+            <img src={testimonialFeatured} alt="Martha P." className="w-16 h-16 rounded-full object-cover mb-4" />
+            <div className="font-semibold text-foreground">Martha P.</div>
+            <div className="text-sm text-muted-foreground">VP Marketing, Local Business Network</div>
           </div>
         </motion.div>
 
