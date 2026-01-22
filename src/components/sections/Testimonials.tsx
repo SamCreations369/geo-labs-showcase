@@ -8,7 +8,7 @@ import testimonial4 from '@/assets/testimonial-4.jpg';
 
 const testimonials = [{
   name: 'Bill Williams',
-  role: 'Owner, Neighborhood Café',
+  role: 'Mobile Detail Owner',
   quote: 'Honest feedback we actually needed. Our content was mediocre and our local SEO was a mess. They helped fix both, and now we rank where we should have been all along. Profits have increased and I\'ve had more calls consistently ever since.',
   image: testimonial1
 }, {
