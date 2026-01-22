@@ -12,7 +12,7 @@ const testimonials = [{
   quote: 'Honest feedback we actually needed. Our content was mediocre and our local SEO was a mess. They helped fix both, and now we rank where we should have been all along. Profits have increased and I\'ve had more calls consistently ever since.',
   image: testimonialBill
 }, {
-  name: 'Monica T.',
+  name: 'Juan Hernandez',
   role: 'Founder, Med Spa in LA',
   quote: 'They identified our biggest visibility gaps, fixed them, and taught us how to keep them fixed. Would definitely recommend.',
   image: testimonial2
