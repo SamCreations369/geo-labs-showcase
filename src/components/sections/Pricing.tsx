@@ -3,28 +3,28 @@ import { motion } from 'framer-motion';
 import { Check } from 'lucide-react';
 import { AnimatedButton } from '@/components/ui/AnimatedButton';
 const plans = [{
-  name: 'GEO Labs Basic',
-  price: 'Free',
-  priceAnnual: 'Free',
-  description: 'For solo use with light needs.',
-  features: ['Unlimited projects', 'Unlimited clients', 'Time tracking', 'CRM', 'iOS & Android app'],
-  cta: 'Try GEO Labs free',
+  name: 'Starter Audit',
+  price: '$50',
+  priceAnnual: '$50',
+  description: 'Get clarity before you commit to anything.',
+  features: ['Full technical audit', 'GEO audit', 'Competitive visibility review', 'Action plan'],
+  cta: 'Get your audit',
   popular: false
 }, {
-  name: 'GEO Labs Premium',
-  price: '$189',
-  priceAnnual: '$87',
-  description: 'For pro use with advanced needs.',
-  features: ['Everything in Basic', 'Invoices & payments', 'Expense tracking', 'Income tracking', 'Scheduling'],
+  name: 'Growth Optimization',
+  price: 'Custom',
+  priceAnnual: 'Custom',
+  description: 'Strengthen your foundation so everything else works better',
+  features: ['On-page optimization', 'Local SEO improvements', 'GEO optimization'],
   cta: 'Get started',
   popular: true,
   discount: 'Save 20%'
 }, {
-  name: 'GEO Labs Enterprise',
+  name: 'Visibility Expansion Retainer',
   price: 'Flexible',
   priceAnnual: 'Flexible',
   description: 'For team use with custom needs.',
-  features: ['Everything in Premium', 'Custom data import', 'Advanced onboarding', 'Hubspot integration', 'Timesheets'],
+  features: ['Ongoing content creation', 'Strategic funnel expansion', 'Monthly performance reporting', 'Continuous optimization'],
   cta: 'Contact sales',
   popular: false
 }];
@@ -76,9 +76,11 @@ export function Pricing() {
         }} whileHover={{
           scale: 1.02,
           y: -5
-        }} className={`glass-card p-8 rounded-2xl relative ${plan.popular ? 'ring-2 ring-primary' : ''}`}>
+        }} className={`glass-card p-8 rounded-2xl relative flex flex-col h-full ${plan.popular ? 'ring-2 ring-primary' : ''}`}>
               {plan.discount && <div className="absolute -top-3 right-6">
-                  
+                  <span className="bg-primary text-primary-foreground text-xs font-medium px-3 py-1 rounded-full">
+                    {plan.discount}
+                  </span>
                 </div>}
 
               <div className="mb-6">
@@ -87,19 +89,23 @@ export function Pricing() {
                   <span className="text-4xl font-semibold text-foreground">
                     {isAnnual ? plan.priceAnnual : plan.price}
                   </span>
-                  {plan.price !== 'Free' && plan.price !== 'Flexible' && <span className="text-muted-foreground">/mo</span>}
+                  {plan.price !== '$50' && plan.price !== 'Flexible' && <span className="text-muted-foreground">/mo</span>}
                 </div>
                 <p className="text-sm text-muted-foreground">{plan.description}</p>
               </div>
 
-              <ul className="space-y-3 mb-8">
+              <ul className="space-y-3 mb-8 flex-grow">
                 {plan.features.map(feature => <li key={feature} className="flex items-center gap-3 text-sm text-foreground">
                     <Check className="w-4 h-4 text-green-500 shrink-0" />
                     {feature}
                   </li>)}
               </ul>
 
-              <AnimatedButton href="#contact" variant={plan.popular ? "primary" : "secondary"} className="w-full text-center">
+              <AnimatedButton 
+                href="#contact" 
+                variant={plan.popular ? "primary" : "secondary"}
+                className="w-full text-center mt-auto"
+              >
                 {plan.cta}
               </AnimatedButton>
             </motion.div>)}
@@ -113,8 +119,12 @@ export function Pricing() {
       }} viewport={{
         once: true
       }} className="flex justify-center items-center gap-4 mt-8">
-          
-          
+          <button onClick={() => setIsAnnual(true)} className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${isAnnual ? 'bg-primary text-primary-foreground' : 'text-muted-foreground'}`}>
+            Annually
+          </button>
+          <button onClick={() => setIsAnnual(false)} className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${!isAnnual ? 'bg-primary text-primary-foreground' : 'text-muted-foreground'}`}>
+            Monthly
+          </button>
         </motion.div>
       </div>
     </section>;
