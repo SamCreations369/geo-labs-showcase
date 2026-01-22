@@ -172,7 +172,7 @@ export function Benefits() {
         }} whileHover={{
           scale: 1.02,
           y: -5
-        }} className="glass-card p-6 rounded-2xl">
+        }} className="glass-card p-6 rounded-2xl transition-shadow duration-300 hover:shadow-[0_0_30px_rgba(59,130,246,0.3)]">
               <h4 className="font-semibold text-foreground mb-2">{feature.title}</h4>
               <p className="text-sm text-muted-foreground">{feature.description}</p>
             </motion.div>)}
