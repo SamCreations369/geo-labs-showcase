@@ -23,7 +23,7 @@ const features = [{
   description: 'We don\'t chase algorithm hacks or short-term ranking wins. We build search presence that compounds over time through quality content and technical optimization. Rankings that stick after updates, authority that grows, visibility that lasts.'
 }, {
   title: 'Transparency',
-  description: 'Set your language, currency, time, and date preferences for a seamless experience that feels truly local.'
+  description: 'You\'ll always know what we\'re doing, why we\'re implementing specific optimizations, and how your rankings are performing. Clear monthly reporting, regular strategy updates, and honest conversations about what\'s working and what needs adjustment.'
 }, {
   title: 'View things your way',
   description: 'Easily toggle between various views, including Kanban, cards, list, table, timeline, and calendar.'
