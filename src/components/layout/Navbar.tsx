@@ -39,13 +39,13 @@ export function Navbar() {
   }} className="fixed top-0 left-0 right-0 z-50 py-4">
       <div className="section-container">
         <motion.div animate={{
-        backgroundColor: scrolled ? 'rgba(255, 255, 255, 0.3)' : 'transparent',
-        borderRadius: scrolled ? '9999px' : '0px',
-        boxShadow: scrolled ? '0 10px 40px -10px rgba(0, 0, 0, 0.1)' : 'none'
-      }} transition={{
-        duration: 0.5,
-        ease: 'easeInOut'
-      }} className={`flex items-center justify-between h-14 px-6 transition-all duration-500 ${scrolled ? 'backdrop-blur-md border border-white/10' : ''}`}>
+          backgroundColor: scrolled ? 'hsla(0, 0%, 100%, 0.3)' : 'hsla(0, 0%, 100%, 0)',
+          borderRadius: scrolled ? '9999px' : '0px',
+          boxShadow: scrolled ? '0 10px 40px -10px rgba(0, 0, 0, 0.1)' : 'none'
+        }} transition={{
+          duration: 0.5,
+          ease: 'easeInOut'
+        }} className={`flex items-center justify-between h-14 px-6 transition-all duration-500 ${scrolled ? 'backdrop-blur-md border border-white/10' : ''}`}>
           {/* Logo */}
           <a href="#" className="flex items-center gap-2 text-xl font-semibold text-foreground">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
