@@ -17,8 +17,7 @@ const plans = [{
   description: 'Strengthen your foundation so everything else works better',
   features: ['On-page optimization', 'Local SEO improvements', 'GEO optimization'],
   cta: 'Get started',
-  popular: true,
-  discount: 'Save 20%'
+  popular: true
 }, {
   name: 'Visibility Expansion Retainer',
   price: 'Flexible',
@@ -77,11 +76,6 @@ export function Pricing() {
           scale: 1.02,
           y: -5
         }} className={`glass-card p-8 rounded-2xl relative flex flex-col h-full ${plan.popular ? 'ring-2 ring-primary' : ''}`}>
-              {plan.discount && <div className="absolute -top-3 right-6">
-                  <span className="bg-primary text-primary-foreground text-xs font-medium px-3 py-1 rounded-full">
-                    {plan.discount}
-                  </span>
-                </div>}
 
               <div className="mb-6">
                 <h3 className="text-lg font-semibold text-foreground mb-4">{plan.name}</h3>
