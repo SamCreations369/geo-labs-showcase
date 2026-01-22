@@ -11,7 +11,7 @@ const plans = [{
   cta: 'GET STARTED',
   popular: false
 }, {
-  name: 'GEO Labs Premium',
+  name: 'Growth Optimization',
   price: 'Custom',
   priceAnnual: 'Custom',
   description: 'For pro use with advanced needs.',
