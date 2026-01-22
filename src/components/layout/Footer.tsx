@@ -25,10 +25,15 @@ export function Footer() {
           {/* Brand */}
           <div className="md:col-span-1">
             <a href="#" className="flex items-center gap-2 font-serif text-xl font-semibold mb-4">
-              <div className="w-8 h-8 rounded-lg bg-primary-foreground flex items-center justify-center">
-                <MapPin className="w-5 h-5 text-primary" />
-              </div>
-              GEO Labs
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                {/* Left face - darker */}
+                <path d="M12 3L2 21L12 16Z" fill="#B8860B" />
+                {/* Right face - medium */}
+                <path d="M12 3L22 21L12 16Z" fill="#DAA520" />
+                {/* Bottom face - lightest */}
+                <path d="M2 21L22 21L12 16Z" fill="#FFD700" />
+              </svg>
+              Eudaimonia
             </a>
             <p className="text-primary-foreground/70 text-sm mb-4">
               SEO + GEO for local businesses.
