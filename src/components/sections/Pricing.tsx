@@ -20,7 +20,7 @@ const plans = [{
   popular: true,
   discount: 'Save 20%'
 }, {
-  name: 'GEO Labs Enterprise',
+  name: 'Visibility Expansion Retainer',
   price: 'Flexible',
   priceAnnual: 'Flexible',
   description: 'For team use with custom needs.',
