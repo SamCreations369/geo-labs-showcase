@@ -13,7 +13,7 @@ const testimonials = [{
   image: testimonialBill
 }, {
   name: 'Juan Hernandez',
-  role: 'Founder, Med Spa in LA',
+  role: 'Clothing Brand Owner',
   quote: 'They identified our biggest visibility gaps, fixed them, and taught us how to keep them fixed. Would definitely recommend.',
   image: testimonial2
 }, {
