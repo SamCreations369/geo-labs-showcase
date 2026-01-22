@@ -1,7 +1,7 @@
 import { motion, useAnimationFrame, useMotionValue } from 'framer-motion';
 import { useLayoutEffect, useRef, useState } from 'react';
 import testimonialFeatured from '@/assets/testimonial-featured.png';
-import testimonial1 from '@/assets/testimonial-1.jpg';
+import testimonialBill from '@/assets/testimonial-bill.png';
 import testimonial2 from '@/assets/testimonial-2.jpg';
 import testimonial3 from '@/assets/testimonial-3.jpg';
 import testimonial4 from '@/assets/testimonial-4.jpg';
@@ -10,7 +10,7 @@ const testimonials = [{
   name: 'Bill Williams',
   role: 'Mobile Detail Owner',
   quote: 'Honest feedback we actually needed. Our content was mediocre and our local SEO was a mess. They helped fix both, and now we rank where we should have been all along. Profits have increased and I\'ve had more calls consistently ever since.',
-  image: testimonial1
+  image: testimonialBill
 }, {
   name: 'Monica T.',
   role: 'Founder, Med Spa in LA',
