@@ -76,7 +76,7 @@ export function Pricing() {
         }} whileHover={{
           scale: 1.02,
           y: -5
-        }} className={`glass-card p-8 rounded-2xl relative ${plan.popular ? 'ring-2 ring-primary' : ''}`}>
+        }} className={`glass-card p-8 rounded-2xl relative flex flex-col h-full ${plan.popular ? 'ring-2 ring-primary' : ''}`}>
               {plan.discount && <div className="absolute -top-3 right-6">
                   <span className="bg-primary text-primary-foreground text-xs font-medium px-3 py-1 rounded-full">
                     {plan.discount}
@@ -94,7 +94,7 @@ export function Pricing() {
                 <p className="text-sm text-muted-foreground">{plan.description}</p>
               </div>
 
-              <ul className="space-y-3 mb-8">
+              <ul className="space-y-3 mb-8 flex-grow">
                 {plan.features.map(feature => <li key={feature} className="flex items-center gap-3 text-sm text-foreground">
                     <Check className="w-4 h-4 text-green-500 shrink-0" />
                     {feature}
@@ -104,7 +104,7 @@ export function Pricing() {
               <AnimatedButton 
                 href="#contact" 
                 variant={plan.popular ? "primary" : "secondary"}
-                className="w-full text-center"
+                className="w-full text-center mt-auto"
               >
                 {plan.cta}
               </AnimatedButton>
