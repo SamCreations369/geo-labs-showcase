@@ -1,6 +1,6 @@
 import { motion, useAnimationFrame, useMotionValue } from 'framer-motion';
 import { useLayoutEffect, useRef, useState } from 'react';
-import testimonialFeatured from '@/assets/testimonial-featured.png';
+import testimonialMartha from '@/assets/testimonial-martha.png';
 import testimonialBill from '@/assets/testimonial-bill.png';
 import testimonial2 from '@/assets/testimonial-2.jpg';
 import testimonial3 from '@/assets/testimonial-3.jpg';
@@ -71,7 +71,7 @@ export function Testimonials() {
             "GEO Labs is by far the best local SEO partner we have ever worked with."
           </p>
           <div className="flex flex-col items-center">
-            <img src={testimonialFeatured} alt="Martha P." className="w-16 h-16 rounded-full object-cover mb-4" />
+            <img src={testimonialMartha} alt="Martha Patel" className="w-16 h-16 rounded-full object-cover mb-4" />
             <div className="font-semibold text-foreground">Martha Patel</div>
             <div className="text-sm text-muted-foreground">VP Marketing, Local Business</div>
           </div>
