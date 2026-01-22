@@ -57,18 +57,18 @@ export function Blog() {
           </h2>
         </motion.div>
 
-        {/* Blog Grid - Dreelio style */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {/* Featured Post - spans 2 columns */}
+        {/* Blog Grid */}
+        <div className="space-y-6">
+          {/* Featured Post - full width on top */}
           <motion.a
             href="#"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            whileHover={{ scale: 1.02 }}
-            className="md:col-span-2 lg:row-span-2 glass-card rounded-2xl overflow-hidden group cursor-pointer"
+            whileHover={{ scale: 1.01 }}
+            className="block glass-card rounded-2xl overflow-hidden group cursor-pointer"
           >
-            <div className="relative h-64 lg:h-full">
+            <div className="relative h-64 md:h-80">
               <img
                 src={featuredPost.image}
                 alt={featuredPost.title}
@@ -101,18 +101,19 @@ export function Blog() {
             </div>
           </motion.a>
 
-          {/* Other Posts */}
-          {posts.map((post, i) => (
-            <motion.a
-              key={post.title}
-              href="#"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              whileHover={{ scale: 1.02, y: -5 }}
-              className="glass-card rounded-2xl overflow-hidden group cursor-pointer"
-            >
+          {/* Other Posts - 3 columns side by side */}
+          <div className="grid md:grid-cols-3 gap-6">
+            {posts.map((post, i) => (
+              <motion.a
+                key={post.title}
+                href="#"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                whileHover={{ scale: 1.02, y: -5 }}
+                className="glass-card rounded-2xl overflow-hidden group cursor-pointer"
+              >
               <div className="relative h-40">
                 <img
                   src={post.image}
@@ -127,7 +128,8 @@ export function Blog() {
                 <span className="text-xs text-muted-foreground">{post.category}</span>
               </div>
             </motion.a>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>
