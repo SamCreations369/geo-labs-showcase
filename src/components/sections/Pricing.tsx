@@ -15,7 +15,7 @@ const plans = [{
   price: 'Custom',
   priceAnnual: 'Custom',
   description: 'Strengthen your foundation so everything else works better',
-  features: ['Everything in Basic', 'Invoices & payments', 'Expense tracking', 'Income tracking', 'Scheduling'],
+  features: ['On-page optimization', 'Local SEO improvements', 'GEO optimization'],
   cta: 'Get started',
   popular: true,
   discount: 'Save 20%'
