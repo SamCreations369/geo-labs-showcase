@@ -9,7 +9,7 @@ const featuredPost = {
   title: 'What is GEO and Why Local Businesses Can\'t Ignore It',
   excerpt: 'Learn how Generative Engine Optimization is changing the game for local search visibility.',
   category: 'Must Read',
-  author: 'GEO Labs Team',
+  author: 'Eudaimonia Team',
   role: 'Head of Marketing',
   image: blog1,
   featured: true,
