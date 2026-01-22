@@ -23,7 +23,7 @@ const testimonials = [{
   image: testimonial3
 }, {
   name: 'Brandon Routh',
-  role: 'Owner, Fitness Studio',
+  role: 'HVAC Company Director',
   quote: 'No sugar-coating, just results. They explained exactly why we weren\'t ranking and what it would take to fix it. Six months later, we\'re finally getting the business traffic we needed.',
   image: testimonial4
 }];
