@@ -1,6 +1,11 @@
 import { motion } from 'framer-motion';
+import { useState } from 'react';
+
 const trustLogos = ['Google', 'Copilot', 'ChatGPT', 'YouTube', 'Google Maps', 'Google', 'Copilot', 'ChatGPT', 'YouTube', 'Google Maps'];
+
 export function TrustBar() {
+  const [isHovered, setIsHovered] = useState(false);
+  
   return <section className="py-16 bg-background">
       <motion.div initial={{
       opacity: 0
@@ -16,7 +21,11 @@ export function TrustBar() {
         </p>
       </motion.div>
 
-      <div className="relative overflow-hidden">
+      <div 
+        className="relative overflow-hidden cursor-pointer"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
         <div className="flex w-max">
           <motion.div 
             className="flex"
@@ -25,7 +34,7 @@ export function TrustBar() {
               x: {
                 repeat: Infinity,
                 repeatType: "loop",
-                duration: 20,
+                duration: isHovered ? 60 : 30,
                 ease: "linear",
               },
             }}
