@@ -12,8 +12,8 @@ const plans = [{
   popular: false
 }, {
   name: 'GEO Labs Premium',
-  price: '$189',
-  priceAnnual: '$87',
+  price: 'Custom',
+  priceAnnual: 'Custom',
   description: 'For pro use with advanced needs.',
   features: ['Everything in Basic', 'Invoices & payments', 'Expense tracking', 'Income tracking', 'Scheduling'],
   cta: 'Get started',
