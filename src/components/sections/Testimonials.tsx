@@ -98,7 +98,7 @@ export function Testimonials() {
                   className="glass-card rounded-2xl w-80 flex-shrink-0 flex flex-col"
                 >
                   <p className="text-foreground p-6 pb-4 flex-1">"{testimonial.quote}"</p>
-                  <div className="flex items-center gap-4 px-6 py-4 border-t border-border/50">
+                  <div className="flex items-center gap-4 px-6 py-4">
                     <img src={testimonial.image} alt={testimonial.name} className="w-10 h-10 rounded-full object-cover" />
                     <div>
                       <div className="font-semibold text-foreground text-sm">{testimonial.name}</div>
@@ -118,7 +118,7 @@ export function Testimonials() {
                   className="glass-card rounded-2xl w-80 flex-shrink-0 flex flex-col"
                 >
                   <p className="text-foreground p-6 pb-4 flex-1">"{testimonial.quote}"</p>
-                  <div className="flex items-center gap-4 px-6 py-4 border-t border-border/50">
+                  <div className="flex items-center gap-4 px-6 py-4">
                     <img src={testimonial.image} alt={testimonial.name} className="w-10 h-10 rounded-full object-cover" />
                     <div>
                       <div className="font-semibold text-foreground text-sm">{testimonial.name}</div>
