@@ -14,7 +14,7 @@ const plans = [{
   name: 'Growth Optimization',
   price: 'Custom',
   priceAnnual: 'Custom',
-  description: 'For pro use with advanced needs.',
+  description: 'Strengthen your foundation so everything else works better',
   features: ['Everything in Basic', 'Invoices & payments', 'Expense tracking', 'Income tracking', 'Scheduling'],
   cta: 'Get started',
   popular: true,
