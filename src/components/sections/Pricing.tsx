@@ -111,21 +111,6 @@ export function Pricing() {
             </motion.div>)}
         </div>
 
-        {/* Toggle */}
-        <motion.div initial={{
-        opacity: 0
-      }} whileInView={{
-        opacity: 1
-      }} viewport={{
-        once: true
-      }} className="flex justify-center items-center gap-4 mt-8">
-          <button onClick={() => setIsAnnual(true)} className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${isAnnual ? 'bg-primary text-primary-foreground' : 'text-muted-foreground'}`}>
-            Annually
-          </button>
-          <button onClick={() => setIsAnnual(false)} className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${!isAnnual ? 'bg-primary text-primary-foreground' : 'text-muted-foreground'}`}>
-            Monthly
-          </button>
-        </motion.div>
       </div>
     </section>;
 }
