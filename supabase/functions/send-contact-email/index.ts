@@ -1,5 +1,6 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { Resend } from "https://esm.sh/resend@2.0.0";
+import { z } from "https://deno.land/x/zod@v3.22.4/mod.ts";
 
 const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
 
@@ -9,28 +10,69 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type",
 };
 
-interface ContactEmailRequest {
-  businessName: string;
-  website: string;
-  city: string;
-  email: string;
-}
+// Server-side validation schema
+const contactSchema = z.object({
+  businessName: z.string().trim().min(1, "Business name is required").max(100),
+  website: z.string().trim().url().max(255).or(z.literal("")),
+  city: z.string().trim().min(1, "City is required").max(100),
+  email: z.string().trim().email("Invalid email address").max(255),
+});
+
+// Simple in-memory rate limiter
+const rateLimiter = new Map<string, number[]>();
+const RATE_LIMIT = 5; // requests
+const RATE_WINDOW_MS = 60 * 1000; // 1 minute
+
+const checkRateLimit = (identifier: string): boolean => {
+  const now = Date.now();
+  const requests = rateLimiter.get(identifier) || [];
+  const recentRequests = requests.filter((time) => now - time < RATE_WINDOW_MS);
+
+  if (recentRequests.length >= RATE_LIMIT) {
+    return false;
+  }
+
+  recentRequests.push(now);
+  rateLimiter.set(identifier, recentRequests);
+  return true;
+};
 
 const handler = async (req: Request): Promise<Response> => {
-  console.log("Received request to send-contact-email function");
-
   // Handle CORS preflight requests
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
 
   try {
-    const { businessName, website, city, email }: ContactEmailRequest = await req.json();
+    // Rate limiting by IP
+    const clientIP = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
     
-    console.log("Processing contact form submission:", { businessName, city, email, website });
+    if (!checkRateLimit(clientIP)) {
+      console.warn("Rate limit exceeded:", { ip: clientIP, timestamp: new Date().toISOString() });
+      return new Response(
+        JSON.stringify({ error: "Too many requests. Please try again in a few minutes." }),
+        { status: 429, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
+
+    // Server-side validation
+    const body = await req.json();
+    const validationResult = contactSchema.safeParse(body);
+
+    if (!validationResult.success) {
+      console.warn("Validation failed:", { errors: validationResult.error.issues });
+      return new Response(
+        JSON.stringify({ error: "Invalid form data. Please check your inputs." }),
+        { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
+
+    const { businessName, website, city, email } = validationResult.data;
+
+    console.log("Processing contact form:", { businessName, city, timestamp: new Date().toISOString() });
 
     // Send confirmation email to the user
-    const userEmailResponse = await resend.emails.send({
+    await resend.emails.send({
       from: "Eudaimonia <onboarding@resend.dev>",
       to: [email],
       subject: "We received your visibility audit request!",
@@ -57,10 +99,10 @@ const handler = async (req: Request): Promise<Response> => {
       `,
     });
 
-    console.log("User confirmation email sent:", userEmailResponse);
+    console.log("User confirmation email sent successfully");
 
     // Send notification email to the owner
-    const ownerEmailResponse = await resend.emails.send({
+    await resend.emails.send({
       from: "Eudaimonia Contact Form <onboarding@resend.dev>",
       to: ["eudaimoniavisiblity@gmail.com"],
       subject: `New Visibility Audit Request: ${businessName}`,
@@ -80,23 +122,24 @@ const handler = async (req: Request): Promise<Response> => {
       `,
     });
 
-    console.log("Owner notification email sent:", ownerEmailResponse);
+    console.log("Owner notification email sent successfully");
 
+    // Return minimal success response
     return new Response(
-      JSON.stringify({ success: true, userEmail: userEmailResponse, ownerEmail: ownerEmailResponse }),
-      {
-        status: 200,
-        headers: { "Content-Type": "application/json", ...corsHeaders },
-      }
+      JSON.stringify({ success: true }),
+      { status: 200, headers: { "Content-Type": "application/json", ...corsHeaders } }
     );
-  } catch (error: any) {
-    console.error("Error in send-contact-email function:", error);
+  } catch (error: unknown) {
+    // Log detailed error server-side only
+    console.error("Contact form error:", {
+      timestamp: new Date().toISOString(),
+      error: error instanceof Error ? error.message : "Unknown error",
+    });
+
+    // Return generic error message to client
     return new Response(
-      JSON.stringify({ error: error.message }),
-      {
-        status: 500,
-        headers: { "Content-Type": "application/json", ...corsHeaders },
-      }
+      JSON.stringify({ error: "Unable to process your request. Please try again later." }),
+      { status: 500, headers: { "Content-Type": "application/json", ...corsHeaders } }
     );
   }
 };
