@@ -20,7 +20,7 @@ const integrationLogos = [{
 }];
 const features = [{
   title: 'Visibility that compounds',
-  description: 'Keep every conversation in sync use comments, messages, and project chats to stay on the same page.'
+  description: 'We don\'t chase algorithm hacks or short-term ranking wins. We build search presence that compounds over time through quality content and technical optimization. Rankings that stick after updates, authority that grows, visibility that lasts.'
 }, {
   title: 'Speaks your language',
   description: 'Set your language, currency, time, and date preferences for a seamless experience that feels truly local.'
