@@ -51,26 +51,18 @@ export function DeviceFeature() {
         }} />
 
           {/* Image container with fixed aspect ratio */}
-          <motion.div 
-            className="relative z-10 w-[700px] sm:w-[850px] lg:w-[1000px] aspect-[16/10] rounded-3xl shadow-2xl overflow-hidden"
-            style={{ scale: imageScale }}
-          >
+          <motion.div className="relative z-10 w-[700px] sm:w-[850px] lg:w-[1000px] aspect-[16/10] rounded-3xl shadow-2xl overflow-hidden" style={{
+          scale: imageScale
+        }}>
             {/* Sliding container with both images side by side */}
-            <motion.div 
-              className="flex w-[200%] h-full"
-              animate={{ x: activeTab === 'mobile' ? '0%' : '-50%' }}
-              transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
-            >
-              <img 
-                alt="GEO Labs mobile app showing Google Maps integration" 
-                className="w-1/2 h-full object-cover flex-shrink-0" 
-                src="/lovable-uploads/3a3051e7-aaef-4391-bc0e-63b6971f8fce.png" 
-              />
-              <img 
-                src={webApp} 
-                alt="GEO Labs web dashboard showing AI search results" 
-                className="w-1/2 h-full object-cover flex-shrink-0" 
-              />
+            <motion.div className="flex w-[200%] h-full" animate={{
+            x: activeTab === 'mobile' ? '0%' : '-50%'
+          }} transition={{
+            duration: 0.4,
+            ease: [0.25, 0.1, 0.25, 1]
+          }}>
+              <img alt="GEO Labs mobile app showing Google Maps integration" className="w-1/2 h-full object-cover flex-shrink-0" src="/lovable-uploads/3a3051e7-aaef-4391-bc0e-63b6971f8fce.png" />
+              <img alt="GEO Labs web dashboard showing AI search results" className="w-1/2 h-full object-cover flex-shrink-0" src="/lovable-uploads/c41029e1-ca56-4b1f-ba7f-b491ff3e7dc1.png" />
             </motion.div>
 
             {/* Tab buttons - inside image at bottom */}
