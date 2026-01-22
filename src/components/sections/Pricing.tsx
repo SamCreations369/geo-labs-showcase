@@ -8,7 +8,7 @@ const plans = [{
   priceAnnual: '$50',
   description: 'Get clarity before you commit to anything.',
   features: ['Full technical audit', 'GEO audit', 'Competitive visibility review', 'Action plan'],
-  cta: 'GET STARTED',
+  cta: 'Get Your Visibility Audit',
   popular: false
 }, {
   name: 'Growth Optimization',
