@@ -95,14 +95,14 @@ export function Testimonials() {
                 <motion.div
                   key={`a-${i}`}
                   whileHover={{ scale: 1.02, y: -5 }}
-                  className="glass-card p-6 rounded-2xl w-80 flex-shrink-0"
+                  className="glass-card rounded-2xl w-80 flex-shrink-0 flex flex-col"
                 >
-                  <p className="text-foreground mb-6">"{testimonial.quote}"</p>
-                  <div className="flex items-center gap-4">
-                    <img src={testimonial.image} alt={testimonial.name} className="w-12 h-12 rounded-full object-cover" />
+                  <p className="text-foreground p-6 pb-4 flex-1">"{testimonial.quote}"</p>
+                  <div className="flex items-center gap-4 px-6 py-4 border-t border-border/50">
+                    <img src={testimonial.image} alt={testimonial.name} className="w-10 h-10 rounded-full object-cover" />
                     <div>
-                      <div className="font-semibold text-foreground">{testimonial.name}</div>
-                      <div className="text-sm text-muted-foreground">{testimonial.role}</div>
+                      <div className="font-semibold text-foreground text-sm">{testimonial.name}</div>
+                      <div className="text-xs text-muted-foreground">{testimonial.role}</div>
                     </div>
                   </div>
                 </motion.div>
@@ -115,14 +115,14 @@ export function Testimonials() {
                 <motion.div
                   key={`b-${i}`}
                   whileHover={{ scale: 1.02, y: -5 }}
-                  className="glass-card p-6 rounded-2xl w-80 flex-shrink-0"
+                  className="glass-card rounded-2xl w-80 flex-shrink-0 flex flex-col"
                 >
-                  <p className="text-foreground mb-6">"{testimonial.quote}"</p>
-                  <div className="flex items-center gap-4">
-                    <img src={testimonial.image} alt={testimonial.name} className="w-12 h-12 rounded-full object-cover" />
+                  <p className="text-foreground p-6 pb-4 flex-1">"{testimonial.quote}"</p>
+                  <div className="flex items-center gap-4 px-6 py-4 border-t border-border/50">
+                    <img src={testimonial.image} alt={testimonial.name} className="w-10 h-10 rounded-full object-cover" />
                     <div>
-                      <div className="font-semibold text-foreground">{testimonial.name}</div>
-                      <div className="text-sm text-muted-foreground">{testimonial.role}</div>
+                      <div className="font-semibold text-foreground text-sm">{testimonial.name}</div>
+                      <div className="text-xs text-muted-foreground">{testimonial.role}</div>
                     </div>
                   </div>
                 </motion.div>
