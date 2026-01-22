@@ -22,7 +22,7 @@ const testimonials = [{
   quote: 'We went from invisible to fully booked weekends. It felt like flipping a switch on our online presence.',
   image: testimonial3
 }, {
-  name: 'Sarah K.',
+  name: 'Brandon Routh',
   role: 'Owner, Fitness Studio',
   quote: 'No sugar-coating, just results. They explained exactly why we weren\'t ranking and what it would take to fix it. Six months later, we\'re finally getting the business traffic we needed.',
   image: testimonial4
