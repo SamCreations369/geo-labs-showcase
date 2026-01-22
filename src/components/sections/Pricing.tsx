@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Check } from 'lucide-react';
 import { AnimatedButton } from '@/components/ui/AnimatedButton';
 const plans = [{
-  name: 'GEO Labs Basic',
+  name: 'Starter Audit',
   price: '$50',
   priceAnnual: '$50',
   description: 'For solo use with light needs.',
