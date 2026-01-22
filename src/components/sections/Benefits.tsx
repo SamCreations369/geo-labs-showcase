@@ -20,13 +20,13 @@ const integrationLogos = [{
 }];
 const features = [{
   title: 'Visibility that compounds',
-  description: 'We don\'t chase algorithm hacks or short-term ranking wins. We build search presence that compounds over time through quality content and technical optimization. Rankings that stick after updates, authority that grows, visibility that lasts.'
+  description: 'Keep every conversation in sync use comments, messages, and project chats to stay on the same page.'
 }, {
-  title: 'Transparency',
-  description: 'You\'ll always know what we\'re doing, why we\'re implementing specific optimizations, and how your rankings are performing. Clear monthly reporting, regular strategy updates, and honest conversations about what\'s working and what needs adjustment.'
+  title: 'Speaks your language',
+  description: 'Set your language, currency, time, and date preferences for a seamless experience that feels truly local.'
 }, {
-  title: 'Custom SEO Strategy',
-  description: 'No templates. No cookie-cutter SEO approaches. Every technical audit, optimization plan, and content strategy is built around your business goals, your industry, and your specific competitive landscape in the LA market.'
+  title: 'View things your way',
+  description: 'Easily toggle between various views, including Kanban, cards, list, table, timeline, and calendar.'
 }];
 export function Benefits() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -84,10 +84,8 @@ export function Benefits() {
           once: true
         }} whileHover={{
           scale: 1.02
-        }} className="bg-secondary/50 p-8 rounded-2xl transition-shadow duration-300 hover:shadow-[0_0_30px_rgba(59,130,246,0.3)]">
-            <h3 className="text-2xl font-semibold text-foreground mb-8">
-              Smart, flexible, and built around your business workflow
-            </h3>
+        }} className="bg-secondary/50 p-8 rounded-2xl">
+            <h3 className="text-2xl font-semibold text-foreground mb-8">Smart, flexible, and built around your business </h3>
             
             <div className="bg-white rounded-xl p-4 mb-6 inline-block">
               <div className="flex items-center gap-2 mb-4">
@@ -134,7 +132,7 @@ export function Benefits() {
           delay: 0.1
         }} whileHover={{
           scale: 1.02
-        }} className="bg-secondary/50 p-8 rounded-2xl transition-shadow duration-300 hover:shadow-[0_0_30px_rgba(59,130,246,0.3)]">
+        }} className="bg-secondary/50 p-8 rounded-2xl">
             <h3 className="text-2xl font-semibold text-foreground mb-8">
               Integrates seamlessly with the tools you already use
             </h3>
@@ -172,7 +170,7 @@ export function Benefits() {
         }} whileHover={{
           scale: 1.02,
           y: -5
-        }} className="glass-card p-6 rounded-2xl transition-shadow duration-300 hover:shadow-[0_0_30px_rgba(59,130,246,0.3)]">
+        }} className="glass-card p-6 rounded-2xl">
               <h4 className="font-semibold text-foreground mb-2">{feature.title}</h4>
               <p className="text-sm text-muted-foreground">{feature.description}</p>
             </motion.div>)}
