@@ -4,8 +4,8 @@ import { Check } from 'lucide-react';
 import { AnimatedButton } from '@/components/ui/AnimatedButton';
 const plans = [{
   name: 'GEO Labs Basic',
-  price: 'Free',
-  priceAnnual: 'Free',
+  price: '$50',
+  priceAnnual: '$50',
   description: 'For solo use with light needs.',
   features: ['Unlimited projects', 'Unlimited clients', 'Time tracking', 'CRM', 'iOS & Android app'],
   cta: 'Try GEO Labs free',
@@ -89,7 +89,7 @@ export function Pricing() {
                   <span className="text-4xl font-semibold text-foreground">
                     {isAnnual ? plan.priceAnnual : plan.price}
                   </span>
-                  {plan.price !== 'Free' && plan.price !== 'Flexible' && <span className="text-muted-foreground">/mo</span>}
+                  {plan.price !== '$50' && plan.price !== 'Flexible' && <span className="text-muted-foreground">/mo</span>}
                 </div>
                 <p className="text-sm text-muted-foreground">{plan.description}</p>
               </div>
