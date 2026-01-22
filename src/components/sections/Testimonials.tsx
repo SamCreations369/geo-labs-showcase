@@ -100,9 +100,9 @@ export function Testimonials() {
                   <p className="text-foreground mb-6">"{testimonial.quote}"</p>
                   <div className="flex items-center gap-4">
                     <img src={testimonial.image} alt={testimonial.name} className="w-12 h-12 rounded-full object-cover" />
-                    <div>
-                      <div className="font-semibold text-foreground">{testimonial.name}</div>
-                      <div className="text-sm text-muted-foreground">{testimonial.role}</div>
+                    <div className="flex items-center gap-2">
+                      <span className="font-semibold text-foreground">{testimonial.name}</span>
+                      <span className="text-sm text-muted-foreground">{testimonial.role}</span>
                     </div>
                   </div>
                 </motion.div>
@@ -120,9 +120,9 @@ export function Testimonials() {
                   <p className="text-foreground mb-6">"{testimonial.quote}"</p>
                   <div className="flex items-center gap-4">
                     <img src={testimonial.image} alt={testimonial.name} className="w-12 h-12 rounded-full object-cover" />
-                    <div>
-                      <div className="font-semibold text-foreground">{testimonial.name}</div>
-                      <div className="text-sm text-muted-foreground">{testimonial.role}</div>
+                    <div className="flex items-center gap-2">
+                      <span className="font-semibold text-foreground">{testimonial.name}</span>
+                      <span className="text-sm text-muted-foreground">{testimonial.role}</span>
                     </div>
                   </div>
                 </motion.div>
