@@ -84,7 +84,7 @@ export function Benefits() {
           once: true
         }} whileHover={{
           scale: 1.02
-        }} className="bg-secondary/50 p-8 rounded-2xl">
+        }} className="bg-secondary/50 p-8 rounded-2xl feature-card">
             <h3 className="text-2xl font-semibold text-foreground mb-8">Smart, flexible, and built around your business </h3>
             
             <div className="bg-white rounded-xl p-4 mb-6 inline-block">
@@ -132,7 +132,7 @@ export function Benefits() {
           delay: 0.1
         }} whileHover={{
           scale: 1.02
-        }} className="bg-secondary/50 p-8 rounded-2xl">
+        }} className="bg-secondary/50 p-8 rounded-2xl feature-card">
             <h3 className="text-2xl font-semibold text-foreground mb-8">
               Integrates seamlessly with the tools you already use
             </h3>
@@ -170,7 +170,7 @@ export function Benefits() {
         }} whileHover={{
           scale: 1.02,
           y: -5
-        }} className="glass-card p-6 rounded-2xl">
+        }} className="glass-card p-6 rounded-2xl feature-card">
               <h4 className="font-semibold text-foreground mb-2">{feature.title}</h4>
               <p className="text-sm text-muted-foreground">{feature.description}</p>
             </motion.div>)}

@@ -93,8 +93,20 @@
   }
 
   .glass-card {
-    @apply bg-card/95 backdrop-blur-sm rounded-3xl;
+    @apply bg-card/95 backdrop-blur-sm rounded-3xl transition-shadow duration-300;
     box-shadow: 0 25px 80px -20px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(255, 255, 255, 0.8) inset;
+  }
+
+  .glass-card:hover {
+    box-shadow: 0 25px 80px -20px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(255, 255, 255, 0.8) inset, 0 0 30px 5px hsl(var(--accent) / 0.3);
+  }
+
+  .feature-card {
+    @apply transition-shadow duration-300;
+  }
+
+  .feature-card:hover {
+    box-shadow: 0 0 30px 5px hsl(var(--accent) / 0.3);
   }
 
   /* Sky gradient background - top (using real sky image) */
