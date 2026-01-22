@@ -79,7 +79,7 @@ export function Testimonials() {
 
         {/* Scrolling Testimonials with pause on hover */}
         <div
-          className="relative overflow-hidden cursor-pointer"
+          className="relative overflow-hidden cursor-pointer py-4 -my-4"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
@@ -88,9 +88,9 @@ export function Testimonials() {
           {/* Right fade gradient */}
           <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
 
-          <motion.div className="flex w-max" style={{ x }}>
+          <motion.div className="flex w-max py-2" style={{ x }}>
             {/* First sequence (measured) */}
-            <div ref={loopRef} className="flex gap-6">
+            <div ref={loopRef} className="flex gap-6 py-2">
               {testimonials.map((testimonial, i) => (
                 <motion.div
                   key={`a-${i}`}
@@ -110,7 +110,7 @@ export function Testimonials() {
             </div>
 
             {/* Duplicate sequence for seamless looping */}
-            <div className="flex gap-6 ml-6" aria-hidden="true">
+            <div className="flex gap-6 ml-6 py-2" aria-hidden="true">
               {testimonials.map((testimonial, i) => (
                 <motion.div
                   key={`b-${i}`}
