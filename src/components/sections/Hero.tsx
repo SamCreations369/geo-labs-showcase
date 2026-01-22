@@ -15,7 +15,7 @@ export function Hero() {
   // Disable expensive scroll transforms on mobile
   const imageY = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [0, 200]);
   const imageScale = useTransform(scrollYProgress, [0, 1], isMobile ? [1, 1] : [1, 0.9]);
-  const imageRotateX = useTransform(scrollYProgress, [0, 0.6], isMobile ? [0, 0] : [55, 0]);
+  const imageRotateX = useTransform(scrollYProgress, [0, 0.6], isMobile ? [25, 0] : [55, 0]);
   return <section ref={ref} className="relative sky-gradient overflow-hidden min-h-screen">
       {/* Simplified clouds on mobile - only show a few static clouds */}
       {!isMobile && (
@@ -75,18 +75,18 @@ export function Hero() {
           </div>
         </motion.div>
 
-        {/* Dashboard Image with 3D effect - simplified on mobile */}
-        <div className="mx-auto max-w-5xl" style={{ perspective: isMobile ? 'none' : '1200px' }}>
+        {/* Dashboard Image with 3D effect */}
+        <div className="mx-auto max-w-5xl" style={{ perspective: '1200px' }}>
           <motion.div initial={{
             opacity: 0,
-            y: isMobile ? 20 : 60
+            y: 60
           }} animate={{
             opacity: 1,
             y: 0
           }} transition={{
             duration: 0.8,
             delay: 0.2
-          }} style={isMobile ? {} : {
+          }} style={{
             y: imageY,
             scale: imageScale,
             rotateX: imageRotateX,
@@ -94,7 +94,7 @@ export function Hero() {
             transformOrigin: 'center bottom'
           }}>
             <img alt="GEO Labs Dashboard showing search visibility metrics" className="w-full rounded-2xl shadow-2xl" style={{
-              boxShadow: isMobile ? '0 20px 40px -15px rgba(0, 0, 0, 0.15)' : '0 50px 100px -30px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.5) inset'
+              boxShadow: '0 50px 100px -30px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.5) inset'
             }} src="/lovable-uploads/40529a62-99b6-4a96-91f2-28b64058f07f.png" />
           </motion.div>
         </div>

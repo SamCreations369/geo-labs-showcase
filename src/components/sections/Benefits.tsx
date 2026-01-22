@@ -1,11 +1,10 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { useIsMobile } from '@/hooks/use-mobile';
+import customizationFeature from '@/assets/customization-feature.svg';
 import googleMapsLogo from '@/assets/google-maps-logo.png';
 import youtubeLogo from '@/assets/youtube-logo.jpg';
 import chatgptLogo from '@/assets/chatgpt-logo.png';
 import copilotLogo from '@/assets/copilot-logo.jpg';
-
 const integrationLogos = [{
   name: 'Google Maps',
   logo: googleMapsLogo
@@ -19,7 +18,6 @@ const integrationLogos = [{
   name: 'Copilot',
   logo: copilotLogo
 }];
-
 const features = [{
   title: 'Visibility that compounds',
   description: "We don't chase algorithm hacks or short-term ranking wins. We build search presence that compounds over time through quality content and technical optimization. Rankings that stick after updates, authority that grows, visibility that lasts."
@@ -30,24 +28,22 @@ const features = [{
   title: 'Custom SEO Strategy',
   description: "No templates. No cookie-cutter SEO approaches. Every technical audit, optimization plan, and content strategy is built around your business goals, your industry, and your specific competitive landscape in the LA market."
 }];
-
 export function Benefits() {
   const sectionRef = useRef<HTMLElement>(null);
-  const isMobile = useIsMobile();
-  
-  const { scrollYProgress } = useScroll({
+  const {
+    scrollYProgress
+  } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"]
   });
 
-  // Disable parallax on mobile
-  const y1 = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [40, -40]);
-  const y2 = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [60, -60]);
-  const y3 = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [30, -30]);
-  const y4 = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [50, -50]);
+  // Create different parallax speeds for each icon
+  const y1 = useTransform(scrollYProgress, [0, 1], [40, -40]);
+  const y2 = useTransform(scrollYProgress, [0, 1], [60, -60]);
+  const y3 = useTransform(scrollYProgress, [0, 1], [30, -30]);
+  const y4 = useTransform(scrollYProgress, [0, 1], [50, -50]);
   const parallaxValues = [y1, y2, y3, y4];
-  
-  return <section ref={sectionRef} id="benefits" className="py-16 md:py-24 bg-secondary/30">
+  return <section ref={sectionRef} id="benefits" className="py-24 bg-secondary/30">
       <div className="section-container">
         <motion.div initial={{
         opacity: 0,
@@ -88,7 +84,7 @@ export function Benefits() {
           once: true
         }} whileHover={{
           scale: 1.02
-        }} className="bg-secondary/50 p-6 md:p-8 rounded-2xl feature-card">
+        }} className="bg-secondary/50 p-8 rounded-2xl feature-card">
             <h3 className="text-2xl font-semibold text-foreground mb-8">Smart, flexible, and built around your business </h3>
             
             <div className="bg-white rounded-xl p-4 mb-6 inline-block">
@@ -120,32 +116,32 @@ export function Benefits() {
 
           {/* Right Card - Integrations */}
           <motion.div initial={{
-            opacity: 0,
-            y: 30
-          }} whileInView={{
-            opacity: 1,
-            y: 0
-          }} viewport={{
-            once: true
-          }} transition={{
-            delay: 0.1
-          }} whileHover={{
-            scale: 1.02
-          }} className="bg-secondary/50 p-6 md:p-8 rounded-2xl feature-card">
-            <h3 className="text-xl md:text-2xl font-semibold text-foreground mb-6 md:mb-8">
+          opacity: 0,
+          y: 30
+        }} whileInView={{
+          opacity: 1,
+          y: 0
+        }} viewport={{
+          once: true
+        }} transition={{
+          delay: 0.1
+        }} whileHover={{
+          scale: 1.02
+        }} className="bg-secondary/50 p-8 rounded-2xl feature-card">
+            <h3 className="text-2xl font-semibold text-foreground mb-8">
               Integrates seamlessly with the tools you already use
             </h3>
             
-            <div className="flex items-center gap-3 md:gap-4 mb-6 flex-wrap">
-              {integrationLogos.map((logo, i) => (
-                <motion.div 
-                  key={i} 
-                  style={isMobile ? {} : { y: parallaxValues[i] }} 
-                  className="w-12 h-12 md:w-16 md:h-16 rounded-xl bg-white shadow-sm flex items-center justify-center overflow-hidden"
-                >
-                  <img src={logo.logo} alt={logo.name} className="w-9 h-9 md:w-12 md:h-12 object-contain" />
-                </motion.div>
-              ))}
+            <div className="flex items-center gap-4 mb-6">
+              
+              <div className="flex gap-4">
+                {integrationLogos.map((logo, i) => <motion.div key={i} style={{
+                y: parallaxValues[i]
+              }} className="w-16 h-16 rounded-xl bg-white shadow-sm flex items-center justify-center overflow-hidden">
+                    <img src={logo.logo} alt={logo.name} className="w-12 h-12 object-contain" />
+                  </motion.div>)}
+              </div>
+              
             </div>
 
             <p className="text-foreground">
