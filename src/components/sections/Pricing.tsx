@@ -3,17 +3,17 @@ import { motion } from 'framer-motion';
 import { Check } from 'lucide-react';
 import { AnimatedButton } from '@/components/ui/AnimatedButton';
 const plans = [{
-  name: 'GEO Labs Basic',
-  price: 'Free',
-  priceAnnual: 'Free',
-  description: 'For solo use with light needs.',
-  features: ['Unlimited projects', 'Unlimited clients', 'Time tracking', 'CRM', 'iOS & Android app'],
-  cta: 'Try GEO Labs free',
+  name: 'Starter Audit',
+  price: '$50',
+  priceAnnual: '$50',
+  description: 'Get clarity before you commit to anything.',
+  features: ['Full technical audit', 'GEO audit', 'Competitive visibility review', 'Action plan'],
+  cta: 'GET STARTED',
   popular: false
 }, {
-  name: 'Growth Optimization',
-  price: '$189',
-  priceAnnual: '$87',
+  name: 'GEO Labs Premium',
+  price: 'Custom',
+  priceAnnual: 'Custom',
   description: 'For pro use with advanced needs.',
   features: ['Everything in Basic', 'Invoices & payments', 'Expense tracking', 'Income tracking', 'Scheduling'],
   cta: 'Get started',
@@ -89,7 +89,7 @@ export function Pricing() {
                   <span className="text-4xl font-semibold text-foreground">
                     {isAnnual ? plan.priceAnnual : plan.price}
                   </span>
-                  {plan.price !== 'Free' && plan.price !== 'Flexible' && <span className="text-muted-foreground">/mo</span>}
+                  {plan.price !== '$50' && plan.price !== 'Flexible' && <span className="text-muted-foreground">/mo</span>}
                 </div>
                 <p className="text-sm text-muted-foreground">{plan.description}</p>
               </div>
@@ -101,14 +101,31 @@ export function Pricing() {
                   </li>)}
               </ul>
 
-              <AnimatedButton href="#contact" variant={plan.popular ? "primary" : "secondary"} className="w-full text-center">
+              <AnimatedButton 
+                href="#contact" 
+                variant={plan.popular ? "primary" : "secondary"}
+                className="w-full text-center"
+              >
                 {plan.cta}
               </AnimatedButton>
             </motion.div>)}
         </div>
 
         {/* Toggle */}
-        
+        <motion.div initial={{
+        opacity: 0
+      }} whileInView={{
+        opacity: 1
+      }} viewport={{
+        once: true
+      }} className="flex justify-center items-center gap-4 mt-8">
+          <button onClick={() => setIsAnnual(true)} className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${isAnnual ? 'bg-primary text-primary-foreground' : 'text-muted-foreground'}`}>
+            Annually
+          </button>
+          <button onClick={() => setIsAnnual(false)} className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${!isAnnual ? 'bg-primary text-primary-foreground' : 'text-muted-foreground'}`}>
+            Monthly
+          </button>
+        </motion.div>
       </div>
     </section>;
 }
