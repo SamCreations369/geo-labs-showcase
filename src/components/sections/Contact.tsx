@@ -5,9 +5,22 @@ import { z } from 'zod';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 
+// Helper to normalize URLs - adds https:// if missing
+const normalizeUrl = (url: string): string => {
+  if (!url) return '';
+  const trimmed = url.trim();
+  if (!trimmed) return '';
+  if (!/^https?:\/\//i.test(trimmed)) {
+    return `https://${trimmed}`;
+  }
+  return trimmed;
+};
+
 const contactSchema = z.object({
   businessName: z.string().trim().min(1, 'Business name is required').max(100, 'Business name must be less than 100 characters'),
-  website: z.string().trim().url('Please enter a valid URL').max(255, 'URL must be less than 255 characters').or(z.literal('')),
+  website: z.string().trim().transform(normalizeUrl).pipe(
+    z.string().url('Please enter a valid website (e.g., yourbusiness.com)').max(255, 'URL must be less than 255 characters').or(z.literal(''))
+  ),
   city: z.string().trim().min(1, 'City is required').max(100, 'City must be less than 100 characters'),
   email: z.string().trim().email('Please enter a valid email address').max(255, 'Email must be less than 255 characters')
 });
