@@ -16,6 +16,16 @@ const extractResendId = (resp: unknown): string | null => {
   return (r?.data?.id ?? r?.id ?? null) as string | null;
 };
 
+// HTML escape function to prevent XSS in email templates
+const escapeHtml = (unsafe: string): string => {
+  return unsafe
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+};
+
 // Helper to normalize URLs - adds https:// if missing
 const normalizeUrl = (url: string): string => {
   if (!url) return '';
@@ -108,6 +118,12 @@ const handler = async (req: Request): Promise<Response> => {
 
     console.log("Processing contact form:", { businessName, city, timestamp: new Date().toISOString() });
 
+    // Escape user inputs to prevent XSS in email templates
+    const safeBusinessName = escapeHtml(businessName);
+    const safeWebsite = escapeHtml(website || 'Not provided');
+    const safeCity = escapeHtml(city);
+    const safeEmail = escapeHtml(email);
+
     // Send confirmation email to the user
     const userEmailResponse = await resend.emails.send({
       from: "Eudaimonia <noreply@eudaimonia.website>",
@@ -115,15 +131,15 @@ const handler = async (req: Request): Promise<Response> => {
       subject: "We received your visibility audit request!",
       html: `
         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-          <h1 style="color: #1a1a2e; margin-bottom: 24px;">Thank you for reaching out, ${businessName}!</h1>
+          <h1 style="color: #1a1a2e; margin-bottom: 24px;">Thank you for reaching out, ${safeBusinessName}!</h1>
           <p style="color: #4a4a68; font-size: 16px; line-height: 1.6;">
             We've received your request for a GEO + SEO visibility audit. Our team will review your information and get back to you shortly.
           </p>
           <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 24px 0;">
             <h3 style="color: #1a1a2e; margin-top: 0;">Your submission details:</h3>
-            <p style="color: #4a4a68; margin: 8px 0;"><strong>Business:</strong> ${businessName}</p>
-            <p style="color: #4a4a68; margin: 8px 0;"><strong>Website:</strong> ${website || 'Not provided'}</p>
-            <p style="color: #4a4a68; margin: 8px 0;"><strong>Location:</strong> ${city}</p>
+            <p style="color: #4a4a68; margin: 8px 0;"><strong>Business:</strong> ${safeBusinessName}</p>
+            <p style="color: #4a4a68; margin: 8px 0;"><strong>Website:</strong> ${safeWebsite}</p>
+            <p style="color: #4a4a68; margin: 8px 0;"><strong>Location:</strong> ${safeCity}</p>
           </div>
           <p style="color: #4a4a68; font-size: 16px; line-height: 1.6;">
             We'll be in touch within 1-2 business days.
@@ -148,18 +164,18 @@ const handler = async (req: Request): Promise<Response> => {
     const ownerEmailResponse = await resend.emails.send({
       from: "Eudaimonia Contact Form <noreply@eudaimonia.website>",
       to: ["eudaimoniaseo@outlook.com"],
-      subject: `New Visibility Audit Request: ${businessName}`,
+      subject: `New Visibility Audit Request: ${safeBusinessName}`,
       html: `
         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
           <h1 style="color: #1a1a2e; margin-bottom: 24px;">New Contact Form Submission</h1>
           <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 24px 0;">
-            <p style="color: #4a4a68; margin: 8px 0;"><strong>Business Name:</strong> ${businessName}</p>
-            <p style="color: #4a4a68; margin: 8px 0;"><strong>Email:</strong> ${email}</p>
-            <p style="color: #4a4a68; margin: 8px 0;"><strong>Website:</strong> ${website || 'Not provided'}</p>
-            <p style="color: #4a4a68; margin: 8px 0;"><strong>City/Neighborhood:</strong> ${city}</p>
+            <p style="color: #4a4a68; margin: 8px 0;"><strong>Business Name:</strong> ${safeBusinessName}</p>
+            <p style="color: #4a4a68; margin: 8px 0;"><strong>Email:</strong> ${safeEmail}</p>
+            <p style="color: #4a4a68; margin: 8px 0;"><strong>Website:</strong> ${safeWebsite}</p>
+            <p style="color: #4a4a68; margin: 8px 0;"><strong>City/Neighborhood:</strong> ${safeCity}</p>
           </div>
           <p style="color: #4a4a68; font-size: 14px;">
-            Reply to this lead at: <a href="mailto:${email}">${email}</a>
+            Reply to this lead at: <a href="mailto:${safeEmail}">${safeEmail}</a>
           </p>
         </div>
       `,
