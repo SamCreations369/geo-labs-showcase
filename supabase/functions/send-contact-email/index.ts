@@ -35,6 +35,7 @@ const contactSchema = z.object({
   ),
   city: z.string().trim().min(1, "City is required").max(100),
   email: z.string().trim().email("Invalid email address").max(255),
+  _hp: z.string().optional(), // Honeypot field
 });
 
 // Simple in-memory rate limiter
@@ -94,7 +95,16 @@ const handler = async (req: Request): Promise<Response> => {
       );
     }
 
-    const { businessName, website, city, email } = validationResult.data;
+    const { businessName, website, city, email, _hp } = validationResult.data;
+
+    // Honeypot check - if filled, silently succeed (it's a bot)
+    if (_hp) {
+      console.warn("Honeypot triggered - bot detected", { timestamp: new Date().toISOString() });
+      return new Response(
+        JSON.stringify({ success: true }),
+        { status: 200, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
 
     console.log("Processing contact form:", { businessName, city, timestamp: new Date().toISOString() });
 

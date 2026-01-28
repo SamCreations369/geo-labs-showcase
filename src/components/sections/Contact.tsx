@@ -48,6 +48,9 @@ export function Contact() {
     email: ''
   });
 
+  // Honeypot field to catch bots - should always be empty
+  const [honeypot, setHoneypot] = useState('');
+
   const [errors, setErrors] = useState<Partial<Record<keyof ContactFormData, string>>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
@@ -55,6 +58,13 @@ export function Contact() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrors({});
+
+    // If honeypot is filled, silently reject (it's a bot)
+    if (honeypot) {
+      setSubmitSuccess(true);
+      setTimeout(() => setSubmitSuccess(false), 3000);
+      return;
+    }
     
     const result = contactSchema.safeParse(formData);
     
@@ -74,7 +84,7 @@ export function Contact() {
     
     try {
       const { data, error } = await supabase.functions.invoke('send-contact-email', {
-        body: formData
+        body: { ...formData, _hp: honeypot }
       });
 
       if (error) throw error;
@@ -159,6 +169,17 @@ export function Contact() {
           className="max-w-lg mx-auto"
         >
           <form onSubmit={handleSubmit} className="glass-card p-8 rounded-2xl shadow-card">
+            {/* Honeypot field - hidden from users, catches bots */}
+            <input
+              type="text"
+              name="website_url"
+              value={honeypot}
+              onChange={(e) => setHoneypot(e.target.value)}
+              className="absolute -left-[9999px] opacity-0 h-0 w-0"
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+            />
             <div className="space-y-5">
               <div>
                 <label className="block text-sm font-medium text-foreground mb-2">
