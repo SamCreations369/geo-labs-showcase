@@ -185,7 +185,9 @@ export function Contact() {
                 <div className="relative">
                   <Globe className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
                   <input
-                    type="url"
+                    // Use text input to avoid native HTML5 URL validation (which requires a scheme)
+                    type="text"
+                    inputMode="url"
                     value={formData.website}
                     onChange={(e) => setFormData({ ...formData, website: e.target.value })}
                     className={`w-full pl-12 pr-4 py-3 rounded-xl bg-secondary/50 border ${errors.website ? 'border-destructive' : 'border-border'} focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-all text-foreground`}
