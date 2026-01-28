@@ -137,7 +137,7 @@ const handler = async (req: Request): Promise<Response> => {
     // Send notification email to the owner
     const ownerEmailResponse = await resend.emails.send({
       from: "Eudaimonia Contact Form <noreply@eudaimonia.website>",
-      to: ["eudaimoniavisiblity@gmail.com"],
+      to: ["eudaimoniaseo@outlook.com"],
       subject: `New Visibility Audit Request: ${businessName}`,
       html: `
         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
