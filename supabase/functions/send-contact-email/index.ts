@@ -16,10 +16,23 @@ const extractResendId = (resp: unknown): string | null => {
   return (r?.data?.id ?? r?.id ?? null) as string | null;
 };
 
+// Helper to normalize URLs - adds https:// if missing
+const normalizeUrl = (url: string): string => {
+  if (!url) return '';
+  const trimmed = url.trim();
+  if (!trimmed) return '';
+  if (!/^https?:\/\//i.test(trimmed)) {
+    return `https://${trimmed}`;
+  }
+  return trimmed;
+};
+
 // Server-side validation schema
 const contactSchema = z.object({
   businessName: z.string().trim().min(1, "Business name is required").max(100),
-  website: z.string().trim().url().max(255).or(z.literal("")),
+  website: z.string().trim().transform(normalizeUrl).pipe(
+    z.string().url().max(255).or(z.literal(""))
+  ),
   city: z.string().trim().min(1, "City is required").max(100),
   email: z.string().trim().email("Invalid email address").max(255),
 });
