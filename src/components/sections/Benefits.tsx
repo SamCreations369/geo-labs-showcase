@@ -72,7 +72,7 @@ export function Benefits() {
         </motion.div>
 
         {/* Feature Cards Grid - Two column layout matching reference */}
-        <div className="grid md:grid-cols-2 gap-6 mb-12">
+        <div className="grid md:grid-cols-2 gap-4 sm:gap-6 mb-8 sm:mb-12">
           {/* Left Card - Customization */}
           <motion.div initial={{
           opacity: 0,
