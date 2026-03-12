@@ -29,7 +29,7 @@ const plans = [{
 }];
 export function Pricing() {
   const [isAnnual, setIsAnnual] = useState(true);
-  return <section id="pricing" className="py-16 sm:py-24 bg-background">
+  return <section id="pricing" className="py-24 bg-background">
       <div className="section-container">
         <motion.div initial={{
         opacity: 0,
@@ -61,7 +61,7 @@ export function Pricing() {
         </motion.div>
 
         {/* Pricing Cards */}
-        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 max-w-5xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
           {plans.map((plan, i) => <motion.div key={plan.name} initial={{
           opacity: 0,
           y: 30

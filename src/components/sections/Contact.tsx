@@ -4,7 +4,6 @@ import { useState, useRef } from 'react';
 import { z } from 'zod';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
-import { useIsMobile } from '@/hooks/use-mobile';
 
 // Helper to normalize URLs - adds https:// if missing
 const normalizeUrl = (url: string): string => {
@@ -31,17 +30,16 @@ type ContactFormData = z.infer<typeof contactSchema>;
 export function Contact() {
   const { toast } = useToast();
   const ref = useRef<HTMLDivElement>(null);
-  const isMobile = useIsMobile();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start end', 'end end']
   });
 
-  // Cloud parallax transforms for bottom section - disabled on mobile
-  const cloud1Y = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [100, 0]);
-  const cloud2Y = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [150, 0]);
-  const cloud3Y = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [80, 0]);
-  const cloud4Y = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [120, 0]);
+  // Cloud parallax transforms for bottom section
+  const cloud1Y = useTransform(scrollYProgress, [0, 1], [100, 0]);
+  const cloud2Y = useTransform(scrollYProgress, [0, 1], [150, 0]);
+  const cloud3Y = useTransform(scrollYProgress, [0, 1], [80, 0]);
+  const cloud4Y = useTransform(scrollYProgress, [0, 1], [120, 0]);
 
   const [formData, setFormData] = useState<ContactFormData>({
     businessName: '',
@@ -114,7 +112,7 @@ export function Contact() {
   };
 
   return (
-    <section ref={ref} id="contact" className="relative py-16 sm:py-24 sky-gradient-bottom overflow-hidden">
+    <section ref={ref} id="contact" className="relative py-24 sky-gradient-bottom overflow-hidden">
       {/* Animated Cloud decorations with parallax - at bottom */}
       <motion.div 
         className="cloud cloud-large cloud-animate-1"

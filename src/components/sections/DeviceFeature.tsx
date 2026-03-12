@@ -17,8 +17,7 @@ export function DeviceFeature() {
   const y1 = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [100, -100]);
   const y2 = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [60, -60]);
   const imageScale = useTransform(scrollYProgress, [0, 0.6], isMobile ? [1, 1] : [0.65, 1.02]);
-  const noMotion = useTransform(scrollYProgress, [0, 1], [0, 0]);
-  return <section ref={ref} id="features" className="py-16 sm:py-24 bg-background overflow-hidden">
+  return <section ref={ref} id="features" className="py-24 bg-background overflow-hidden">
       <div className="section-container">
         <motion.div initial={{
         opacity: 0,
@@ -47,17 +46,15 @@ export function DeviceFeature() {
         </motion.div>
 
         {/* Device mockup with tabs */}
-        <div className="relative flex flex-col items-center min-h-[400px] sm:min-h-[600px]">
-          {/* Decorative shape behind - hidden on mobile */}
-          {!isMobile && (
-            <motion.img src={decorativeShape} alt="" className="absolute left-0 top-1/2 -translate-y-1/2 w-64 opacity-30 -z-10" style={{
-            y: y2
-          }} />
-          )}
+        <div className="relative flex flex-col items-center min-h-[600px]">
+          {/* Decorative shape behind */}
+          <motion.img src={decorativeShape} alt="" className="absolute left-0 top-1/2 -translate-y-1/2 w-64 opacity-30 -z-10" style={{
+          y: y2
+        }} />
 
           {/* Image container with fixed aspect ratio */}
-          <motion.div className="relative z-10 w-full max-w-[700px] sm:max-w-[850px] lg:max-w-[1000px] aspect-[16/10] rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden" style={{
-          scale: isMobile ? undefined : imageScale
+          <motion.div className="relative z-10 w-[700px] sm:w-[850px] lg:w-[1000px] aspect-[16/10] rounded-3xl shadow-2xl overflow-hidden" style={{
+          scale: imageScale
         }}>
             {/* Sliding container with both images side by side */}
             <motion.div className="flex w-[200%] h-full" animate={{
@@ -71,22 +68,20 @@ export function DeviceFeature() {
             </motion.div>
 
             {/* Tab buttons - inside image at bottom */}
-            <div className="absolute bottom-3 sm:bottom-6 left-1/2 -translate-x-1/2 flex gap-1 p-1 bg-white/30 backdrop-blur-md rounded-full shadow-lg z-20">
-              <button onClick={() => setActiveTab('mobile')} className={`px-4 sm:px-6 py-2 sm:py-3 rounded-full font-medium text-sm sm:text-base transition-all duration-300 ${activeTab === 'mobile' ? 'bg-foreground text-background' : 'text-foreground/80 hover:text-foreground'}`}>
+            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-1 p-1 bg-white/30 backdrop-blur-md rounded-full shadow-lg z-20">
+              <button onClick={() => setActiveTab('mobile')} className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${activeTab === 'mobile' ? 'bg-foreground text-background' : 'text-foreground/80 hover:text-foreground'}`}>
                 Mobile
               </button>
-              <button onClick={() => setActiveTab('web')} className={`px-4 sm:px-6 py-2 sm:py-3 rounded-full font-medium text-sm sm:text-base transition-all duration-300 ${activeTab === 'web' ? 'bg-foreground text-background' : 'text-foreground/80 hover:text-foreground'}`}>
+              <button onClick={() => setActiveTab('web')} className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${activeTab === 'web' ? 'bg-foreground text-background' : 'text-foreground/80 hover:text-foreground'}`}>
                 Web
               </button>
             </div>
           </motion.div>
 
-          {/* Decorative shape right - hidden on mobile */}
-          {!isMobile && (
-            <motion.img src={decorativeShape} alt="" className="absolute right-0 top-1/3 w-48 opacity-20 -z-10" style={{
-            y: y1
-          }} />
-          )}
+          {/* Decorative shape right */}
+          <motion.img src={decorativeShape} alt="" className="absolute right-0 top-1/3 w-48 opacity-20 -z-10" style={{
+          y: y1
+        }} />
         </div>
 
         {/* Feature chips */}

@@ -1,24 +1,22 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
-import { useIsMobile } from '@/hooks/use-mobile';
 import projectUI from '@/assets/project-ui.png';
 import decorativeShape from '@/assets/decorative-shape.png';
 import { AnimatedButton } from '@/components/ui/AnimatedButton';
 const features = ['SEO Audit & Fixes', 'GMB / GBP Optimization', 'Location & Keyword Strategy', 'Content that ranks locally'];
 export function ProjectSection() {
   const ref = useRef<HTMLDivElement>(null);
-  const isMobile = useIsMobile();
   const {
     scrollYProgress
   } = useScroll({
     target: ref,
     offset: ['start end', 'end start']
   });
-  const y = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [80, -80]);
-  const shapeY = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [40, -40]);
-  return <section ref={ref} id="seo-services" className="py-16 sm:py-24 bg-secondary/30 overflow-hidden">
+  const y = useTransform(scrollYProgress, [0, 1], [80, -80]);
+  const shapeY = useTransform(scrollYProgress, [0, 1], [40, -40]);
+  return <section ref={ref} id="seo-services" className="py-24 bg-secondary/30 overflow-hidden">
       <div className="section-container">
-        <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 items-center">
+        <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-center">
           {/* Left - Image (takes half the width) */}
           <div className="relative w-full lg:w-1/2">
             <motion.img src={decorativeShape} alt="" className="absolute -left-20 top-0 w-72 opacity-20 -z-10" style={{
