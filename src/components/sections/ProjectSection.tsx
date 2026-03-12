@@ -1,19 +1,21 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
+import { useIsMobile } from '@/hooks/use-mobile';
 import projectUI from '@/assets/project-ui.png';
 import decorativeShape from '@/assets/decorative-shape.png';
 import { AnimatedButton } from '@/components/ui/AnimatedButton';
 const features = ['SEO Audit & Fixes', 'GMB / GBP Optimization', 'Location & Keyword Strategy', 'Content that ranks locally'];
 export function ProjectSection() {
   const ref = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
   const {
     scrollYProgress
   } = useScroll({
     target: ref,
     offset: ['start end', 'end start']
   });
-  const y = useTransform(scrollYProgress, [0, 1], [80, -80]);
-  const shapeY = useTransform(scrollYProgress, [0, 1], [40, -40]);
+  const y = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [80, -80]);
+  const shapeY = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [40, -40]);
   return <section ref={ref} id="seo-services" className="py-24 bg-secondary/30 overflow-hidden">
       <div className="section-container">
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-center">
