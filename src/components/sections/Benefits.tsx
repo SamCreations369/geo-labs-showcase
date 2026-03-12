@@ -65,8 +65,8 @@ export function Benefits() {
         y: 0
       }} viewport={{
         once: true
-      }} className="text-center mb-16 max-w-3xl mx-auto">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl text-foreground leading-tight mb-6">
+      }} className="text-center mb-10 sm:mb-16 max-w-3xl mx-auto">
+          <h2 className="text-2xl sm:text-4xl lg:text-5xl text-foreground leading-tight mb-6">
             Built for businesses that understand customers can't buy what they can't find
           </h2>
         </motion.div>
