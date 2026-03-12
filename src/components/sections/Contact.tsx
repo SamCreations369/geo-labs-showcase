@@ -4,6 +4,7 @@ import { useState, useRef } from 'react';
 import { z } from 'zod';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 // Helper to normalize URLs - adds https:// if missing
 const normalizeUrl = (url: string): string => {
