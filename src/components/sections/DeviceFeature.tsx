@@ -81,10 +81,12 @@ export function DeviceFeature() {
             </div>
           </motion.div>
 
-          {/* Decorative shape right */}
-          <motion.img src={decorativeShape} alt="" className="absolute right-0 top-1/3 w-48 opacity-20 -z-10" style={{
-          y: y1
-        }} />
+          {/* Decorative shape right - hidden on mobile */}
+          {!isMobile && (
+            <motion.img src={decorativeShape} alt="" className="absolute right-0 top-1/3 w-48 opacity-20 -z-10" style={{
+            y: y1
+          }} />
+          )}
         </div>
 
         {/* Feature chips */}
