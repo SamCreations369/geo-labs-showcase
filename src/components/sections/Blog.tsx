@@ -35,7 +35,7 @@ const posts = [
 
 export function Blog() {
   return (
-    <section id="blog" className="py-24 bg-secondary/30">
+    <section id="blog" className="py-16 sm:py-24 bg-secondary/30">
       <div className="section-container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -102,7 +102,7 @@ export function Blog() {
           </motion.a>
 
           {/* Other Posts - 3 columns side by side */}
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
             {posts.map((post, i) => (
               <motion.a
                 key={post.title}

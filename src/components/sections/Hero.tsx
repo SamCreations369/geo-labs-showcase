@@ -51,7 +51,7 @@ export function Hero() {
         </>
       )}
 
-      <div className="section-container relative z-10 pt-32 pb-8">
+      <div className="section-container relative z-10 pt-24 sm:pt-32 pb-8">
         {/* Centered Content */}
         <motion.div initial={{
         opacity: 0,
@@ -62,10 +62,10 @@ export function Hero() {
       }} transition={{
         duration: 0.6
       }} className="text-center max-w-4xl mx-auto mb-12">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-foreground leading-[1.1] mb-6">
+          <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl text-foreground leading-[1.1] mb-4 sm:mb-6">
             Your competitors aren't smarter. They just show up first.
           </h1>
-          <p className="text-lg sm:text-xl max-w-2xl mx-auto mb-10 text-muted-foreground">
+          <p className="text-base sm:text-xl max-w-2xl mx-auto mb-8 sm:mb-10 text-muted-foreground">
             Complete visibility strategy for LA businesses tired of being invisible in local search. From comprehensive SEO audit to sustainable organic growth across Google, Bing, and AI platforms, we deliver honest assessments and effective solutions for businesses throughout Los Angeles County.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">

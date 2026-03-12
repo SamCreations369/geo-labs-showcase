@@ -1,22 +1,24 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
+import { useIsMobile } from '@/hooks/use-mobile';
 import budgetUI from '@/assets/budget-ui.png';
 import decorativeShape from '@/assets/decorative-shape.png';
 import { AnimatedButton } from '@/components/ui/AnimatedButton';
 const features = ['Call & Lead Tracking', 'Traffic & Visibility Reports', 'Conversion Insights', 'Monthly Strategy Adjustments'];
 export function FinancialSection() {
   const ref = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
   const {
     scrollYProgress
   } = useScroll({
     target: ref,
     offset: ['start end', 'end start']
   });
-  const y = useTransform(scrollYProgress, [0, 1], [60, -60]);
-  const shapeY = useTransform(scrollYProgress, [0, 1], [30, -30]);
-  return <section ref={ref} className="py-24 bg-background overflow-hidden">
+  const y = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [60, -60]);
+  const shapeY = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [30, -30]);
+  return <section ref={ref} className="py-16 sm:py-24 bg-background overflow-hidden">
       <div className="section-container">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Left - Content */}
           <motion.div initial={{
           opacity: 0,

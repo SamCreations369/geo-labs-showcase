@@ -43,7 +43,7 @@ export function Benefits() {
   const y3 = useTransform(scrollYProgress, [0, 1], [30, -30]);
   const y4 = useTransform(scrollYProgress, [0, 1], [50, -50]);
   const parallaxValues = [y1, y2, y3, y4];
-  return <section ref={sectionRef} id="benefits" className="py-24 bg-secondary/30">
+  return <section ref={sectionRef} id="benefits" className="py-16 sm:py-24 bg-secondary/30">
       <div className="section-container">
         <motion.div initial={{
         opacity: 0,
@@ -65,14 +65,14 @@ export function Benefits() {
         y: 0
       }} viewport={{
         once: true
-      }} className="text-center mb-16 max-w-3xl mx-auto">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl text-foreground leading-tight mb-6">
+      }} className="text-center mb-10 sm:mb-16 max-w-3xl mx-auto">
+          <h2 className="text-2xl sm:text-4xl lg:text-5xl text-foreground leading-tight mb-6">
             Built for businesses that understand customers can't buy what they can't find
           </h2>
         </motion.div>
 
         {/* Feature Cards Grid - Two column layout matching reference */}
-        <div className="grid md:grid-cols-2 gap-6 mb-12">
+        <div className="grid md:grid-cols-2 gap-4 sm:gap-6 mb-8 sm:mb-12">
           {/* Left Card - Customization */}
           <motion.div initial={{
           opacity: 0,
@@ -127,8 +127,8 @@ export function Benefits() {
           delay: 0.1
         }} whileHover={{
           scale: 1.02
-        }} className="bg-secondary/50 p-8 rounded-2xl feature-card">
-            <h3 className="text-2xl font-semibold text-foreground mb-8">
+        }} className="bg-secondary/50 p-5 sm:p-8 rounded-2xl feature-card">
+            <h3 className="text-xl sm:text-2xl font-semibold text-foreground mb-4 sm:mb-8">
               Integrates seamlessly with the tools you already use
             </h3>
             
@@ -151,7 +151,7 @@ export function Benefits() {
         </div>
 
         {/* Bottom Feature Cards */}
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
           {features.map((feature, i) => <motion.div key={feature.title} initial={{
           opacity: 0,
           y: 30
