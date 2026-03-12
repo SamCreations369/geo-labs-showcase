@@ -102,7 +102,7 @@ export function Blog() {
           </motion.a>
 
           {/* Other Posts - 3 columns side by side */}
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
             {posts.map((post, i) => (
               <motion.a
                 key={post.title}

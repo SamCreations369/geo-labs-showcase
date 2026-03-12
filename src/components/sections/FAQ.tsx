@@ -64,7 +64,7 @@ function FAQItem({ faq, index }: { faq: typeof faqs[0]; index: number }) {
 
 export function FAQ() {
   return (
-    <section id="faq" className="py-24 bg-background">
+    <section id="faq" className="py-16 sm:py-24 bg-background">
       <div className="section-container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

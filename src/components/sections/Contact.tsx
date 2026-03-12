@@ -114,7 +114,7 @@ export function Contact() {
   };
 
   return (
-    <section ref={ref} id="contact" className="relative py-24 sky-gradient-bottom overflow-hidden">
+    <section ref={ref} id="contact" className="relative py-16 sm:py-24 sky-gradient-bottom overflow-hidden">
       {/* Animated Cloud decorations with parallax - at bottom */}
       <motion.div 
         className="cloud cloud-large cloud-animate-1"

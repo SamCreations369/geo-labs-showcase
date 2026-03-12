@@ -151,7 +151,7 @@ export function Benefits() {
         </div>
 
         {/* Bottom Feature Cards */}
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
           {features.map((feature, i) => <motion.div key={feature.title} initial={{
           opacity: 0,
           y: 30

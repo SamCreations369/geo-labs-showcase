@@ -51,7 +51,7 @@ export function Hero() {
         </>
       )}
 
-      <div className="section-container relative z-10 pt-32 pb-8">
+      <div className="section-container relative z-10 pt-24 sm:pt-32 pb-8">
         {/* Centered Content */}
         <motion.div initial={{
         opacity: 0,

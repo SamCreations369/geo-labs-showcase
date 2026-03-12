@@ -52,7 +52,7 @@ export function Testimonials() {
     const next = x.get() - moveBy;
     x.set(next <= -loopWidth ? next + loopWidth : next);
   });
-  return <section className="py-24 bg-background overflow-hidden">
+  return <section className="py-16 sm:py-24 bg-background overflow-hidden">
       <div className="section-container">
         {/* Featured Testimonial - Dreelio style */}
         <motion.div initial={{
