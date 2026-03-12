@@ -31,16 +31,17 @@ type ContactFormData = z.infer<typeof contactSchema>;
 export function Contact() {
   const { toast } = useToast();
   const ref = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start end', 'end end']
   });
 
-  // Cloud parallax transforms for bottom section
-  const cloud1Y = useTransform(scrollYProgress, [0, 1], [100, 0]);
-  const cloud2Y = useTransform(scrollYProgress, [0, 1], [150, 0]);
-  const cloud3Y = useTransform(scrollYProgress, [0, 1], [80, 0]);
-  const cloud4Y = useTransform(scrollYProgress, [0, 1], [120, 0]);
+  // Cloud parallax transforms for bottom section - disabled on mobile
+  const cloud1Y = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [100, 0]);
+  const cloud2Y = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [150, 0]);
+  const cloud3Y = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [80, 0]);
+  const cloud4Y = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [120, 0]);
 
   const [formData, setFormData] = useState<ContactFormData>({
     businessName: '',
