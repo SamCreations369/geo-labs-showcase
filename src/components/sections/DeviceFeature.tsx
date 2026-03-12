@@ -47,15 +47,17 @@ export function DeviceFeature() {
         </motion.div>
 
         {/* Device mockup with tabs */}
-        <div className="relative flex flex-col items-center min-h-[600px]">
-          {/* Decorative shape behind */}
-          <motion.img src={decorativeShape} alt="" className="absolute left-0 top-1/2 -translate-y-1/2 w-64 opacity-30 -z-10" style={{
-          y: y2
-        }} />
+        <div className="relative flex flex-col items-center min-h-[400px] sm:min-h-[600px]">
+          {/* Decorative shape behind - hidden on mobile */}
+          {!isMobile && (
+            <motion.img src={decorativeShape} alt="" className="absolute left-0 top-1/2 -translate-y-1/2 w-64 opacity-30 -z-10" style={{
+            y: y2
+          }} />
+          )}
 
           {/* Image container with fixed aspect ratio */}
-          <motion.div className="relative z-10 w-[700px] sm:w-[850px] lg:w-[1000px] aspect-[16/10] rounded-3xl shadow-2xl overflow-hidden" style={{
-          scale: imageScale
+          <motion.div className="relative z-10 w-full max-w-[700px] sm:max-w-[850px] lg:max-w-[1000px] aspect-[16/10] rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden" style={{
+          scale: isMobile ? undefined : imageScale
         }}>
             {/* Sliding container with both images side by side */}
             <motion.div className="flex w-[200%] h-full" animate={{
