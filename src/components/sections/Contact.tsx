@@ -31,6 +31,7 @@ type ContactFormData = z.infer<typeof contactSchema>;
 
 export function Contact() {
   const { toast } = useToast();
+  const isMobile = useIsMobile();
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
