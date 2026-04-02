@@ -154,7 +154,7 @@ export function ShowcaseCarousel() {
                   <div
                     key={slide.label}
                     ref={(el) => setCardRef(el, index)}
-                    className="mb-6 w-[90%] mx-auto rounded-2xl overflow-hidden shadow-2xl bg-card border border-border"
+                    className="relative mb-6 w-[90%] mx-auto rounded-2xl overflow-hidden shadow-2xl bg-card border border-border"
                     style={{ aspectRatio: '16/9', willChange: 'transform, opacity' }}
                   >
                     {slide.type === 'image' ? (
