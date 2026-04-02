@@ -12,27 +12,23 @@ export function Hero() {
     <section ref={ref} className="relative sky-gradient overflow-x-clip">
       {!isMobile && (
         <>
-          {/* Left side clouds */}
-          <div className="cloud cloud-xlarge cloud-animate-1" style={{ top: -30, left: '-12%' }} />
-          <div className="cloud cloud-large cloud-animate-2" style={{ top: 80, left: '-8%' }} />
-          <div className="cloud cloud-medium cloud-animate-3" style={{ top: 180, left: '-3%' }} />
-          <div className="cloud cloud-xlarge cloud-animate-2" style={{ top: 120, left: '-15%' }} />
-          <div className="cloud cloud-small cloud-animate-1" style={{ top: 250, left: '0%' }} />
-          {/* Right side clouds */}
-          <div className="cloud cloud-xlarge cloud-animate-3" style={{ top: -20, right: '-12%' }} />
-          <div className="cloud cloud-large cloud-animate-1" style={{ top: 90, right: '-8%' }} />
-          <div className="cloud cloud-medium cloud-animate-2" style={{ top: 200, right: '-3%' }} />
-          <div className="cloud cloud-xlarge cloud-animate-1" style={{ top: 140, right: '-15%' }} />
-          <div className="cloud cloud-small cloud-animate-3" style={{ top: 260, right: '0%' }} />
+          {/* Left side clouds flanking headline */}
+          <div className="cloud cloud-xlarge cloud-animate-1" style={{ top: 60, left: '-5%' }} />
+          <div className="cloud cloud-large cloud-animate-2" style={{ top: 160, left: '-2%' }} />
+          <div className="cloud cloud-medium cloud-animate-3" style={{ top: 260, left: '0%' }} />
+          {/* Right side clouds flanking headline */}
+          <div className="cloud cloud-xlarge cloud-animate-3" style={{ top: 70, right: '-5%' }} />
+          <div className="cloud cloud-large cloud-animate-1" style={{ top: 170, right: '-2%' }} />
+          <div className="cloud cloud-medium cloud-animate-2" style={{ top: 270, right: '0%' }} />
         </>
       )}
       
       {isMobile && (
         <>
-          <div className="cloud cloud-large" style={{ top: -10, left: '-15%', animation: 'none' }} />
-          <div className="cloud cloud-medium" style={{ top: 80, left: '-10%', animation: 'none' }} />
-          <div className="cloud cloud-large" style={{ top: -10, right: '-15%', animation: 'none' }} />
-          <div className="cloud cloud-medium" style={{ top: 80, right: '-10%', animation: 'none' }} />
+          <div className="cloud cloud-large" style={{ top: 50, left: '-10%', animation: 'none' }} />
+          <div className="cloud cloud-large" style={{ top: 50, right: '-10%', animation: 'none' }} />
+          <div className="cloud cloud-medium" style={{ top: 150, left: '-5%', animation: 'none' }} />
+          <div className="cloud cloud-medium" style={{ top: 150, right: '-5%', animation: 'none' }} />
         </>
       )}
 
