@@ -1,9 +1,11 @@
-import { motion, useScroll, useTransform, MotionValue } from 'framer-motion';
-import { useState, useEffect, useCallback, useRef } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { useLayoutEffect, useRef, useState, useCallback } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useIsMobile } from '@/hooks/use-mobile';
 import ahrefsShowcase from '@/assets/ahrefs-showcase.png';
 import gscShowcase from '@/assets/google-search-console.png';
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface SlideItem {
   type: 'image' | 'video';
@@ -21,172 +23,178 @@ const slides: SlideItem[] = [
 ];
 
 export function ShowcaseCarousel() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [activeIndex, setActiveIndex] = useState(0);
   const isMobile = useIsMobile();
-  const containerRef = useRef<HTMLDivElement>(null);
 
-  const next = useCallback(() => {
-    setActiveIndex((prev) => (prev + 1) % slides.length);
+  const setCardRef = useCallback((el: HTMLDivElement | null, index: number) => {
+    cardRefs.current[index] = el;
   }, []);
 
-  const prev = useCallback(() => {
-    setActiveIndex((prev) => (prev - 1 + slides.length) % slides.length);
-  }, []);
+  useLayoutEffect(() => {
+    // Respect prefers-reduced-motion
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced || isMobile) return;
 
-  // Scroll-driven: advance slides on scroll within the container
-  useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
+    const section = sectionRef.current;
+    if (!section) return;
 
-    let lastScrollY = window.scrollY;
-    let accumulatedDelta = 0;
-    const threshold = 150;
+    const ctx = gsap.context(() => {
+      ScrollTrigger.create({
+        trigger: section,
+        start: 'top top',
+        end: 'bottom bottom',
+        scrub: 0.8,
+        onUpdate: (self) => {
+          const activeProgress = self.progress * (slides.length - 1);
+          const newIndex = Math.round(activeProgress);
+          setActiveIndex(newIndex);
 
-    const handleScroll = () => {
-      const rect = container.getBoundingClientRect();
-      const inView = rect.top < window.innerHeight && rect.bottom > 0;
-      if (!inView) {
-        accumulatedDelta = 0;
-        return;
-      }
+          cardRefs.current.forEach((card, index) => {
+            if (!card) return;
+            const diff = index - activeProgress;
+            const absDiff = Math.abs(diff);
 
-      const delta = window.scrollY - lastScrollY;
-      lastScrollY = window.scrollY;
-      accumulatedDelta += delta;
+            gsap.set(card, {
+              xPercent: diff * 55,
+              z: -absDiff * 300,
+              rotateY: diff * -35,
+              scale: Math.max(1 - absDiff * 0.2, 0.6),
+              opacity: absDiff < 1.5 ? Math.max(1 - absDiff * 0.6, 0) : 0,
+              filter: `blur(${absDiff * 2}px)`,
+            });
+          });
+        },
+      });
+    }, section);
 
-      if (accumulatedDelta > threshold) {
-        accumulatedDelta = 0;
-        setActiveIndex((prev) => Math.min(prev + 1, slides.length - 1));
-      } else if (accumulatedDelta < -threshold) {
-        accumulatedDelta = 0;
-        setActiveIndex((prev) => Math.max(prev - 1, 0));
-      }
-    };
+    return () => ctx.revert();
+  }, [isMobile]);
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  // Reduced motion or mobile: detect for static layout
+  const prefersReduced = typeof window !== 'undefined'
+    ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    : false;
 
-  const getDesktopStyle = (index: number) => {
-    const diff = index - activeIndex;
-    return {
-      rotateY: diff * -45,
-      scale: diff === 0 ? 1 : 0.75,
-      x: `${diff * 85}%`,
-      z: diff === 0 ? 0 : -250,
-      opacity: Math.abs(diff) > 1 ? 0 : diff === 0 ? 1 : 0.5,
-    };
-  };
-
-  const getMobileStyle = (index: number) => {
-    const diff = index - activeIndex;
-    return {
-      rotateY: 0,
-      scale: diff === 0 ? 1 : 0.85,
-      y: `${diff * 110}%`,
-      x: '0%',
-      z: diff === 0 ? 0 : -100,
-      opacity: diff === 0 ? 1 : 0,
-    };
-  };
+  const isStatic = isMobile || prefersReduced;
 
   return (
-    <div ref={containerRef} className="relative w-full sky-gradient py-12 sm:py-16">
-      {/* 3D Perspective Container */}
+    <section
+      ref={sectionRef}
+      className="relative"
+      style={{ height: isStatic ? 'auto' : `${slides.length * 100}vh` }}
+    >
       <div
-        className="relative mx-auto max-w-5xl"
-        style={{ perspective: '1200px', height: isMobile ? '300px' : '500px' }}
+        className="w-full flex flex-col items-center justify-center"
+        style={
+          isStatic
+            ? { position: 'relative' }
+            : { position: 'sticky', top: 0, height: '100vh' }
+        }
       >
-        <div className="relative w-full h-full" style={{ transformStyle: 'preserve-3d' }}>
-          {slides.map((slide, index) => {
-            const style = isMobile ? getMobileStyle(index) : getDesktopStyle(index);
-            return (
-              <motion.div
-                key={slide.label}
-                className="absolute inset-0 flex items-center justify-center"
-                animate={style}
-                transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-                style={{ transformStyle: 'preserve-3d' }}
-              >
-                <div className="w-[90%] sm:w-[80%] h-full rounded-2xl overflow-hidden shadow-2xl bg-card border border-border">
-                  {slide.type === 'image' ? (
-                    <img
-                      src={slide.src}
-                      alt={slide.alt}
-                      className="w-full h-full object-cover"
-                      loading="lazy"
-                    />
-                  ) : (
-                    <video
-                      src={slide.src}
-                      autoPlay
-                      muted
-                      loop
-                      playsInline
-                      className="w-full h-full object-cover"
-                    />
-                  )}
-                </div>
-              </motion.div>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* Navigation */}
-      <div className="flex items-center justify-center gap-4 mt-6">
-        <button
-          onClick={prev}
-          className="p-2 rounded-full bg-card border border-border hover:bg-accent transition-colors"
-          aria-label="Previous slide"
+        {/* 3D Perspective Container */}
+        <div
+          className="relative w-full max-w-5xl mx-auto flex-1 flex items-center justify-center"
+          style={isStatic ? {} : { perspective: '1200px' }}
         >
-          <ChevronLeft className="w-5 h-5 text-foreground" />
-        </button>
-
-        <div className="flex gap-2">
-          {slides.map((slide, index) => (
-            <button
-              key={slide.label}
-              onClick={() => setActiveIndex(index)}
-              className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                index === activeIndex
-                  ? 'bg-foreground w-6'
-                  : 'bg-muted-foreground/40 hover:bg-muted-foreground/60'
-              }`}
-              aria-label={`Go to ${slide.label}`}
-            />
-          ))}
-        </div>
-
-        <button
-          onClick={next}
-          className="p-2 rounded-full bg-card border border-border hover:bg-accent transition-colors"
-          aria-label="Next slide"
-        >
-          <ChevronRight className="w-5 h-5 text-foreground" />
-        </button>
-      </div>
-
-      {/* Label + Link */}
-      <motion.div
-        key={activeIndex}
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.3 }}
-        className="text-center mt-4"
-      >
-        <p className="text-sm font-semibold text-foreground">{slides[activeIndex].label}</p>
-        {slides[activeIndex].link && (
-          <a
-            href={slides[activeIndex].link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-xs text-muted-foreground hover:text-foreground transition-colors underline underline-offset-2"
+          <div
+            className={`relative w-full ${isStatic ? '' : ''}`}
+            style={{
+              height: isStatic ? 'auto' : '60vh',
+              transformStyle: isStatic ? undefined : 'preserve-3d',
+            }}
           >
-            {slides[activeIndex].link!.replace('https://www.', '')}
-          </a>
-        )}
-      </motion.div>
-    </div>
+            {slides.map((slide, index) => {
+              // Static layout: show only active on mobile, all stacked for reduced motion
+              if (isStatic) {
+                if (isMobile && index !== activeIndex) return null;
+                return (
+                  <div
+                    key={slide.label}
+                    className={`${prefersReduced ? 'mb-6' : ''} w-[90%] sm:w-[80%] mx-auto rounded-2xl overflow-hidden shadow-2xl bg-card border border-border`}
+                    style={isMobile ? { aspectRatio: '16/9' } : {}}
+                  >
+                    {slide.type === 'image' ? (
+                      <img src={slide.src} alt={slide.alt} className="w-full h-full object-cover" loading="lazy" />
+                    ) : (
+                      <video src={slide.src} autoPlay muted loop playsInline className="w-full h-full object-cover" />
+                    )}
+                  </div>
+                );
+              }
+
+              // Desktop 3D layout
+              return (
+                <div
+                  key={slide.label}
+                  ref={(el) => setCardRef(el, index)}
+                  className="absolute inset-0 flex items-center justify-center"
+                  style={{
+                    transformStyle: 'preserve-3d',
+                    willChange: 'transform, opacity, filter',
+                  }}
+                >
+                  <div className="w-[80%] h-full rounded-2xl overflow-hidden shadow-2xl bg-card border border-border">
+                    {slide.type === 'image' ? (
+                      <img src={slide.src} alt={slide.alt} className="w-full h-full object-cover" loading="lazy" />
+                    ) : (
+                      <video src={slide.src} autoPlay muted loop playsInline className="w-full h-full object-cover" />
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Bottom Bar: Label + Link + Dots */}
+        <div className="py-6 flex flex-col items-center gap-3">
+          <div className="text-center min-h-[3rem]">
+            <p
+              className="text-sm font-semibold text-foreground transition-opacity duration-300"
+              key={activeIndex}
+            >
+              {slides[activeIndex]?.label}
+            </p>
+            {slides[activeIndex]?.link && (
+              <a
+                href={slides[activeIndex].link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs text-muted-foreground hover:text-foreground transition-colors underline underline-offset-2"
+              >
+                {slides[activeIndex].link!.replace('https://www.', '')}
+              </a>
+            )}
+          </div>
+
+          {/* Dots */}
+          <div className="flex gap-2">
+            {slides.map((slide, index) => (
+              <button
+                key={slide.label}
+                onClick={() => {
+                  if (!isStatic && sectionRef.current) {
+                    const sectionTop = sectionRef.current.offsetTop;
+                    const sectionHeight = sectionRef.current.offsetHeight - window.innerHeight;
+                    const targetScroll = sectionTop + (index / (slides.length - 1)) * sectionHeight;
+                    window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+                  } else {
+                    setActiveIndex(index);
+                  }
+                }}
+                className={`h-2 rounded-full transition-all duration-300 ${
+                  index === activeIndex
+                    ? 'bg-foreground w-6'
+                    : 'bg-muted-foreground/40 hover:bg-muted-foreground/60 w-2'
+                }`}
+                aria-label={`Go to ${slide.label}`}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
