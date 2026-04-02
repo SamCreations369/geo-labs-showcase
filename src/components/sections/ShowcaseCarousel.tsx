@@ -10,12 +10,13 @@ interface SlideItem {
   src: string;
   alt: string;
   label: string;
+  link?: string;
 }
 
 const slides: SlideItem[] = [
-  { type: 'video', src: '/videos/pgr-showcase.mp4', alt: 'PGR Window Tinting website showcase', label: 'PGR Window Tinting' },
+  { type: 'video', src: '/videos/pgr-showcase.mp4', alt: 'PGR Window Tinting website showcase', label: 'PGR Window Tinting', link: 'https://www.pgrwindowtinting.com' },
   { type: 'image', src: ahrefsShowcase, alt: 'Ahrefs SEO analytics dashboard', label: 'SEO Analytics' },
-  { type: 'video', src: '/videos/aboutaria-showcase.mp4', alt: 'About Aria Karimpour website showcase', label: 'About Aria' },
+  { type: 'video', src: '/videos/aboutaria-showcase.mp4', alt: 'About Aria Karimpour website showcase', label: 'About Aria', link: 'https://www.aboutariakarimpour.com' },
   { type: 'image', src: gscShowcase, alt: 'Google Search Console performance data', label: 'Search Console' },
 ];
 
