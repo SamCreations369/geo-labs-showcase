@@ -64,9 +64,6 @@ export function ShowcaseCarousel() {
             <DotIndicator key={slide.label} index={index} progress={progress} />
           ))}
         </div>
-
-        {/* Label */}
-        <SlideLabel progress={progress} />
       </div>
     </div>
   );
@@ -83,27 +80,28 @@ function CarouselSlide({
   progress: MotionValue<number>;
   isMobile: boolean;
 }) {
-  // Desktop: rotateY-based 3D effect. Mobile: translateY from bottom.
   const rotateY = useTransform(progress, (p) => {
     const diff = index - p;
     return isMobile ? 0 : diff * -45;
   });
 
-  const x = useTransform(progress, (p) => {
+  const xPercent = useTransform(progress, (p) => {
     const diff = index - p;
     return isMobile ? 0 : diff * 85;
   });
+  const xStr = useTransform(xPercent, (v) => `${v}%`);
 
-  const y = useTransform(progress, (p) => {
+  const yPercent = useTransform(progress, (p) => {
     if (!isMobile) return 0;
     const diff = index - p;
     return diff * 110;
   });
+  const yStr = useTransform(yPercent, (v) => `${v}%`);
 
   const z = useTransform(progress, (p) => {
-    const diff = index - p;
-    if (isMobile) return Math.abs(diff) === 0 ? 0 : -100;
-    return diff === 0 ? 0 : -250;
+    const diff = Math.abs(index - p);
+    if (diff < 0.01) return 0;
+    return isMobile ? -100 : -250;
   });
 
   const scale = useTransform(progress, (p) => {
@@ -125,8 +123,8 @@ function CarouselSlide({
       className="absolute inset-0 flex items-center justify-center"
       style={{
         rotateY,
-        x: useTransform(x, (v) => `${v}%`),
-        y: useTransform(y, (v) => `${v}%`),
+        x: xStr,
+        y: yStr,
         z,
         scale,
         opacity,
@@ -172,46 +170,4 @@ function DotIndicator({ index, progress }: { index: number; progress: MotionValu
       style={{ width, opacity: dotOpacity }}
     />
   );
-}
-
-function SlideLabel({ progress }: { progress: MotionValue<number> }) {
-  const labelOpacity = useTransform(progress, (p) => {
-    const nearest = Math.round(p);
-    return Math.abs(p - nearest) < 0.3 ? 1 : 0;
-  });
-
-  const labelIndex = useTransform(progress, (p) => Math.round(p));
-
-  return (
-    <motion.p
-      className="text-center text-sm text-muted-foreground mt-3 font-medium"
-      style={{ opacity: labelOpacity }}
-    >
-      <MotionLabel index={labelIndex} />
-    </motion.p>
-  );
-}
-
-function MotionLabel({ index }: { index: MotionValue<number> }) {
-  // Use a simple approach - render all labels and show active one
-  return (
-    <>
-      {slides.map((slide, i) => (
-        <MotionLabelText key={slide.label} index={index} slideIndex={i} label={slide.label} />
-      ))}
-    </>
-  );
-}
-
-function MotionLabelText({
-  index,
-  slideIndex,
-  label,
-}: {
-  index: MotionValue<number>;
-  slideIndex: number;
-  label: string;
-}) {
-  const display = useTransform(index, (v) => (v === slideIndex ? 'inline' : 'none'));
-  return <motion.span style={{ display }}>{label}</motion.span>;
 }
