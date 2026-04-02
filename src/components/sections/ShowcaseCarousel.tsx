@@ -29,7 +29,6 @@ export function ShowcaseCarousel() {
     offset: ['start start', 'end end'],
   });
 
-  // Continuous progress mapped to 0 → SLIDE_COUNT-1
   const progress = useTransform(scrollYProgress, [0, 1], [0, SLIDE_COUNT - 1]);
 
   return (
@@ -38,14 +37,10 @@ export function ShowcaseCarousel() {
       style={{ height: `${(SLIDE_COUNT + 1) * 100}vh` }}
       className="relative sky-gradient"
     >
-      {/* Sticky viewport */}
-      <div className="sticky top-0 h-screen flex flex-col items-center justify-center overflow-hidden">
+      <div className="sticky top-0 h-screen flex flex-col items-center justify-center">
         <div
           className="relative w-full max-w-5xl mx-auto px-4"
-          style={{
-            perspective: isMobile ? '800px' : '1200px',
-            height: isMobile ? '300px' : '500px',
-          }}
+          style={{ height: isMobile ? '300px' : '500px' }}
         >
           {slides.map((slide, index) => (
             <CarouselSlide
@@ -80,34 +75,25 @@ function CarouselSlide({
   progress: MotionValue<number>;
   isMobile: boolean;
 }) {
-  const rotateY = useTransform(progress, (p) => {
-    const diff = index - p;
-    return isMobile ? 0 : diff * -45;
+  // Desktop: horizontal 3D rotation. Mobile: vertical slide from bottom.
+  const xOffset = useTransform(progress, (p) => {
+    if (isMobile) return 0;
+    return (index - p) * 85;
   });
 
-  const xPercent = useTransform(progress, (p) => {
-    const diff = index - p;
-    return isMobile ? 0 : diff * 85;
-  });
-  const xStr = useTransform(xPercent, (v) => `${v}%`);
-
-  const yPercent = useTransform(progress, (p) => {
+  const yOffset = useTransform(progress, (p) => {
     if (!isMobile) return 0;
-    const diff = index - p;
-    return diff * 110;
+    return (index - p) * 110;
   });
-  const yStr = useTransform(yPercent, (v) => `${v}%`);
 
-  const z = useTransform(progress, (p) => {
-    const diff = Math.abs(index - p);
-    if (diff < 0.01) return 0;
-    return isMobile ? -100 : -250;
+  const rotateY = useTransform(progress, (p) => {
+    if (isMobile) return 0;
+    return (index - p) * -45;
   });
 
   const scale = useTransform(progress, (p) => {
     const diff = Math.abs(index - p);
-    if (diff < 0.01) return 1;
-    return isMobile ? 0.85 : 0.75;
+    return diff < 0.01 ? 1 : isMobile ? 0.85 : 0.75;
   });
 
   const opacity = useTransform(progress, (p) => {
@@ -118,17 +104,22 @@ function CarouselSlide({
     return 0.5;
   });
 
+  const zIndex = useTransform(progress, (p) => {
+    const diff = Math.abs(index - p);
+    return Math.round(10 - diff * 5);
+  });
+
   return (
     <motion.div
-      className="absolute inset-0 flex items-center justify-center"
+      className="absolute inset-0 flex items-center justify-center will-change-transform"
       style={{
+        x: useTransform(xOffset, (v) => `${v}%`),
+        y: useTransform(yOffset, (v) => `${v}%`),
         rotateY,
-        x: xStr,
-        y: yStr,
-        z,
         scale,
         opacity,
-        transformStyle: 'preserve-3d',
+        zIndex,
+        perspective: isMobile ? 800 : 1200,
       }}
     >
       <div className="w-[85%] sm:w-[75%] h-full rounded-2xl overflow-hidden shadow-2xl bg-card border border-border">
