@@ -39,6 +39,7 @@ export function ShowcaseCarousel() {
 
   const getSlideStyle = (index: number) => {
     const diff = index - activeIndex;
+    // Handle wrapping
     const normalizedDiff =
       diff > slides.length / 2 ? diff - slides.length :
       diff < -slides.length / 2 ? diff + slides.length :
@@ -46,20 +47,20 @@ export function ShowcaseCarousel() {
 
     if (isMobile) {
       return {
-        rotateY: normalizedDiff * -30,
-        scale: normalizedDiff === 0 ? 1 : 0.7,
-        x: `${normalizedDiff * 90}%`,
-        z: normalizedDiff === 0 ? 0 : -200,
-        opacity: Math.abs(normalizedDiff) > 1 ? 0 : normalizedDiff === 0 ? 1 : 0.3,
+        rotateY: 0,
+        scale: normalizedDiff === 0 ? 1 : 0.85,
+        x: `${normalizedDiff * 105}%`,
+        z: normalizedDiff === 0 ? 0 : -100,
+        opacity: normalizedDiff === 0 ? 1 : 0,
       };
     }
 
     return {
-      rotateY: normalizedDiff * -65,
-      scale: normalizedDiff === 0 ? 1 : 0.6,
-      x: `${normalizedDiff * 75}%`,
-      z: normalizedDiff === 0 ? 50 : -400,
-      opacity: Math.abs(normalizedDiff) > 1 ? 0 : normalizedDiff === 0 ? 1 : 0.4,
+      rotateY: normalizedDiff * -45,
+      scale: normalizedDiff === 0 ? 1 : 0.75,
+      x: `${normalizedDiff * 85}%`,
+      z: normalizedDiff === 0 ? 0 : -250,
+      opacity: Math.abs(normalizedDiff) > 1 ? 0 : normalizedDiff === 0 ? 1 : 0.5,
     };
   };
 
@@ -67,8 +68,8 @@ export function ShowcaseCarousel() {
     <div className="relative w-full">
       {/* 3D Perspective Container */}
       <div
-        className="relative mx-auto max-w-5xl"
-        style={{ perspective: '800px', height: isMobile ? '280px' : '520px' }}
+        className="relative mx-auto max-w-5xl overflow-hidden"
+        style={{ perspective: '1200px', height: isMobile ? '300px' : '500px' }}
       >
         <div className="relative w-full h-full" style={{ transformStyle: 'preserve-3d' }}>
           {slides.map((slide, index) => {
