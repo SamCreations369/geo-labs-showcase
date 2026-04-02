@@ -70,14 +70,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 60 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          style={{
-            y: imageY,
-            scale: imageScale,
-            rotateX: imageRotateX,
-            transformStyle: 'preserve-3d',
-            transformOrigin: 'center bottom',
-            perspective: '1200px',
-          }}
+          style={{ y: imageY, scale: imageScale }}
         >
           <ShowcaseCarousel />
         </motion.div>
