@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useRef } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { AnimatedButton } from '@/components/ui/AnimatedButton';
@@ -7,15 +7,6 @@ import { ShowcaseCarousel } from '@/components/sections/ShowcaseCarousel';
 export function Hero() {
   const ref = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
-  
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start start', 'end start']
-  });
-  
-  const imageY = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [0, 200]);
-  const imageScale = useTransform(scrollYProgress, [0, 1], isMobile ? [1, 1] : [1, 0.9]);
-  const imageRotateX = useTransform(scrollYProgress, [0, 0.6], isMobile ? [25, 0] : [55, 0]);
 
   return (
     <section ref={ref} className="relative sky-gradient overflow-x-clip">
@@ -63,18 +54,10 @@ export function Hero() {
             </AnimatedButton>
           </div>
         </motion.div>
-
-        {/* 3D Showcase Carousel */}
-        <motion.div
-          className="mx-auto max-w-5xl"
-          initial={{ opacity: 0, y: 60 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          style={{ y: imageY, scale: imageScale }}
-        >
-          <ShowcaseCarousel />
-        </motion.div>
       </div>
+
+      {/* GSAP Scroll-Locked 3D Carousel */}
+      <ShowcaseCarousel />
     </section>
   );
 }
