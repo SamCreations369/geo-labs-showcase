@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import ahrefsShowcase from '@/assets/ahrefs-showcase.png';
@@ -13,15 +13,16 @@ interface SlideItem {
 }
 
 const slides: SlideItem[] = [
-  { type: 'image', src: ahrefsShowcase, alt: 'Ahrefs SEO analytics dashboard', label: 'SEO Analytics' },
-  { type: 'image', src: gscShowcase, alt: 'Google Search Console performance data', label: 'Search Console' },
   { type: 'video', src: '/videos/pgr-showcase.mp4', alt: 'PGR Window Tinting website showcase', label: 'PGR Window Tinting' },
+  { type: 'image', src: ahrefsShowcase, alt: 'Ahrefs SEO analytics dashboard', label: 'SEO Analytics' },
   { type: 'video', src: '/videos/aboutaria-showcase.mp4', alt: 'About Aria Karimpour website showcase', label: 'About Aria' },
+  { type: 'image', src: gscShowcase, alt: 'Google Search Console performance data', label: 'Search Console' },
 ];
 
 export function ShowcaseCarousel() {
   const [activeIndex, setActiveIndex] = useState(0);
   const isMobile = useIsMobile();
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const next = useCallback(() => {
     setActiveIndex((prev) => (prev + 1) % slides.length);
@@ -31,41 +32,64 @@ export function ShowcaseCarousel() {
     setActiveIndex((prev) => (prev - 1 + slides.length) % slides.length);
   }, []);
 
-  // Auto-advance every 5 seconds
+  // Scroll-driven: advance slides on scroll within the container
   useEffect(() => {
-    const interval = setInterval(next, 5000);
-    return () => clearInterval(interval);
-  }, [next]);
+    const container = containerRef.current;
+    if (!container) return;
+
+    let lastScrollY = window.scrollY;
+    let accumulatedDelta = 0;
+    const threshold = 150; // pixels of scroll needed to advance
+
+    const handleScroll = () => {
+      const rect = container.getBoundingClientRect();
+      const inView = rect.top < window.innerHeight && rect.bottom > 0;
+      if (!inView) {
+        accumulatedDelta = 0;
+        return;
+      }
+
+      const delta = window.scrollY - lastScrollY;
+      lastScrollY = window.scrollY;
+      accumulatedDelta += delta;
+
+      if (accumulatedDelta > threshold) {
+        accumulatedDelta = 0;
+        setActiveIndex((prev) => Math.min(prev + 1, slides.length - 1));
+      } else if (accumulatedDelta < -threshold) {
+        accumulatedDelta = 0;
+        setActiveIndex((prev) => Math.max(prev - 1, 0));
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const getSlideStyle = (index: number) => {
     const diff = index - activeIndex;
-    // Handle wrapping
-    const normalizedDiff =
-      diff > slides.length / 2 ? diff - slides.length :
-      diff < -slides.length / 2 ? diff + slides.length :
-      diff;
 
     if (isMobile) {
       return {
         rotateY: 0,
-        scale: normalizedDiff === 0 ? 1 : 0.85,
-        x: `${normalizedDiff * 105}%`,
-        z: normalizedDiff === 0 ? 0 : -100,
-        opacity: normalizedDiff === 0 ? 1 : 0,
+        scale: diff === 0 ? 1 : 0.85,
+        x: `${diff * 105}%`,
+        z: diff === 0 ? 0 : -100,
+        opacity: diff === 0 ? 1 : 0,
       };
     }
 
     return {
-      rotateY: normalizedDiff * -45,
-      scale: normalizedDiff === 0 ? 1 : 0.75,
-      x: `${normalizedDiff * 85}%`,
-      z: normalizedDiff === 0 ? 0 : -250,
-      opacity: Math.abs(normalizedDiff) > 1 ? 0 : normalizedDiff === 0 ? 1 : 0.5,
+      rotateY: diff * -45,
+      scale: diff === 0 ? 1 : 0.75,
+      x: `${diff * 85}%`,
+      z: diff === 0 ? 0 : -250,
+      opacity: Math.abs(diff) > 1 ? 0 : diff === 0 ? 1 : 0.5,
     };
   };
 
   return (
-    <div className="relative w-full">
+    <div ref={containerRef} className="relative w-full">
       {/* 3D Perspective Container */}
       <div
         className="relative mx-auto max-w-5xl overflow-hidden"
