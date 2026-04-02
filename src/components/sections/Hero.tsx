@@ -76,8 +76,5 @@ export function Hero() {
         </motion.div>
 
       </div>
-
-      {/* Scroll-driven Showcase Carousel */}
-      <ShowcaseCarousel />
     </section>;
 }
