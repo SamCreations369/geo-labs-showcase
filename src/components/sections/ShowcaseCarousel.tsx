@@ -1,5 +1,6 @@
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef } from 'react';
+import { motion, useScroll, useTransform, MotionValue } from 'framer-motion';
+import { useState, useEffect, useCallback, useRef } from 'react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import ahrefsShowcase from '@/assets/ahrefs-showcase.png';
 import gscShowcase from '@/assets/google-search-console.png';
@@ -18,155 +19,163 @@ const slides: SlideItem[] = [
   { type: 'image', src: gscShowcase, alt: 'Google Search Console performance data', label: 'Search Console' },
 ];
 
-const SLIDE_COUNT = slides.length;
-const ANGLE_STEP = 360 / SLIDE_COUNT; // 90deg per card
-const RADIUS = 500; // translateZ radius for the cylinder
-
 export function ShowcaseCarousel() {
-  const outerRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
   const isMobile = useIsMobile();
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  const { scrollYProgress } = useScroll({
-    target: outerRef,
-    offset: ['start start', 'end end'],
-  });
+  const next = useCallback(() => {
+    setActiveIndex((prev) => (prev + 1) % slides.length);
+  }, []);
 
-  // Map scroll progress to cylinder rotation (desktop) or active index (mobile)
-  const cylinderRotation = useTransform(scrollYProgress, [0, 1], [0, -ANGLE_STEP * (SLIDE_COUNT - 1)]);
+  const prev = useCallback(() => {
+    setActiveIndex((prev) => (prev - 1 + slides.length) % slides.length);
+  }, []);
 
-  // For mobile: map progress to a continuous index value (0 to SLIDE_COUNT-1)
-  const mobileProgress = useTransform(scrollYProgress, [0, 1], [0, SLIDE_COUNT - 1]);
+  // Scroll-driven: advance slides on scroll within the container
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    let lastScrollY = window.scrollY;
+    let accumulatedDelta = 0;
+    const threshold = 150;
+
+    const handleScroll = () => {
+      const rect = container.getBoundingClientRect();
+      const inView = rect.top < window.innerHeight && rect.bottom > 0;
+      if (!inView) {
+        accumulatedDelta = 0;
+        return;
+      }
+
+      const delta = window.scrollY - lastScrollY;
+      lastScrollY = window.scrollY;
+      accumulatedDelta += delta;
+
+      if (accumulatedDelta > threshold) {
+        accumulatedDelta = 0;
+        setActiveIndex((prev) => Math.min(prev + 1, slides.length - 1));
+      } else if (accumulatedDelta < -threshold) {
+        accumulatedDelta = 0;
+        setActiveIndex((prev) => Math.max(prev - 1, 0));
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const getDesktopStyle = (index: number) => {
+    const diff = index - activeIndex;
+    return {
+      rotateY: diff * -45,
+      scale: diff === 0 ? 1 : 0.75,
+      x: `${diff * 85}%`,
+      z: diff === 0 ? 0 : -250,
+      opacity: Math.abs(diff) > 1 ? 0 : diff === 0 ? 1 : 0.5,
+    };
+  };
+
+  const getMobileStyle = (index: number) => {
+    const diff = index - activeIndex;
+    return {
+      rotateY: 0,
+      scale: diff === 0 ? 1 : 0.85,
+      y: `${diff * 110}%`,
+      x: '0%',
+      z: diff === 0 ? 0 : -100,
+      opacity: diff === 0 ? 1 : 0,
+    };
+  };
 
   return (
-    <div
-      ref={outerRef}
-      style={{ height: `${SLIDE_COUNT * 100}vh` }}
-      className="relative"
-    >
-      {/* Sticky container */}
-      <div className="sticky top-0 h-screen flex flex-col items-center justify-center overflow-hidden">
-        {isMobile ? (
-          <MobileCarousel progress={mobileProgress} />
-        ) : (
-          <DesktopCarousel rotation={cylinderRotation} />
-        )}
-
-        {/* Dot indicators */}
-        <ScrollDots progress={mobileProgress} />
-      </div>
-    </div>
-  );
-}
-
-function DesktopCarousel({ rotation }: { rotation: any }) {
-  return (
-    <div
-      className="relative w-full flex items-center justify-center"
-      style={{ perspective: '1200px', height: '500px' }}
-    >
-      <motion.div
-        className="relative"
-        style={{
-          width: '100%',
-          height: '100%',
-          transformStyle: 'preserve-3d',
-          rotateY: rotation,
-        }}
+    <div ref={containerRef} className="relative w-full sky-gradient py-12 sm:py-16">
+      {/* 3D Perspective Container */}
+      <div
+        className="relative mx-auto max-w-5xl"
+        style={{ perspective: '1200px', height: isMobile ? '300px' : '500px' }}
       >
-        {slides.map((slide, index) => {
-          const angle = index * ANGLE_STEP;
-          return (
-            <div
-              key={slide.label}
-              className="absolute inset-0 flex items-center justify-center"
-              style={{
-                transformStyle: 'preserve-3d',
-                transform: `rotateY(${angle}deg) translateZ(${RADIUS}px)`,
-                backfaceVisibility: 'hidden',
-              }}
-            >
-              <div className="w-[70%] max-w-3xl aspect-video rounded-2xl overflow-hidden shadow-2xl bg-card border border-border">
-                <SlideContent slide={slide} />
-              </div>
-            </div>
-          );
-        })}
-      </motion.div>
-    </div>
-  );
-}
-
-function MobileCarousel({ progress }: { progress: any }) {
-  return (
-    <div className="relative w-full flex items-center justify-center" style={{ height: '350px' }}>
-      {slides.map((slide, index) => (
-        <MobileSlide key={slide.label} slide={slide} index={index} progress={progress} />
-      ))}
-    </div>
-  );
-}
-
-function MobileSlide({ slide, index, progress }: { slide: SlideItem; index: number; progress: any }) {
-  // Each slide: when progress equals index, translateY = 0 and opacity = 1
-  // Before: translateY = 100% (below), After: translateY = -100% (above)
-  const y = useTransform(progress, [index - 1, index, index + 1], ['100%', '0%', '-100%']);
-  const opacity = useTransform(progress, [index - 1, index - 0.5, index, index + 0.5, index + 1], [0, 1, 1, 1, 0]);
-  const scale = useTransform(progress, [index - 1, index, index + 1], [0.85, 1, 0.85]);
-
-  return (
-    <motion.div
-      className="absolute inset-0 flex items-center justify-center px-4"
-      style={{ y, opacity, scale }}
-    >
-      <div className="w-full max-w-sm aspect-video rounded-2xl overflow-hidden shadow-2xl bg-card border border-border">
-        <SlideContent slide={slide} />
+        <div className="relative w-full h-full" style={{ transformStyle: 'preserve-3d' }}>
+          {slides.map((slide, index) => {
+            const style = isMobile ? getMobileStyle(index) : getDesktopStyle(index);
+            return (
+              <motion.div
+                key={slide.label}
+                className="absolute inset-0 flex items-center justify-center"
+                animate={style}
+                transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+                style={{ transformStyle: 'preserve-3d' }}
+              >
+                <div className="w-[90%] sm:w-[80%] h-full rounded-2xl overflow-hidden shadow-2xl bg-card border border-border">
+                  {slide.type === 'image' ? (
+                    <img
+                      src={slide.src}
+                      alt={slide.alt}
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <video
+                      src={slide.src}
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      className="w-full h-full object-cover"
+                    />
+                  )}
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
       </div>
-    </motion.div>
-  );
-}
 
-function SlideContent({ slide }: { slide: SlideItem }) {
-  if (slide.type === 'image') {
-    return (
-      <img
-        src={slide.src}
-        alt={slide.alt}
-        className="w-full h-full object-cover"
-        loading="lazy"
-      />
-    );
-  }
-  return (
-    <video
-      src={slide.src}
-      autoPlay
-      muted
-      loop
-      playsInline
-      className="w-full h-full object-cover"
-    />
-  );
-}
+      {/* Navigation */}
+      <div className="flex items-center justify-center gap-4 mt-6">
+        <button
+          onClick={prev}
+          className="p-2 rounded-full bg-card border border-border hover:bg-accent transition-colors"
+          aria-label="Previous slide"
+        >
+          <ChevronLeft className="w-5 h-5 text-foreground" />
+        </button>
 
-function ScrollDots({ progress }: { progress: any }) {
-  return (
-    <div className="flex gap-2 mt-6">
-      {slides.map((slide, index) => (
-        <DotIndicator key={slide.label} index={index} progress={progress} label={slide.label} />
-      ))}
+        <div className="flex gap-2">
+          {slides.map((slide, index) => (
+            <button
+              key={slide.label}
+              onClick={() => setActiveIndex(index)}
+              className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                index === activeIndex
+                  ? 'bg-foreground w-6'
+                  : 'bg-muted-foreground/40 hover:bg-muted-foreground/60'
+              }`}
+              aria-label={`Go to ${slide.label}`}
+            />
+          ))}
+        </div>
+
+        <button
+          onClick={next}
+          className="p-2 rounded-full bg-card border border-border hover:bg-accent transition-colors"
+          aria-label="Next slide"
+        >
+          <ChevronRight className="w-5 h-5 text-foreground" />
+        </button>
+      </div>
+
+      {/* Label */}
+      <motion.p
+        key={activeIndex}
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3 }}
+        className="text-center text-sm text-muted-foreground mt-3 font-medium"
+      >
+        {slides[activeIndex].label}
+      </motion.p>
     </div>
-  );
-}
-
-function DotIndicator({ index, progress, label }: { index: number; progress: any; label: string }) {
-  const width = useTransform(progress, [index - 0.5, index, index + 0.5], [8, 24, 8]);
-  const opacity = useTransform(progress, [index - 0.5, index, index + 0.5], [0.4, 1, 0.4]);
-
-  return (
-    <motion.div
-      className="h-2 rounded-full bg-foreground"
-      style={{ width, opacity }}
-      aria-label={`Slide: ${label}`}
-    />
   );
 }
