@@ -126,66 +126,63 @@
     transform: scaleY(-1);
   }
 
-  /* Cloud shapes - soft natural clouds matching sky photo */
+  /* Cloud shapes - highly visible fluffy clouds */
   .cloud {
     position: absolute;
-    background: rgba(255, 255, 255, 0.7);
+    background: white;
     border-radius: 9999px;
     pointer-events: none;
-    box-shadow: 0 0 60px 30px rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0 80px 40px rgba(255, 255, 255, 0.8);
     will-change: transform;
   }
 
   .cloud-small {
-    width: 200px;
-    height: 80px;
-    filter: blur(18px);
-    opacity: 0.6;
+    width: 180px;
+    height: 90px;
+    filter: blur(25px);
+    opacity: 0.95;
   }
 
   .cloud-medium {
-    width: 380px;
-    height: 140px;
-    filter: blur(22px);
-    opacity: 0.65;
+    width: 350px;
+    height: 160px;
+    filter: blur(35px);
+    opacity: 0.95;
   }
 
   .cloud-large {
     width: 550px;
-    height: 200px;
-    filter: blur(28px);
-    opacity: 0.7;
+    height: 220px;
+    filter: blur(45px);
+    opacity: 0.95;
   }
 
   .cloud-xlarge {
-    width: 720px;
-    height: 260px;
-    filter: blur(32px);
-    opacity: 0.75;
+    width: 700px;
+    height: 280px;
+    filter: blur(50px);
+    opacity: 0.95;
   }
 
   /* Reduce blur on mobile for performance */
   @media (max-width: 768px) {
     .cloud {
-      box-shadow: 0 0 30px 15px rgba(255, 255, 255, 0.4);
+      box-shadow: 0 0 40px 20px rgba(255, 255, 255, 0.6);
     }
     .cloud-small {
-      width: 120px;
+      width: 100px;
       height: 50px;
-      filter: blur(12px);
-      opacity: 0.5;
+      filter: blur(15px);
     }
     .cloud-medium {
-      width: 200px;
+      width: 180px;
       height: 80px;
-      filter: blur(16px);
-      opacity: 0.55;
+      filter: blur(20px);
     }
     .cloud-large {
-      width: 300px;
-      height: 110px;
-      filter: blur(20px);
-      opacity: 0.6;
+      width: 280px;
+      height: 120px;
+      filter: blur(25px);
     }
   }
 
