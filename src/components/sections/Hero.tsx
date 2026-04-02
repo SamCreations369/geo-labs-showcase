@@ -66,7 +66,7 @@ export function Hero() {
             Your competitors aren't smarter. They just show up first.
           </h1>
           <p className="text-lg sm:text-xl max-w-2xl mx-auto mb-10 text-muted-foreground">
-            Premium websites, SEO, and GEO for LA businesses tired of being invisible. We build stunning websites starting at $899, optimize your search visibility across Google, Bing, and AI platforms, and keep everything running with affordable monthly maintenance.
+            Premium websites, SEO, and GEO for LA businesses tired of being invisible. We build stunning websites, optimize your search visibility across Google, Bing, and AI platforms, and keep everything running with affordable monthly maintenance.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <AnimatedButton href="#contact">
