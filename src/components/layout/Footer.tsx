@@ -36,7 +36,7 @@ export function Footer() {
               Eudaimonia
             </a>
             <p className="text-primary-foreground/70 text-sm mb-4">
-              SEO + GEO for local businesses.
+              Web creation, SEO + GEO for local businesses.
             </p>
             <p className="text-primary-foreground/60 text-xs">
               Based in Los Angeles, CA.

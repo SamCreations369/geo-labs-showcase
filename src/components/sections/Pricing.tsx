@@ -49,7 +49,9 @@ const webPlans = [{
   popular: false
 }];
 export function Pricing() {
-  const [isAnnual, setIsAnnual] = useState(true);
+  const [activeTab, setActiveTab] = useState<'seo' | 'web'>('seo');
+  const plans = activeTab === 'seo' ? seoPlans : webPlans;
+
   return <section id="pricing" className="py-24 bg-background">
       <div className="section-container">
         <motion.div initial={{
@@ -72,7 +74,7 @@ export function Pricing() {
         y: 0
       }} viewport={{
         once: true
-      }} className="text-center mb-12 max-w-2xl mx-auto">
+      }} className="text-center mb-8 max-w-2xl mx-auto">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl text-foreground leading-tight mb-2">
             Simple plans
           </h2>
@@ -80,6 +82,24 @@ export function Pricing() {
             for serious growth
           </h2>
         </motion.div>
+
+        {/* Tab Toggle */}
+        <div className="flex justify-center mb-12">
+          <div className="flex gap-1 p-1 bg-secondary rounded-full">
+            <button
+              onClick={() => setActiveTab('seo')}
+              className={`px-6 py-2.5 rounded-full font-medium text-sm transition-all duration-300 ${activeTab === 'seo' ? 'bg-primary text-primary-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'}`}
+            >
+              SEO & GEO
+            </button>
+            <button
+              onClick={() => setActiveTab('web')}
+              className={`px-6 py-2.5 rounded-full font-medium text-sm transition-all duration-300 ${activeTab === 'web' ? 'bg-primary text-primary-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'}`}
+            >
+              Web Creation
+            </button>
+          </div>
+        </div>
 
         {/* Pricing Cards */}
         <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
@@ -102,9 +122,9 @@ export function Pricing() {
                 <h3 className="text-lg font-semibold text-foreground mb-4">{plan.name}</h3>
                 <div className="mb-2">
                   <span className="text-4xl font-semibold text-foreground">
-                    {isAnnual ? plan.priceAnnual : plan.price}
+                    {plan.price}
                   </span>
-                  {plan.price !== '$50' && plan.price !== 'Flexible' && <span className="text-muted-foreground">/mo</span>}
+                  {'priceLabel' in plan && plan.priceLabel && <span className="text-muted-foreground">{plan.priceLabel}</span>}
                 </div>
                 <p className="text-sm text-muted-foreground">{plan.description}</p>
               </div>
