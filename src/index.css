@@ -126,66 +126,59 @@
     transform: scaleY(-1);
   }
 
-  /* Cloud shapes - soft natural clouds matching sky photo */
+  /* Cloud shapes - realistic soft clouds */
   .cloud {
     position: absolute;
-    background: rgba(255, 255, 255, 0.7);
+    background: radial-gradient(ellipse at center, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 70%);
     border-radius: 9999px;
     pointer-events: none;
-    box-shadow: 0 0 60px 30px rgba(255, 255, 255, 0.5);
     will-change: transform;
   }
 
   .cloud-small {
-    width: 200px;
-    height: 80px;
-    filter: blur(18px);
-    opacity: 0.6;
-  }
-
-  .cloud-medium {
-    width: 380px;
-    height: 140px;
-    filter: blur(22px);
-    opacity: 0.65;
-  }
-
-  .cloud-large {
-    width: 550px;
-    height: 200px;
-    filter: blur(28px);
+    width: 220px;
+    height: 90px;
+    filter: blur(8px);
     opacity: 0.7;
   }
 
-  .cloud-xlarge {
-    width: 720px;
-    height: 260px;
-    filter: blur(32px);
+  .cloud-medium {
+    width: 400px;
+    height: 160px;
+    filter: blur(10px);
     opacity: 0.75;
   }
 
-  /* Reduce blur on mobile for performance */
+  .cloud-large {
+    width: 600px;
+    height: 230px;
+    filter: blur(14px);
+    opacity: 0.8;
+  }
+
+  .cloud-xlarge {
+    width: 780px;
+    height: 300px;
+    filter: blur(16px);
+    opacity: 0.85;
+  }
+
+  /* Reduce on mobile */
   @media (max-width: 768px) {
-    .cloud {
-      box-shadow: 0 0 30px 15px rgba(255, 255, 255, 0.4);
-    }
     .cloud-small {
-      width: 120px;
-      height: 50px;
-      filter: blur(12px);
-      opacity: 0.5;
+      width: 140px;
+      height: 55px;
+      filter: blur(6px);
     }
     .cloud-medium {
-      width: 200px;
-      height: 80px;
-      filter: blur(16px);
-      opacity: 0.55;
+      width: 240px;
+      height: 95px;
+      filter: blur(8px);
     }
     .cloud-large {
-      width: 300px;
-      height: 110px;
-      filter: blur(20px);
-      opacity: 0.6;
+      width: 340px;
+      height: 130px;
+      filter: blur(10px);
     }
   }
 
