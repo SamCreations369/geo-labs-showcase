@@ -97,9 +97,9 @@ export default {
           "100%": { backgroundPosition: "200% 0" },
         },
         "text-slide-up": {
-          "0%, 40%": { transform: "translateY(0)" },
-          "50%, 90%": { transform: "translateY(-100%)" },
-          "100%": { transform: "translateY(0)" },
+          "0%, 100%": { transform: "translateY(0)" },
+          "15%": { transform: "translateY(-25%)", opacity: "0.3" },
+          "30%": { transform: "translateY(0)", opacity: "1" },
         },
       },
       animation: {
