@@ -110,7 +110,7 @@ export function Benefits() {
             </div>
 
             <p className="text-foreground">
-              <strong>Personalize every detail,</strong> From branding and interface layout to colors and menus, so your presence feels like an extension of your brand.
+              <strong>Personalize every detail.</strong> From custom web design and branding to colors, layouts, and SEO structure — your website feels like a true extension of your brand.
             </p>
           </motion.div>
 

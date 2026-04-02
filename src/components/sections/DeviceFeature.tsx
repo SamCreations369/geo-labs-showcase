@@ -98,15 +98,15 @@ export function DeviceFeature() {
       }} className="flex flex-wrap justify-center gap-3 mt-12">
           <div className="feature-chip">
             <span className="w-2 h-2 rounded-full bg-accent" />
+            Custom Web Design & Development
+          </div>
+          <div className="feature-chip">
+            <span className="w-2 h-2 rounded-full bg-accent" />
             Google & Maps Optimization
           </div>
           <div className="feature-chip">
             <span className="w-2 h-2 rounded-full bg-accent" />
             AI & GEO Optimization
-          </div>
-          <div className="feature-chip">
-            <span className="w-2 h-2 rounded-full bg-accent" />
-            Review & Reputation Engine
           </div>
         </motion.div>
       </div>

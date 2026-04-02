@@ -49,12 +49,12 @@ export function ProjectSection() {
         }} transition={{
           duration: 0.6
         }} className="w-full lg:w-1/2">
-            <span className="eyebrow text-secondary-foreground">SEO SERVICES</span>
+            <span className="eyebrow text-secondary-foreground">WEB & SEO SERVICES</span>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl text-foreground leading-tight mb-6">
-              Fix what's broken, optimize what works
+              Build it right, then make sure people find it
             </h2>
             <p className="text-lg mb-8 text-secondary-foreground">
-              Most businesses have the same problems: terrible site structure, weak content, zero local presence. We audit the damage, prioritize what matters, and rebuild your visibility from the foundation up.
+              Most businesses have the same problems: outdated websites, terrible site structure, weak content, zero local presence. We design premium websites, audit the damage, prioritize what matters, and rebuild your visibility from the foundation up.
             </p>
             <div className="flex flex-wrap gap-3 mb-8">
               {features.map(feature => <div key={feature} className="chip">
