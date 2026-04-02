@@ -76,14 +76,14 @@ function CarouselSlide({
   isMobile: boolean;
 }) {
   // Desktop: horizontal 3D rotation. Mobile: vertical slide from bottom.
-  const xOffset = useTransform(progress, (p) => {
-    if (isMobile) return 0;
-    return (index - p) * 85;
+  const xStr = useTransform(progress, (p) => {
+    if (isMobile) return '0%';
+    return `${(index - p) * 85}%`;
   });
 
-  const yOffset = useTransform(progress, (p) => {
-    if (!isMobile) return 0;
-    return (index - p) * 110;
+  const yStr = useTransform(progress, (p) => {
+    if (!isMobile) return '0%';
+    return `${(index - p) * 110}%`;
   });
 
   const rotateY = useTransform(progress, (p) => {
