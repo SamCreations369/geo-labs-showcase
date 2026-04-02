@@ -1,47 +1,48 @@
 
 
-## Plan: 3D Scroll Carousel Showcase
+## Plan: Sticky Scroll-Locked 3D Carousel with Reference-Style Animation
 
-**What**: Replace the current static dashboard image in the Hero section with a 3D perspective carousel that scrolls through 4 items: the ahrefs screenshot, Google Search Console screenshot, and two auto-playing website showcase videos (PGR Window Tinting and About Aria). The carousel uses a 3D rotation effect inspired by the reference site, where the active card is front-and-center and adjacent cards are rotated/scaled back in perspective.
-
----
-
-### Assets to add
-- `src/assets/ahrefs-showcase.png` — uploaded ahrefs image
-- `src/assets/google-search-console.png` — uploaded GSC image
-- `public/videos/pgr-showcase.mp4` — PGR website scroll video
-- `public/videos/aboutaria-showcase.mp4` — About Aria website scroll video
-
-Videos go in `public/` since they are large media files loaded via `<video>` tags.
+**What**: Rebuild the ShowcaseCarousel to use a sticky scroll-locking mechanism (like the reference site) so the carousel "stops" the page and you must scroll through all 4 slides before continuing. On desktop, cards rotate on the Y-axis in a true 3D cylinder layout. On mobile, cards slide in from the bottom instead of the right.
 
 ---
 
-### New component: `src/components/sections/ShowcaseCarousel.tsx`
+### How the reference site works
 
-A scroll-linked 3D carousel with 4 slides displayed in a perspective container:
+The reference uses a tall scroll track (`carousel_track` at ~300vh) with a `position: sticky` inner container. All cards are placed on a 3D cylinder using `rotateY` + `translateZ`. As the user scrolls, the cylinder rotates — each card steps into view one at a time. The scroll is "consumed" by the carousel before the page continues.
 
-- **3D layout**: Cards arranged horizontally with CSS `perspective` on the parent. The active card is at full scale/opacity, facing forward. Adjacent cards rotate on the Y-axis (approx. -45deg left, +45deg right), scale down, and reduce opacity — mimicking the reference site's depth effect.
-- **Navigation**: Arrow buttons (left/right) and auto-advance timer. Scroll-based progression using Framer Motion's `useScroll` is preserved to tie into the existing parallax system.
-- **Card content**:
-  - Cards 1 & 2: `<img>` tags for ahrefs and GSC screenshots in rounded tile cards with shadow
-  - Cards 3 & 4: `<video>` tags with `autoPlay`, `muted`, `loop`, `playsInline` for the two website showcase videos, same tile card styling
-- **Mobile**: Simplified to single-card view with swipe/tap navigation, no 3D rotation.
+---
+
+### Changes to `src/components/sections/ShowcaseCarousel.tsx` (full rewrite)
+
+**Sticky scroll-lock approach:**
+- Wrap carousel in a tall outer div (height: `slides.length * 100vh`) to create scroll runway
+- Inside, a `position: sticky; top: 0; height: 100vh` container holds the 3D scene
+- Use `useScroll({ target: outerRef })` to get `scrollYProgress` (0→1 across the tall div)
+- Map `scrollYProgress` to `activeIndex` (0→3), so each ~25% of scroll advances one slide
+
+**Desktop 3D cylinder (matching reference):**
+- Cards arranged in a cylinder: each card gets `rotateY(index * angleStep)` + `translateZ(radius)`
+- The whole cylinder rotates via `rotateY` driven by scroll progress
+- `angleStep = 360 / slides.length` (90deg per card for 4 items)
+- Adjacent cards visible at reduced opacity, creating the depth effect from the reference
+
+**Mobile — cards from bottom:**
+- No Y-axis rotation; instead use `translateY` for transitions
+- Active card at `translateY(0)`, next cards below at `translateY(100%)`, previous above at `translateY(-100%)`
+- Smooth vertical slide animation as you scroll
+
+**Navigation:** Keep arrow buttons and dots for manual control, but scroll is the primary driver.
 
 ### Changes to `src/components/sections/Hero.tsx`
 
-- Remove the existing static dashboard `<img>` block (lines 78-100)
-- Import and render `<ShowcaseCarousel />` in its place, keeping the same perspective wrapper and scroll-linked `rotateX` entrance animation
-
-### Changes to `src/pages/Index.tsx`
-
-No changes needed — the carousel lives inside the Hero section.
-
----
+- Remove the `motion.div` wrapper around `<ShowcaseCarousel />` that applies `imageY`, `imageScale`, `imageRotateX` — the carousel now manages its own scroll behavior internally
+- Move `<ShowcaseCarousel />` **outside** the `section-container` div so the sticky positioning works against the full viewport
+- The Hero section no longer needs `min-h-screen` since the carousel's scroll runway provides the height
 
 ### Technical details
 
-- Framer Motion `AnimatePresence` and `animate` for card transitions (rotateY, scale, translateX, opacity)
-- `useScroll` + `useTransform` for the overall section parallax (already in Hero)
-- Videos use native `<video>` element — no external player library needed
-- Carousel state managed with `useState` for active index, `useEffect` for auto-advance interval
+- Framer Motion `useScroll` with `target` set to the outer scroll-runway div and `offset: ['start start', 'end end']`
+- `useTransform` to map `scrollYProgress` → rotation angle (desktop) or translateY (mobile)
+- CSS `perspective` on the 3D scene container, `transform-style: preserve-3d` on the cylinder wrapper
+- Videos keep `autoPlay`, `muted`, `loop`, `playsInline`
 
