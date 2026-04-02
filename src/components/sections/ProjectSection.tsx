@@ -3,7 +3,7 @@ import { useRef } from 'react';
 import projectUI from '@/assets/project-ui.png';
 import decorativeShape from '@/assets/decorative-shape.png';
 import { AnimatedButton } from '@/components/ui/AnimatedButton';
-const features = ['SEO Audit & Fixes', 'GMB / GBP Optimization', 'Location & Keyword Strategy', 'Content that ranks locally'];
+const features = ['SEO Audit & Fixes', 'Custom Web Design', 'GMB / GBP Optimization', 'Content that ranks locally'];
 export function ProjectSection() {
   const ref = useRef<HTMLDivElement>(null);
   const {
