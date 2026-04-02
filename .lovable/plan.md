@@ -1,48 +1,51 @@
 
 
-## Plan: Sticky Scroll-Locked 3D Carousel with Reference-Style Animation
+## Plan: GSAP ScrollTrigger 3D Carousel
 
-**What**: Rebuild the ShowcaseCarousel to use a sticky scroll-locking mechanism (like the reference site) so the carousel "stops" the page and you must scroll through all 4 slides before continuing. On desktop, cards rotate on the Y-axis in a true 3D cylinder layout. On mobile, cards slide in from the bottom instead of the right.
-
----
-
-### How the reference site works
-
-The reference uses a tall scroll track (`carousel_track` at ~300vh) with a `position: sticky` inner container. All cards are placed on a 3D cylinder using `rotateY` + `translateZ`. As the user scrolls, the cylinder rotates — each card steps into view one at a time. The scroll is "consumed" by the carousel before the page continues.
+Replace the Framer Motion ShowcaseCarousel with a GSAP + ScrollTrigger scroll-locked 3D carousel. Three files changed, nothing else touched.
 
 ---
 
-### Changes to `src/components/sections/ShowcaseCarousel.tsx` (full rewrite)
+### File 1: `package.json`
+Add `"gsap": "^3.12.7"` to dependencies.
 
-**Sticky scroll-lock approach:**
-- Wrap carousel in a tall outer div (height: `slides.length * 100vh`) to create scroll runway
-- Inside, a `position: sticky; top: 0; height: 100vh` container holds the 3D scene
-- Use `useScroll({ target: outerRef })` to get `scrollYProgress` (0→1 across the tall div)
-- Map `scrollYProgress` to `activeIndex` (0→3), so each ~25% of scroll advances one slide
+### File 2: `src/components/sections/ShowcaseCarousel.tsx` — Full rewrite
 
-**Desktop 3D cylinder (matching reference):**
-- Cards arranged in a cylinder: each card gets `rotateY(index * angleStep)` + `translateZ(radius)`
-- The whole cylinder rotates via `rotateY` driven by scroll progress
-- `angleStep = 360 / slides.length` (90deg per card for 4 items)
-- Adjacent cards visible at reduced opacity, creating the depth effect from the reference
+**No Framer Motion.** Pure GSAP + React refs.
 
-**Mobile — cards from bottom:**
-- No Y-axis rotation; instead use `translateY` for transitions
-- Active card at `translateY(0)`, next cards below at `translateY(100%)`, previous above at `translateY(-100%)`
-- Smooth vertical slide animation as you scroll
+**Structure:**
+- Outer `<section>` with `height: slides.length * 100vh` (scroll runway)
+- Inner `<div>` with `position: sticky; top: 0; height: 100vh` (viewport)
+- Perspective container (`perspective: 1200px`) with 4 absolutely-positioned cards
+- Bottom bar: label, optional link, dot indicators
 
-**Navigation:** Keep arrow buttons and dots for manual control, but scroll is the primary driver.
+**GSAP setup in `useLayoutEffect`:**
+- `gsap.registerPlugin(ScrollTrigger)`
+- Wrap in `gsap.context()` for cleanup
+- ONE `ScrollTrigger.create()` — trigger is the outer section, `pin: false` (CSS sticky handles it), `scrub: 0.8`
+- `onUpdate(self)`: compute `activeProgress = self.progress * (slides.length - 1)`, then for each card ref compute `diff = index - activeProgress` and apply transforms via `gsap.set()`:
+  - `xPercent: diff * 55` (desktop), `yPercent: diff * 110` (mobile)
+  - `z: -Math.abs(diff) * 300` (desktop only)
+  - `rotateY: diff * -35` (desktop only)
+  - `scale: 1 - Math.abs(diff) * 0.2` (clamped to 0.6 min)
+  - `opacity: Math.abs(diff) < 1.5 ? 1 - Math.abs(diff) * 0.6 : 0`
+  - `filter: blur(${Math.abs(diff) * 2}px)`
+- Update `activeIndex` state (rounded) for bottom bar label/dots
 
-### Changes to `src/components/sections/Hero.tsx`
+**Mobile:** No ScrollTrigger, no rotateY, no perspective. Simple stacked cards — only active card visible, scroll-snapped vertically. Height reduced to auto.
 
-- Remove the `motion.div` wrapper around `<ShowcaseCarousel />` that applies `imageY`, `imageScale`, `imageRotateX` — the carousel now manages its own scroll behavior internally
-- Move `<ShowcaseCarousel />` **outside** the `section-container` div so the sticky positioning works against the full viewport
-- The Hero section no longer needs `min-h-screen` since the carousel's scroll runway provides the height
+**prefers-reduced-motion:** Detect via `window.matchMedia`. If enabled, skip ScrollTrigger entirely, show all cards stacked statically.
 
-### Technical details
+**Bottom bar:** CSS transitions only (no Framer Motion). Label + link update via React state driven by `activeIndex`. Dots are buttons that scroll to the corresponding progress point.
 
-- Framer Motion `useScroll` with `target` set to the outer scroll-runway div and `offset: ['start start', 'end end']`
-- `useTransform` to map `scrollYProgress` → rotation angle (desktop) or translateY (mobile)
-- CSS `perspective` on the 3D scene container, `transform-style: preserve-3d` on the cylinder wrapper
-- Videos keep `autoPlay`, `muted`, `loop`, `playsInline`
+**Slides array** kept identical to current (video/image/video/image order with links).
+
+### File 3: `src/components/sections/Hero.tsx`
+
+Minimal changes only:
+- Remove `imageY`, `imageScale`, `imageRotateX` transforms (lines 16-18)
+- Remove the `motion.div` wrapper around `<ShowcaseCarousel />` (lines 68-76)
+- Place `<ShowcaseCarousel />` after the closing `</div>` of `section-container` (line 77), still inside the `<section>`
+- Keep `useScroll`/`useTransform` imports if still used elsewhere, otherwise clean up unused imports
+- All clouds, text animation, sky-gradient, AnimatedButton — completely untouched
 
