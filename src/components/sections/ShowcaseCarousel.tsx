@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, MotionValue } from 'framer-motion';
 import { useRef } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import ahrefsShowcase from '@/assets/ahrefs-showcase.png';
@@ -19,8 +19,6 @@ const slides: SlideItem[] = [
 ];
 
 const SLIDE_COUNT = slides.length;
-const ANGLE_STEP = 360 / SLIDE_COUNT; // 90deg per card
-const RADIUS = 500; // translateZ radius for the cylinder
 
 export function ShowcaseCarousel() {
   const outerRef = useRef<HTMLDivElement>(null);
@@ -31,142 +29,189 @@ export function ShowcaseCarousel() {
     offset: ['start start', 'end end'],
   });
 
-  // Map scroll progress to cylinder rotation (desktop) or active index (mobile)
-  const cylinderRotation = useTransform(scrollYProgress, [0, 1], [0, -ANGLE_STEP * (SLIDE_COUNT - 1)]);
-
-  // For mobile: map progress to a continuous index value (0 to SLIDE_COUNT-1)
-  const mobileProgress = useTransform(scrollYProgress, [0, 1], [0, SLIDE_COUNT - 1]);
+  // Continuous progress mapped to 0 → SLIDE_COUNT-1
+  const progress = useTransform(scrollYProgress, [0, 1], [0, SLIDE_COUNT - 1]);
 
   return (
     <div
       ref={outerRef}
-      style={{ height: `${SLIDE_COUNT * 100}vh` }}
-      className="relative"
+      style={{ height: `${(SLIDE_COUNT + 1) * 100}vh` }}
+      className="relative sky-gradient"
     >
-      {/* Sticky container */}
+      {/* Sticky viewport */}
       <div className="sticky top-0 h-screen flex flex-col items-center justify-center overflow-hidden">
-        {isMobile ? (
-          <MobileCarousel progress={mobileProgress} />
-        ) : (
-          <DesktopCarousel rotation={cylinderRotation} />
-        )}
+        <div
+          className="relative w-full max-w-5xl mx-auto px-4"
+          style={{
+            perspective: isMobile ? '800px' : '1200px',
+            height: isMobile ? '300px' : '500px',
+          }}
+        >
+          {slides.map((slide, index) => (
+            <CarouselSlide
+              key={slide.label}
+              slide={slide}
+              index={index}
+              progress={progress}
+              isMobile={isMobile}
+            />
+          ))}
+        </div>
 
-        {/* Dot indicators */}
-        <ScrollDots progress={mobileProgress} />
+        {/* Dots */}
+        <div className="flex gap-2 mt-8">
+          {slides.map((slide, index) => (
+            <DotIndicator key={slide.label} index={index} progress={progress} />
+          ))}
+        </div>
+
+        {/* Label */}
+        <SlideLabel progress={progress} />
       </div>
     </div>
   );
 }
 
-function DesktopCarousel({ rotation }: { rotation: any }) {
-  return (
-    <div
-      className="relative w-full flex items-center justify-center"
-      style={{ perspective: '1200px', height: '500px' }}
-    >
-      <motion.div
-        className="relative"
-        style={{
-          width: '100%',
-          height: '100%',
-          transformStyle: 'preserve-3d',
-          rotateY: rotation,
-        }}
-      >
-        {slides.map((slide, index) => {
-          const angle = index * ANGLE_STEP;
-          return (
-            <div
-              key={slide.label}
-              className="absolute inset-0 flex items-center justify-center"
-              style={{
-                transformStyle: 'preserve-3d',
-                transform: `rotateY(${angle}deg) translateZ(${RADIUS}px)`,
-                backfaceVisibility: 'hidden',
-              }}
-            >
-              <div className="w-[70%] max-w-3xl aspect-video rounded-2xl overflow-hidden shadow-2xl bg-card border border-border">
-                <SlideContent slide={slide} />
-              </div>
-            </div>
-          );
-        })}
-      </motion.div>
-    </div>
-  );
-}
+function CarouselSlide({
+  slide,
+  index,
+  progress,
+  isMobile,
+}: {
+  slide: SlideItem;
+  index: number;
+  progress: MotionValue<number>;
+  isMobile: boolean;
+}) {
+  // Desktop: rotateY-based 3D effect. Mobile: translateY from bottom.
+  const rotateY = useTransform(progress, (p) => {
+    const diff = index - p;
+    return isMobile ? 0 : diff * -45;
+  });
 
-function MobileCarousel({ progress }: { progress: any }) {
-  return (
-    <div className="relative w-full flex items-center justify-center" style={{ height: '350px' }}>
-      {slides.map((slide, index) => (
-        <MobileSlide key={slide.label} slide={slide} index={index} progress={progress} />
-      ))}
-    </div>
-  );
-}
+  const x = useTransform(progress, (p) => {
+    const diff = index - p;
+    return isMobile ? 0 : diff * 85;
+  });
 
-function MobileSlide({ slide, index, progress }: { slide: SlideItem; index: number; progress: any }) {
-  // Each slide: when progress equals index, translateY = 0 and opacity = 1
-  // Before: translateY = 100% (below), After: translateY = -100% (above)
-  const y = useTransform(progress, [index - 1, index, index + 1], ['100%', '0%', '-100%']);
-  const opacity = useTransform(progress, [index - 1, index - 0.5, index, index + 0.5, index + 1], [0, 1, 1, 1, 0]);
-  const scale = useTransform(progress, [index - 1, index, index + 1], [0.85, 1, 0.85]);
+  const y = useTransform(progress, (p) => {
+    if (!isMobile) return 0;
+    const diff = index - p;
+    return diff * 110;
+  });
+
+  const z = useTransform(progress, (p) => {
+    const diff = index - p;
+    if (isMobile) return Math.abs(diff) === 0 ? 0 : -100;
+    return diff === 0 ? 0 : -250;
+  });
+
+  const scale = useTransform(progress, (p) => {
+    const diff = Math.abs(index - p);
+    if (diff < 0.01) return 1;
+    return isMobile ? 0.85 : 0.75;
+  });
+
+  const opacity = useTransform(progress, (p) => {
+    const diff = Math.abs(index - p);
+    if (diff < 0.01) return 1;
+    if (diff > 1.2) return 0;
+    if (isMobile) return Math.max(0, 1 - diff * 1.5);
+    return 0.5;
+  });
 
   return (
     <motion.div
-      className="absolute inset-0 flex items-center justify-center px-4"
-      style={{ y, opacity, scale }}
+      className="absolute inset-0 flex items-center justify-center"
+      style={{
+        rotateY,
+        x: useTransform(x, (v) => `${v}%`),
+        y: useTransform(y, (v) => `${v}%`),
+        z,
+        scale,
+        opacity,
+        transformStyle: 'preserve-3d',
+      }}
     >
-      <div className="w-full max-w-sm aspect-video rounded-2xl overflow-hidden shadow-2xl bg-card border border-border">
-        <SlideContent slide={slide} />
+      <div className="w-[85%] sm:w-[75%] h-full rounded-2xl overflow-hidden shadow-2xl bg-card border border-border">
+        {slide.type === 'image' ? (
+          <img
+            src={slide.src}
+            alt={slide.alt}
+            className="w-full h-full object-cover"
+            loading="lazy"
+          />
+        ) : (
+          <video
+            src={slide.src}
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="w-full h-full object-cover"
+          />
+        )}
       </div>
     </motion.div>
   );
 }
 
-function SlideContent({ slide }: { slide: SlideItem }) {
-  if (slide.type === 'image') {
-    return (
-      <img
-        src={slide.src}
-        alt={slide.alt}
-        className="w-full h-full object-cover"
-        loading="lazy"
-      />
-    );
-  }
-  return (
-    <video
-      src={slide.src}
-      autoPlay
-      muted
-      loop
-      playsInline
-      className="w-full h-full object-cover"
-    />
-  );
-}
-
-function ScrollDots({ progress }: { progress: any }) {
-  return (
-    <div className="flex gap-2 mt-6">
-      {slides.map((slide, index) => (
-        <DotIndicator key={slide.label} index={index} progress={progress} label={slide.label} />
-      ))}
-    </div>
-  );
-}
-
-function DotIndicator({ index, progress, label }: { index: number; progress: any; label: string }) {
-  const width = useTransform(progress, [index - 0.5, index, index + 0.5], [8, 24, 8]);
-  const opacity = useTransform(progress, [index - 0.5, index, index + 0.5], [0.4, 1, 0.4]);
+function DotIndicator({ index, progress }: { index: number; progress: MotionValue<number> }) {
+  const width = useTransform(progress, (p) => {
+    const diff = Math.abs(index - p);
+    return diff < 0.5 ? 24 : 8;
+  });
+  const dotOpacity = useTransform(progress, (p) => {
+    const diff = Math.abs(index - p);
+    return diff < 0.5 ? 1 : 0.4;
+  });
 
   return (
     <motion.div
       className="h-2 rounded-full bg-foreground"
-      style={{ width, opacity }}
-      aria-label={`Slide: ${label}`}
+      style={{ width, opacity: dotOpacity }}
     />
   );
+}
+
+function SlideLabel({ progress }: { progress: MotionValue<number> }) {
+  const labelOpacity = useTransform(progress, (p) => {
+    const nearest = Math.round(p);
+    return Math.abs(p - nearest) < 0.3 ? 1 : 0;
+  });
+
+  const labelIndex = useTransform(progress, (p) => Math.round(p));
+
+  return (
+    <motion.p
+      className="text-center text-sm text-muted-foreground mt-3 font-medium"
+      style={{ opacity: labelOpacity }}
+    >
+      <MotionLabel index={labelIndex} />
+    </motion.p>
+  );
+}
+
+function MotionLabel({ index }: { index: MotionValue<number> }) {
+  // Use a simple approach - render all labels and show active one
+  return (
+    <>
+      {slides.map((slide, i) => (
+        <MotionLabelText key={slide.label} index={index} slideIndex={i} label={slide.label} />
+      ))}
+    </>
+  );
+}
+
+function MotionLabelText({
+  index,
+  slideIndex,
+  label,
+}: {
+  index: MotionValue<number>;
+  slideIndex: number;
+  label: string;
+}) {
+  const display = useTransform(index, (v) => (v === slideIndex ? 'inline' : 'none'));
+  return <motion.span style={{ display }}>{label}</motion.span>;
 }
