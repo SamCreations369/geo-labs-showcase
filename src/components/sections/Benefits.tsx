@@ -85,7 +85,7 @@ export function Benefits() {
         }} whileHover={{
           scale: 1.02
         }} className="bg-secondary/50 p-8 rounded-2xl feature-card">
-            <h3 className="text-2xl font-semibold text-foreground mb-8">Smart, flexible, and built around your business </h3>
+            <h3 className="text-2xl font-semibold text-foreground mb-8">Smart websites, flexible and built around your business</h3>
             
             <div className="bg-white rounded-xl p-4 mb-6 inline-block">
               <div className="flex items-center gap-2 mb-4">
