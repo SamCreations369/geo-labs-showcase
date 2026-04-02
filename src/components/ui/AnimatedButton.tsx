@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface AnimatedButtonProps {
   href: string;
@@ -13,6 +14,7 @@ export function AnimatedButton({
   className,
   variant = "primary" 
 }: AnimatedButtonProps) {
+  const isMobile = useIsMobile();
   const baseStyles = variant === "primary" 
     ? "bg-primary text-primary-foreground hover:bg-primary/90" 
     : "bg-transparent text-foreground hover:bg-secondary";
@@ -27,11 +29,17 @@ export function AnimatedButton({
       )}
     >
       <span className="relative inline-flex overflow-hidden h-[1.5em]">
-        <span className="transition-transform duration-300 ease-out group-hover:-translate-y-full">
+        <span className={cn(
+          "transition-transform duration-300 ease-out group-hover:-translate-y-full",
+          isMobile && "animate-text-slide"
+        )}>
           {children}
         </span>
         <span 
-          className="absolute top-full transition-transform duration-300 ease-out group-hover:-translate-y-full" 
+          className={cn(
+            "absolute top-full transition-transform duration-300 ease-out group-hover:-translate-y-full",
+            isMobile && "animate-text-slide"
+          )}
           aria-hidden="true"
         >
           {children}
