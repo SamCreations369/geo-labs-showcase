@@ -69,7 +69,7 @@ export function Navbar() {
           {/* CTA Button */}
           <div className="hidden md:block">
             <AnimatedButton href="#contact" className="text-sm">
-              Get Your Visibility Audit
+              Book a Free Consultation
             </AnimatedButton>
           </div>
 
