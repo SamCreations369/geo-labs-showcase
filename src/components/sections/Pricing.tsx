@@ -2,10 +2,9 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Check } from 'lucide-react';
 import { AnimatedButton } from '@/components/ui/AnimatedButton';
-const plans = [{
+const seoPlans = [{
   name: 'Starter Audit',
   price: '$50',
-  priceAnnual: '$50',
   description: 'Get clarity before you commit to anything.',
   features: ['Full technical audit', 'GEO audit', 'Competitive visibility review', 'Action plan'],
   cta: 'Get your audit',
@@ -13,18 +12,40 @@ const plans = [{
 }, {
   name: 'Growth Optimization',
   price: 'Custom',
-  priceAnnual: 'Custom',
-  description: 'Strengthen your foundation so everything else works better',
+  description: 'Strengthen your foundation so everything else works better.',
   features: ['On-page optimization', 'Local SEO improvements', 'GEO optimization'],
   cta: 'Get started',
   popular: true
 }, {
   name: 'Visibility Expansion Retainer',
   price: 'Flexible',
-  priceAnnual: 'Flexible',
-  description: 'For team use with custom needs.',
+  description: 'Ongoing strategy for sustained growth.',
   features: ['Ongoing content creation', 'Strategic funnel expansion', 'Monthly performance reporting', 'Continuous optimization'],
-  cta: 'Contact sales',
+  cta: 'Contact us',
+  popular: false
+}];
+
+const webPlans = [{
+  name: 'Premium Website',
+  price: '$899',
+  description: 'A professionally built website for your business.',
+  features: ['Custom design & development', 'Mobile-responsive layout', 'SEO-ready foundation', 'Contact forms & integrations'],
+  cta: 'Get started',
+  popular: false
+}, {
+  name: 'Full Ownership Package',
+  price: '$1,999',
+  description: 'Your website, fully yours — code, hosting, everything.',
+  features: ['Everything in Premium', 'Full source code ownership', 'Domain & hosting transfer', 'No ongoing obligations'],
+  cta: 'Get started',
+  popular: true
+}, {
+  name: 'Maintenance & Enhancement',
+  price: '$99',
+  priceLabel: '/mo',
+  description: 'Keep your site updated, secure, and improving.',
+  features: ['Monthly updates & fixes', 'Security monitoring', 'Performance optimization', 'Content updates & enhancements'],
+  cta: 'Subscribe',
   popular: false
 }];
 export function Pricing() {
