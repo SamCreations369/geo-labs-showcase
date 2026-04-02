@@ -24,35 +24,43 @@ export function ShowcaseCarousel() {
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ['start end', 'end start'],
+    offset: ['start start', 'end end'],
   });
 
-  // Map scroll progress to active index (0 to slides.length - 1)
-  const activeIndexFloat = useTransform(scrollYProgress, [0.1, 0.9], [0, slides.length - 1]);
+  // Map scroll to active index
+  const activeIndexFloat = useTransform(scrollYProgress, [0, 1], [0, slides.length - 1]);
 
   return (
-    <div ref={containerRef} className="relative w-full py-4">
-      {/* 3D Perspective Container */}
-      <div
-        className="relative mx-auto max-w-5xl overflow-hidden sticky top-20"
-        style={{ perspective: '1200px', height: isMobile ? '300px' : '500px' }}
-      >
-        <div className="relative w-full h-full" style={{ transformStyle: 'preserve-3d' }}>
-          {slides.map((slide, index) => (
-            <ScrollSlide
-              key={slide.label}
-              slide={slide}
-              index={index}
-              activeIndexFloat={activeIndexFloat}
-              isMobile={isMobile}
-            />
-          ))}
+    // Tall container to create scroll space — each slide gets ~100vh
+    <div ref={containerRef} style={{ height: `${slides.length * 100}vh` }} className="relative">
+      {/* Sticky viewport */}
+      <div className="sticky top-0 h-screen flex flex-col items-center justify-center overflow-hidden">
+        <div
+          className="relative w-full max-w-5xl mx-auto"
+          style={{ perspective: '1200px', height: isMobile ? '60vh' : '65vh' }}
+        >
+          <div className="relative w-full h-full" style={{ transformStyle: 'preserve-3d' }}>
+            {slides.map((slide, index) => (
+              <ScrollSlide
+                key={slide.label}
+                slide={slide}
+                index={index}
+                activeIndexFloat={activeIndexFloat}
+                isMobile={isMobile}
+              />
+            ))}
+          </div>
         </div>
-      </div>
 
-      {/* Label driven by scroll */}
-      <div className="sticky top-[calc(50vh+280px)] flex justify-center pointer-events-none">
-        <ScrollLabel activeIndexFloat={activeIndexFloat} />
+        {/* Dots + label */}
+        <div className="mt-4 flex flex-col items-center gap-2">
+          <div className="flex gap-2">
+            {slides.map((_, i) => (
+              <ScrollDot key={i} index={i} activeIndexFloat={activeIndexFloat} />
+            ))}
+          </div>
+          <ScrollLabel activeIndexFloat={activeIndexFloat} />
+        </div>
       </div>
     </div>
   );
@@ -72,19 +80,23 @@ function ScrollSlide({
   const diff = useTransform(activeIndexFloat, (v: number) => index - v);
 
   const rotateY = useTransform(diff, (d: number) => (isMobile ? 0 : d * -45));
-  const scale = useTransform(diff, (d: number) =>
-    Math.abs(d) < 0.01 ? 1 : isMobile ? 0.85 : 0.75
+  const scale = useTransform(diff, (d: number) => {
+    const abs = Math.abs(d);
+    if (abs < 0.05) return 1;
+    return isMobile ? 0.85 : 0.75;
+  });
+  const xPercent = useTransform(diff, (d: number) =>
+    isMobile ? d * 110 : d * 85
   );
-  const x = useTransform(diff, (d: number) =>
-    isMobile ? d * 105 : d * 85
-  );
-  const z = useTransform(diff, (d: number) =>
-    Math.abs(d) < 0.01 ? 0 : isMobile ? -100 : -250
-  );
+  const z = useTransform(diff, (d: number) => {
+    const abs = Math.abs(d);
+    if (abs < 0.05) return 0;
+    return isMobile ? -100 : -250;
+  });
   const opacity = useTransform(diff, (d: number) => {
     const abs = Math.abs(d);
-    if (abs < 0.01) return 1;
-    if (isMobile) return abs > 0.8 ? 0 : 1 - abs;
+    if (abs < 0.05) return 1;
+    if (isMobile) return Math.max(0, 1 - abs * 2);
     return abs > 1.2 ? 0 : 0.5;
   });
 
@@ -94,13 +106,13 @@ function ScrollSlide({
       style={{
         rotateY,
         scale,
-        x: useTransform(x, (v: number) => `${v}%`),
+        x: useTransform(xPercent, (v: number) => `${v}%`),
         z,
         opacity,
         transformStyle: 'preserve-3d',
       }}
     >
-      <div className="w-[90%] sm:w-[80%] h-full rounded-2xl overflow-hidden shadow-2xl bg-card border border-border">
+      <div className="w-[90%] sm:w-[80%] h-[85%] rounded-2xl overflow-hidden shadow-2xl bg-card border border-border">
         {slide.type === 'image' ? (
           <img
             src={slide.src}
@@ -133,32 +145,21 @@ function ScrollLabel({
     return slides[idx].label;
   });
 
-  // Dots
-  const activeIdx = useTransform(activeIndexFloat, (v: number) =>
-    Math.round(Math.max(0, Math.min(v, slides.length - 1)))
-  );
-
   return (
-    <div className="flex flex-col items-center gap-3">
-      <div className="flex gap-2">
-        {slides.map((_, i) => (
-          <ScrollDot key={i} index={i} activeIdx={activeIdx} />
-        ))}
-      </div>
-      <motion.p className="text-sm text-muted-foreground font-medium">
-        {label}
-      </motion.p>
-    </div>
+    <motion.p className="text-sm text-muted-foreground font-medium">{label}</motion.p>
   );
 }
 
 function ScrollDot({
   index,
-  activeIdx,
+  activeIndexFloat,
 }: {
   index: number;
-  activeIdx: ReturnType<typeof useTransform>;
+  activeIndexFloat: ReturnType<typeof useTransform>;
 }) {
+  const activeIdx = useTransform(activeIndexFloat, (v: number) =>
+    Math.round(Math.max(0, Math.min(v, slides.length - 1)))
+  );
   const isActive = useTransform(activeIdx, (v: number) => v === index);
   const width = useTransform(isActive, (a: boolean) => (a ? 24 : 8));
   const bg = useTransform(isActive, (a: boolean) =>
