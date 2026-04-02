@@ -36,7 +36,7 @@ export function TrustBar() {
   });
 
   return (
-    <section className="py-16 bg-background">
+    <section className="py-10 sm:py-16 bg-background">
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}

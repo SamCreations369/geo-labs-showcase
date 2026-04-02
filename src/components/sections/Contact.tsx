@@ -112,7 +112,7 @@ export function Contact() {
   };
 
   return (
-    <section ref={ref} id="contact" className="relative py-24 sky-gradient-bottom overflow-hidden">
+    <section ref={ref} id="contact" className="relative py-16 sm:py-24 sky-gradient-bottom overflow-hidden">
       {/* Animated Cloud decorations with parallax - at bottom */}
       <motion.div 
         className="cloud cloud-large cloud-animate-1"
@@ -148,7 +148,7 @@ export function Contact() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-10 sm:mb-16"
         >
           <span className="eyebrow">Get started</span>
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-foreground leading-tight mb-4">
@@ -168,7 +168,7 @@ export function Contact() {
           transition={{ delay: 0.2 }}
           className="max-w-lg mx-auto"
         >
-          <form onSubmit={handleSubmit} className="glass-card p-8 rounded-2xl shadow-card">
+          <form onSubmit={handleSubmit} className="glass-card p-6 sm:p-8 rounded-2xl shadow-card">
             {/* Honeypot field - hidden from users, catches bots */}
             <input
               type="text"
