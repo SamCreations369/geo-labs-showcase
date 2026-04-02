@@ -64,7 +64,7 @@ export function DeviceFeature() {
             duration: 0.4,
             ease: [0.25, 0.1, 0.25, 1]
           }}>
-              <img alt="GEO Labs mobile app showing Google Maps integration" className="w-1/2 h-full object-cover flex-shrink-0" src="/lovable-uploads/3a3051e7-aaef-4391-bc0e-63b6971f8fce.png" />
+              <img alt="PGR Window Tint mobile website mockup" className="w-1/2 h-full object-cover flex-shrink-0" src={pgrMobileMockup} />
               <img alt="GEO Labs web dashboard showing AI search results" className="w-1/2 h-full object-cover flex-shrink-0" src="/lovable-uploads/c41029e1-ca56-4b1f-ba7f-b491ff3e7dc1.png" />
             </motion.div>
 
