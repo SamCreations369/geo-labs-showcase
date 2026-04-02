@@ -76,29 +76,23 @@ export function Hero() {
           </div>
         </motion.div>
 
-        {/* Dashboard Image with 3D effect */}
-        <div className="mx-auto max-w-5xl" style={{ perspective: '1200px' }}>
-          <motion.div initial={{
-            opacity: 0,
-            y: 60
-          }} animate={{
-            opacity: 1,
-            y: 0
-          }} transition={{
-            duration: 0.8,
-            delay: 0.2
-          }} style={{
+        {/* 3D Showcase Carousel */}
+        <motion.div
+          className="mx-auto max-w-5xl"
+          initial={{ opacity: 0, y: 60 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          style={{
             y: imageY,
             scale: imageScale,
             rotateX: imageRotateX,
             transformStyle: 'preserve-3d',
-            transformOrigin: 'center bottom'
-          }}>
-            <img alt="GEO Labs Dashboard showing search visibility metrics" className="w-full rounded-2xl shadow-2xl" style={{
-              boxShadow: '0 50px 100px -30px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.5) inset'
-            }} src="/lovable-uploads/40529a62-99b6-4a96-91f2-28b64058f07f.png" />
-          </motion.div>
-        </div>
+            transformOrigin: 'center bottom',
+            perspective: '1200px',
+          }}
+        >
+          <ShowcaseCarousel />
+        </motion.div>
       </div>
     </section>;
 }
