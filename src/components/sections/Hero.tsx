@@ -13,22 +13,22 @@ export function Hero() {
       {!isMobile && (
         <>
           {/* Left side clouds flanking headline */}
-          <div className="cloud cloud-xlarge cloud-animate-1" style={{ top: 40, left: '-2%' }} />
-          <div className="cloud cloud-large cloud-animate-2" style={{ top: 140, left: '0%' }} />
-          <div className="cloud cloud-medium cloud-animate-3" style={{ top: 240, left: '2%' }} />
+          <div className="cloud cloud-xlarge cloud-animate-1" style={{ top: 60, left: '-5%' }} />
+          <div className="cloud cloud-large cloud-animate-2" style={{ top: 160, left: '-2%' }} />
+          <div className="cloud cloud-medium cloud-animate-3" style={{ top: 260, left: '0%' }} />
           {/* Right side clouds flanking headline */}
-          <div className="cloud cloud-xlarge cloud-animate-3" style={{ top: 50, right: '-2%' }} />
-          <div className="cloud cloud-large cloud-animate-1" style={{ top: 150, right: '0%' }} />
-          <div className="cloud cloud-medium cloud-animate-2" style={{ top: 250, right: '2%' }} />
+          <div className="cloud cloud-xlarge cloud-animate-3" style={{ top: 70, right: '-5%' }} />
+          <div className="cloud cloud-large cloud-animate-1" style={{ top: 170, right: '-2%' }} />
+          <div className="cloud cloud-medium cloud-animate-2" style={{ top: 270, right: '0%' }} />
         </>
       )}
       
       {isMobile && (
         <>
-          <div className="cloud cloud-large" style={{ top: 40, left: '-5%', animation: 'none' }} />
-          <div className="cloud cloud-large" style={{ top: 40, right: '-5%', animation: 'none' }} />
-          <div className="cloud cloud-medium" style={{ top: 140, left: '0%', animation: 'none' }} />
-          <div className="cloud cloud-medium" style={{ top: 140, right: '0%', animation: 'none' }} />
+          <div className="cloud cloud-large" style={{ top: 50, left: '-10%', animation: 'none' }} />
+          <div className="cloud cloud-large" style={{ top: 50, right: '-10%', animation: 'none' }} />
+          <div className="cloud cloud-medium" style={{ top: 150, left: '-5%', animation: 'none' }} />
+          <div className="cloud cloud-medium" style={{ top: 150, right: '-5%', animation: 'none' }} />
         </>
       )}
 

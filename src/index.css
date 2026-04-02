@@ -126,60 +126,59 @@
     transform: scaleY(-1);
   }
 
-  /* Cloud shapes - prominent defined clouds */
+  /* Cloud shapes - realistic soft clouds */
   .cloud {
     position: absolute;
-    background: radial-gradient(ellipse at center, rgba(255,255,255,1) 0%, rgba(255,255,255,0.9) 25%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0) 70%);
+    background: radial-gradient(ellipse at center, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 70%);
     border-radius: 9999px;
     pointer-events: none;
     will-change: transform;
-    box-shadow: 0 0 50px 20px rgba(255,255,255,0.4);
   }
 
   .cloud-small {
-    width: 260px;
-    height: 110px;
-    filter: blur(3px);
-    opacity: 0.85;
+    width: 220px;
+    height: 90px;
+    filter: blur(8px);
+    opacity: 0.7;
   }
 
   .cloud-medium {
-    width: 480px;
-    height: 200px;
-    filter: blur(4px);
-    opacity: 0.9;
+    width: 400px;
+    height: 160px;
+    filter: blur(10px);
+    opacity: 0.75;
   }
 
   .cloud-large {
-    width: 700px;
-    height: 280px;
-    filter: blur(5px);
-    opacity: 0.92;
+    width: 600px;
+    height: 230px;
+    filter: blur(14px);
+    opacity: 0.8;
   }
 
   .cloud-xlarge {
-    width: 900px;
-    height: 360px;
-    filter: blur(6px);
-    opacity: 0.95;
+    width: 780px;
+    height: 300px;
+    filter: blur(16px);
+    opacity: 0.85;
   }
 
   /* Reduce on mobile */
   @media (max-width: 768px) {
     .cloud-small {
-      width: 160px;
-      height: 65px;
-      filter: blur(3px);
+      width: 140px;
+      height: 55px;
+      filter: blur(6px);
     }
     .cloud-medium {
-      width: 300px;
-      height: 120px;
-      filter: blur(4px);
+      width: 240px;
+      height: 95px;
+      filter: blur(8px);
     }
     .cloud-large {
-      width: 420px;
-      height: 170px;
-      filter: blur(5px);
+      width: 340px;
+      height: 130px;
+      filter: blur(10px);
     }
   }
 
