@@ -33,13 +33,38 @@ export function ShowcaseCarousel() {
   }, []);
 
   useLayoutEffect(() => {
-    // Respect prefers-reduced-motion
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReduced || isMobile) return;
+    if (prefersReduced) return;
 
     const section = sectionRef.current;
     if (!section) return;
 
+    if (isMobile) {
+      // Mobile: each card slides up into frame individually
+      const ctx = gsap.context(() => {
+        cardRefs.current.forEach((card) => {
+          if (!card) return;
+          gsap.set(card, { y: 80, opacity: 0 });
+          ScrollTrigger.create({
+            trigger: card,
+            start: 'top 90%',
+            end: 'top 40%',
+            scrub: 0.6,
+            onUpdate: (self) => {
+              const p = self.progress;
+              gsap.set(card, {
+                y: 80 * (1 - p),
+                opacity: p,
+                scale: 0.92 + 0.08 * p,
+              });
+            },
+          });
+        });
+      }, section);
+      return () => ctx.revert();
+    }
+
+    // Desktop: 3D scroll-locked carousel
     const ctx = gsap.context(() => {
       ScrollTrigger.create({
         trigger: section,
