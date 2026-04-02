@@ -4,6 +4,8 @@ import { useState, useRef } from 'react';
 import { z } from 'zod';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
+import { useIsMobile } from '@/hooks/use-mobile';
+import { cn } from '@/lib/utils';
 
 // Helper to normalize URLs - adds https:// if missing
 const normalizeUrl = (url: string): string => {
@@ -29,6 +31,7 @@ type ContactFormData = z.infer<typeof contactSchema>;
 
 export function Contact() {
   const { toast } = useToast();
+  const isMobile = useIsMobile();
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -261,17 +264,24 @@ export function Contact() {
                 className="group w-full inline-flex items-center justify-center px-7 py-4 rounded-full font-medium text-base transition-all duration-200 overflow-hidden bg-primary text-primary-foreground hover:bg-primary/90 active:scale-[0.98] disabled:opacity-50"
               >
                 <span className="relative inline-flex items-center overflow-hidden h-[1.5em]">
-                  <span className="transition-transform duration-300 ease-out group-hover:-translate-y-full flex items-center">
+                  <span className={cn(
+                    "flex items-center",
+                    isMobile && !isSubmitting && !submitSuccess
+                      ? "animate-text-slide will-change-transform"
+                      : "transition-transform duration-300 ease-out group-hover:-translate-y-full"
+                  )}>
                     {isSubmitting ? 'Submitting...' : submitSuccess ? 'Thank you!' : 'Book a Free Consultation'}
                     {!isSubmitting && !submitSuccess && <Send className="ml-2 w-4 h-4" />}
                   </span>
-                  <span 
-                    className="absolute top-full transition-transform duration-300 ease-out group-hover:-translate-y-full flex items-center" 
-                    aria-hidden="true"
-                  >
-                    {isSubmitting ? 'Submitting...' : submitSuccess ? 'Thank you!' : 'Book a Free Consultation'}
-                    {!isSubmitting && !submitSuccess && <Send className="ml-2 w-4 h-4" />}
-                  </span>
+                  {(!isMobile || isSubmitting || submitSuccess) && (
+                    <span 
+                      className="absolute top-full transition-transform duration-300 ease-out group-hover:-translate-y-full flex items-center"
+                      aria-hidden="true"
+                    >
+                      {isSubmitting ? 'Submitting...' : submitSuccess ? 'Thank you!' : 'Book a Free Consultation'}
+                      {!isSubmitting && !submitSuccess && <Send className="ml-2 w-4 h-4" />}
+                    </span>
+                  )}
                 </span>
               </button>
             </div>

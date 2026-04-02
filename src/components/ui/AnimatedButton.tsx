@@ -30,20 +30,20 @@ export function AnimatedButton({
     >
       <span className="relative inline-flex overflow-hidden h-[1.5em]">
         <span className={cn(
-          "transition-transform duration-300 ease-out group-hover:-translate-y-full",
-          isMobile && "animate-text-slide"
+          isMobile 
+            ? "animate-text-slide will-change-transform" 
+            : "transition-transform duration-300 ease-out group-hover:-translate-y-full"
         )}>
           {children}
         </span>
-        <span 
-          className={cn(
-            "absolute top-full transition-transform duration-300 ease-out group-hover:-translate-y-full",
-            isMobile && "animate-text-slide"
-          )}
-          aria-hidden="true"
-        >
-          {children}
-        </span>
+        {!isMobile && (
+          <span 
+            className="absolute top-full transition-transform duration-300 ease-out group-hover:-translate-y-full"
+            aria-hidden="true"
+          >
+            {children}
+          </span>
+        )}
       </span>
     </a>
   );

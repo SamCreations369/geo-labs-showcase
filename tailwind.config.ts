@@ -96,10 +96,10 @@ export default {
           "0%": { backgroundPosition: "-200% 0" },
           "100%": { backgroundPosition: "200% 0" },
         },
-        "text-slide": {
-          "0%, 40%": { transform: "translateY(0)" },
-          "50%, 90%": { transform: "translateY(-100%)" },
-          "100%": { transform: "translateY(0)" },
+        "text-slide-up": {
+          "0%, 100%": { transform: "translateY(0)" },
+          "15%": { transform: "translateY(-25%)", opacity: "0.3" },
+          "30%": { transform: "translateY(0)", opacity: "1" },
         },
       },
       animation: {
@@ -109,7 +109,7 @@ export default {
         float: "float 6s ease-in-out infinite",
         "fade-in-up": "fade-in-up 0.8s ease-out forwards",
         shimmer: "shimmer 2s infinite",
-        "text-slide": "text-slide 3s ease-in-out infinite",
+        "text-slide": "text-slide-up 3s ease-in-out infinite",
       },
     },
   },
