@@ -62,7 +62,7 @@ export function ProjectSection() {
                 </div>)}
             </div>
             <AnimatedButton href="#contact">
-              Get Your Visibility Audit
+              Book a Free Consultation
             </AnimatedButton>
           </motion.div>
         </div>

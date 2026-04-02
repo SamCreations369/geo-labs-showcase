@@ -262,14 +262,14 @@ export function Contact() {
               >
                 <span className="relative inline-flex items-center overflow-hidden h-[1.5em]">
                   <span className="transition-transform duration-300 ease-out group-hover:-translate-y-full flex items-center">
-                    {isSubmitting ? 'Submitting...' : submitSuccess ? 'Thank you!' : 'Get Your Visibility Audit'}
+                    {isSubmitting ? 'Submitting...' : submitSuccess ? 'Thank you!' : 'Book a Free Consultation'}
                     {!isSubmitting && !submitSuccess && <Send className="ml-2 w-4 h-4" />}
                   </span>
                   <span 
                     className="absolute top-full transition-transform duration-300 ease-out group-hover:-translate-y-full flex items-center" 
                     aria-hidden="true"
                   >
-                    {isSubmitting ? 'Submitting...' : submitSuccess ? 'Thank you!' : 'Get Your Visibility Audit'}
+                    {isSubmitting ? 'Submitting...' : submitSuccess ? 'Thank you!' : 'Book a Free Consultation'}
                     {!isSubmitting && !submitSuccess && <Send className="ml-2 w-4 h-4" />}
                   </span>
                 </span>
