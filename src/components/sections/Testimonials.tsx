@@ -64,7 +64,7 @@ export function Testimonials() {
       }} viewport={{
         once: true
       }} className="glass-card rounded-3xl p-8 sm:p-12 md:p-16 mb-8 sm:mb-12 text-center">
-          <p className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl text-foreground leading-tight mb-6 sm:mb-10 max-w-4xl mx-auto font-medium">&ldquo;Eudaimonia built us a stunning website and got us ranking &mdash; the best partner we've ever worked with.&rdquo;</p>
+          <p className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl text-foreground leading-tight mb-6 sm:mb-10 max-w-4xl mx-auto font-medium">"Eudaimonia built us a stunning website and got us ranking — the best partner we've ever worked with."</p>
           <div className="flex flex-col items-center">
             <img src={testimonialMartha} alt="Martha Patel" className="w-16 h-16 rounded-full object-cover mb-4" />
             <div className="font-semibold text-foreground">Martha Patel</div>
