@@ -97,7 +97,7 @@ export function Navbar() {
                   {link.name}
                 </a>)}
               <AnimatedButton href="#contact" className="text-sm w-full text-center">
-                Get Your Visibility Audit
+                Book a Free Consultation
               </AnimatedButton>
             </div>
           </motion.div>}
