@@ -67,7 +67,7 @@ export function Benefits() {
         once: true
       }} className="text-center mb-16 max-w-3xl mx-auto">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl text-foreground leading-tight mb-6">
-            Built for businesses that understand customers can't buy what they can't find
+            Premium websites & search visibility for businesses that want to be found
           </h2>
         </motion.div>
 
