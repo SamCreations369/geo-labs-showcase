@@ -30,7 +30,7 @@ export function DeviceFeature() {
       }} viewport={{
         once: true
       }} className="text-center mb-6">
-          <span className="eyebrow text-card-foreground">Web Creation & Visibility</span>
+          <span className="eyebrow text-card-foreground">Everywhere customers look</span>
         </motion.div>
 
         <motion.div initial={{
@@ -42,8 +42,8 @@ export function DeviceFeature() {
       }} viewport={{
         once: true
       }} className="text-center mb-16 max-w-3xl mx-auto">
-           <h2 className="text-3xl sm:text-4xl lg:text-5xl text-foreground leading-tight mb-4">
-            Beautiful websites that show up everywhere customers look
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl text-foreground leading-tight mb-4">
+            Because showing up in one place isn't enough anymore
           </h2>
         </motion.div>
 
@@ -98,15 +98,15 @@ export function DeviceFeature() {
       }} className="flex flex-wrap justify-center gap-3 mt-12">
           <div className="feature-chip">
             <span className="w-2 h-2 rounded-full bg-accent" />
-            Custom Web Design & Development
-          </div>
-          <div className="feature-chip">
-            <span className="w-2 h-2 rounded-full bg-accent" />
             Google & Maps Optimization
           </div>
           <div className="feature-chip">
             <span className="w-2 h-2 rounded-full bg-accent" />
             AI & GEO Optimization
+          </div>
+          <div className="feature-chip">
+            <span className="w-2 h-2 rounded-full bg-accent" />
+            Review & Reputation Engine
           </div>
         </motion.div>
       </div>

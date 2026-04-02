@@ -12,16 +12,12 @@ const faqs = [
     answer: 'We combine traditional SEO, local search, and AI-focused strategies so you show up in maps, organic results, and AI-generated answers. It\'s a comprehensive approach that covers all the ways customers search today.',
   },
   {
-    question: 'Do you also build websites?',
-    answer: 'Yes — web creation is one of our core services. We design and build premium, mobile-responsive websites optimized for search from day one. You can choose a managed plan or a full ownership package where you own all the code, hosting, and domain.',
-  },
-  {
     question: 'How long until I see results?',
-    answer: 'For websites, we typically deliver within 2–4 weeks. For SEO and GEO, most local businesses start noticing ranking changes within 4–12 weeks depending on competition and current visibility. Some quick wins like Google Business Profile optimization can show results even faster.',
+    answer: 'Most local businesses start noticing changes within 4–12 weeks depending on competition, current visibility, and how many locations you\'re targeting. Some quick wins like Google Business Profile optimization can show results even faster.',
   },
   {
     question: 'Do you only work with businesses in LA?',
-    answer: 'We\'re based in Los Angeles but can work with businesses in other cities as long as they serve a local area. Our web creation and SEO strategies work for any local business looking to dominate their neighborhood.',
+    answer: 'We\'re based in Los Angeles but can work with businesses in other cities as long as they serve a local area. Our strategies work for any local business looking to dominate their neighborhood.',
   },
 ];
 
