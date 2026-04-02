@@ -18,7 +18,7 @@ export function Hero() {
   const imageRotateX = useTransform(scrollYProgress, [0, 0.6], isMobile ? [25, 0] : [55, 0]);
 
   return (
-    <section ref={ref} className="relative sky-gradient overflow-hidden">
+    <section ref={ref} className="relative sky-gradient overflow-x-hidden">
       {!isMobile && (
         <>
           <div className="cloud cloud-xlarge cloud-animate-1" style={{ top: -50, left: '-10%' }} />
