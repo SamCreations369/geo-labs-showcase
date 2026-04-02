@@ -34,7 +34,7 @@ export function ShowcaseCarousel() {
     // Tall container to create scroll space — each slide gets ~100vh
     <div ref={containerRef} style={{ height: `${slides.length * 100}vh` }} className="relative">
       {/* Sticky viewport */}
-      <div className="sticky top-0 h-screen flex flex-col items-center justify-center overflow-hidden">
+      <div className="sticky top-0 h-screen flex flex-col items-center justify-center overflow-hidden bg-background z-30">
         <div
           className="relative w-full max-w-5xl mx-auto"
           style={{ perspective: '1200px', height: isMobile ? '60vh' : '65vh' }}
