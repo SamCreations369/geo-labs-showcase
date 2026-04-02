@@ -113,8 +113,8 @@ function CarouselSlide({
     <motion.div
       className="absolute inset-0 flex items-center justify-center will-change-transform"
       style={{
-        x: useTransform(xOffset, (v) => `${v}%`),
-        y: useTransform(yOffset, (v) => `${v}%`),
+        x: xStr,
+        y: yStr,
         rotateY,
         scale,
         opacity,
