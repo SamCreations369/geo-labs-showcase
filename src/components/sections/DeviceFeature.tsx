@@ -42,8 +42,8 @@ export function DeviceFeature() {
       }} viewport={{
         once: true
       }} className="text-center mb-16 max-w-3xl mx-auto">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl text-foreground leading-tight mb-4">
-            Because showing up in one place isn't enough anymore
+           <h2 className="text-3xl sm:text-4xl lg:text-5xl text-foreground leading-tight mb-4">
+            Beautiful websites that show up everywhere customers look
           </h2>
         </motion.div>
 
