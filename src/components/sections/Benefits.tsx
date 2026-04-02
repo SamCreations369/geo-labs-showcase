@@ -20,13 +20,13 @@ const integrationLogos = [{
 }];
 const features = [{
   title: 'Visibility that compounds',
-  description: "We don't chase algorithm hacks or short-term ranking wins. We build search presence that compounds over time through quality content and technical optimization. Rankings that stick after updates, authority that grows, visibility that lasts."
+  description: "We don't chase algorithm hacks or short-term ranking wins. We build search presence that compounds over time through quality content, technical optimization, and websites designed to convert. Rankings that stick after updates, authority that grows, visibility that lasts."
 }, {
   title: 'Transparency',
-  description: "You'll always know what we're doing, why we're implementing specific optimizations, and how your rankings are performing. Clear monthly reporting, regular strategy updates, and honest conversations about what's working and what needs adjustment."
+  description: "You'll always know what we're doing, why we're implementing specific optimizations, and how your site and rankings are performing. Clear monthly reporting, regular strategy updates, and honest conversations about what's working and what needs adjustment."
 }, {
-  title: 'Custom SEO Strategy',
-  description: "No templates. No cookie-cutter SEO approaches. Every technical audit, optimization plan, and content strategy is built around your business goals, your industry, and your specific competitive landscape in the LA market."
+  title: 'Custom Strategy',
+  description: "No templates. No cookie-cutter approaches. Every website, technical audit, optimization plan, and content strategy is built around your business goals, your industry, and your specific competitive landscape in the LA market."
 }];
 export function Benefits() {
   const sectionRef = useRef<HTMLElement>(null);
