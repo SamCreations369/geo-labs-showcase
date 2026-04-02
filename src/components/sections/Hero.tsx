@@ -2,6 +2,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { AnimatedButton } from '@/components/ui/AnimatedButton';
+import { ShowcaseCarousel } from '@/components/sections/ShowcaseCarousel';
 
 export function Hero() {
   const ref = useRef<HTMLDivElement>(null);
