@@ -167,16 +167,26 @@ export function ShowcaseCarousel() {
         </button>
       </div>
 
-      {/* Label */}
-      <motion.p
+      {/* Label + Link */}
+      <motion.div
         key={activeIndex}
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
-        className="text-center text-sm text-muted-foreground mt-3 font-medium"
+        className="text-center mt-4"
       >
-        {slides[activeIndex].label}
-      </motion.p>
+        <p className="text-sm font-semibold text-foreground">{slides[activeIndex].label}</p>
+        {slides[activeIndex].link && (
+          <a
+            href={slides[activeIndex].link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs text-muted-foreground hover:text-foreground transition-colors underline underline-offset-2"
+          >
+            {slides[activeIndex].link!.replace('https://www.', '')}
+          </a>
+        )}
+      </motion.div>
     </div>
   );
 }
