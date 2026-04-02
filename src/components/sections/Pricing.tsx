@@ -124,7 +124,7 @@ export function Pricing() {
                   <span className="text-4xl font-semibold text-foreground">
                     {plan.price}
                   </span>
-                  {'priceLabel' in plan && plan.priceLabel && <span className="text-muted-foreground">{plan.priceLabel}</span>}
+                  {'priceLabel' in plan && (plan as any).priceLabel && <span className="text-muted-foreground">{(plan as any).priceLabel}</span>}
                 </div>
                 <p className="text-sm text-muted-foreground">{plan.description}</p>
               </div>
