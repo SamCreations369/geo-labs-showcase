@@ -93,7 +93,7 @@ export function ShowcaseCarousel() {
     <div ref={containerRef} className="relative w-full sky-gradient py-12 sm:py-16">
       {/* 3D Perspective Container */}
       <div
-        className="relative mx-auto max-w-5xl overflow-hidden"
+        className="relative mx-auto max-w-5xl"
         style={{ perspective: '1200px', height: isMobile ? '300px' : '500px' }}
       >
         <div className="relative w-full h-full" style={{ transformStyle: 'preserve-3d' }}>
