@@ -10,12 +10,13 @@ interface SlideItem {
   src: string;
   alt: string;
   label: string;
+  link?: string;
 }
 
 const slides: SlideItem[] = [
-  { type: 'video', src: '/videos/pgr-showcase.mp4', alt: 'PGR Window Tinting website showcase', label: 'PGR Window Tinting' },
+  { type: 'video', src: '/videos/pgr-showcase.mp4', alt: 'PGR Window Tinting website showcase', label: 'PGR Window Tinting', link: 'https://www.pgrwindowtinting.com' },
   { type: 'image', src: ahrefsShowcase, alt: 'Ahrefs SEO analytics dashboard', label: 'SEO Analytics' },
-  { type: 'video', src: '/videos/aboutaria-showcase.mp4', alt: 'About Aria Karimpour website showcase', label: 'About Aria' },
+  { type: 'video', src: '/videos/aboutaria-showcase.mp4', alt: 'About Aria Karimpour website showcase', label: 'About Aria', link: 'https://www.aboutariakarimpour.com' },
   { type: 'image', src: gscShowcase, alt: 'Google Search Console performance data', label: 'Search Console' },
 ];
 
@@ -166,16 +167,26 @@ export function ShowcaseCarousel() {
         </button>
       </div>
 
-      {/* Label */}
-      <motion.p
+      {/* Label + Link */}
+      <motion.div
         key={activeIndex}
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
-        className="text-center text-sm text-muted-foreground mt-3 font-medium"
+        className="text-center mt-4"
       >
-        {slides[activeIndex].label}
-      </motion.p>
+        <p className="text-sm font-semibold text-foreground">{slides[activeIndex].label}</p>
+        {slides[activeIndex].link && (
+          <a
+            href={slides[activeIndex].link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs text-muted-foreground hover:text-foreground transition-colors underline underline-offset-2"
+          >
+            {slides[activeIndex].link!.replace('https://www.', '')}
+          </a>
+        )}
+      </motion.div>
     </div>
   );
 }
