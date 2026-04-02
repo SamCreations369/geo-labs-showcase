@@ -33,38 +33,13 @@ export function ShowcaseCarousel() {
   }, []);
 
   useLayoutEffect(() => {
+    // Respect prefers-reduced-motion
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReduced) return;
+    if (prefersReduced || isMobile) return;
 
     const section = sectionRef.current;
     if (!section) return;
 
-    if (isMobile) {
-      // Mobile: each card slides up into frame individually
-      const ctx = gsap.context(() => {
-        cardRefs.current.forEach((card) => {
-          if (!card) return;
-          gsap.set(card, { y: 80, opacity: 0 });
-          ScrollTrigger.create({
-            trigger: card,
-            start: 'top 90%',
-            end: 'top 40%',
-            scrub: 0.6,
-            onUpdate: (self) => {
-              const p = self.progress;
-              gsap.set(card, {
-                y: 80 * (1 - p),
-                opacity: p,
-                scale: 0.92 + 0.08 * p,
-              });
-            },
-          });
-        });
-      }, section);
-      return () => ctx.revert();
-    }
-
-    // Desktop: 3D scroll-locked carousel
     const ctx = gsap.context(() => {
       ScrollTrigger.create({
         trigger: section,
@@ -132,44 +107,19 @@ export function ShowcaseCarousel() {
           >
             {slides.map((slide, index) => {
               // Static layout: show only active on mobile, all stacked for reduced motion
-              if (isStatic && !isMobile) {
-                // Reduced motion only: static stacked
+              if (isStatic) {
+                if (isMobile && index !== activeIndex) return null;
                 return (
                   <div
                     key={slide.label}
-                    className="mb-6 w-[90%] sm:w-[80%] mx-auto rounded-2xl overflow-hidden shadow-2xl bg-card border border-border"
+                    className={`${prefersReduced ? 'mb-6' : ''} w-[90%] sm:w-[80%] mx-auto rounded-2xl overflow-hidden shadow-2xl bg-card border border-border`}
+                    style={isMobile ? { aspectRatio: '16/9' } : {}}
                   >
                     {slide.type === 'image' ? (
                       <img src={slide.src} alt={slide.alt} className="w-full h-full object-cover" loading="lazy" />
                     ) : (
                       <video src={slide.src} autoPlay muted loop playsInline className="w-full h-full object-cover" />
                     )}
-                  </div>
-                );
-              }
-
-              if (isMobile) {
-                // Mobile: all cards shown, animated by GSAP
-                return (
-                  <div
-                    key={slide.label}
-                    ref={(el) => setCardRef(el, index)}
-                    className="relative mb-6 w-[90%] mx-auto rounded-2xl overflow-hidden shadow-2xl bg-card border border-border"
-                    style={{ aspectRatio: '16/9', willChange: 'transform, opacity' }}
-                  >
-                    {slide.type === 'image' ? (
-                      <img src={slide.src} alt={slide.alt} className="w-full h-full object-cover" loading="lazy" />
-                    ) : (
-                      <video src={slide.src} autoPlay muted loop playsInline className="w-full h-full object-cover" />
-                    )}
-                    <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/60 to-transparent">
-                      <p className="text-sm font-semibold text-primary-foreground">{slide.label}</p>
-                      {slide.link && (
-                        <a href={slide.link} target="_blank" rel="noopener noreferrer" className="text-xs text-primary-foreground/70 underline underline-offset-2">
-                          {slide.link.replace('https://www.', '')}
-                        </a>
-                      )}
-                    </div>
                   </div>
                 );
               }
@@ -198,52 +148,52 @@ export function ShowcaseCarousel() {
           </div>
         </div>
 
-        {/* Bottom Bar: Label + Link + Dots (desktop only) */}
-        {!isMobile && (
-          <div className="py-6 flex flex-col items-center gap-3">
-            <div className="text-center min-h-[3rem]">
-              <p
-                className="text-sm font-semibold text-foreground transition-opacity duration-300"
-                key={activeIndex}
+        {/* Bottom Bar: Label + Link + Dots */}
+        <div className="py-6 flex flex-col items-center gap-3">
+          <div className="text-center min-h-[3rem]">
+            <p
+              className="text-sm font-semibold text-foreground transition-opacity duration-300"
+              key={activeIndex}
+            >
+              {slides[activeIndex]?.label}
+            </p>
+            {slides[activeIndex]?.link && (
+              <a
+                href={slides[activeIndex].link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs text-muted-foreground hover:text-foreground transition-colors underline underline-offset-2"
               >
-                {slides[activeIndex]?.label}
-              </p>
-              {slides[activeIndex]?.link && (
-                <a
-                  href={slides[activeIndex].link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-xs text-muted-foreground hover:text-foreground transition-colors underline underline-offset-2"
-                >
-                  {slides[activeIndex].link!.replace('https://www.', '')}
-                </a>
-              )}
-            </div>
-
-            {/* Dots */}
-            <div className="flex gap-2">
-              {slides.map((slide, index) => (
-                <button
-                  key={slide.label}
-                  onClick={() => {
-                    if (sectionRef.current) {
-                      const sectionTop = sectionRef.current.offsetTop;
-                      const sectionHeight = sectionRef.current.offsetHeight - window.innerHeight;
-                      const targetScroll = sectionTop + (index / (slides.length - 1)) * sectionHeight;
-                      window.scrollTo({ top: targetScroll, behavior: 'smooth' });
-                    }
-                  }}
-                  className={`h-2 rounded-full transition-all duration-300 ${
-                    index === activeIndex
-                      ? 'bg-foreground w-6'
-                      : 'bg-muted-foreground/40 hover:bg-muted-foreground/60 w-2'
-                  }`}
-                  aria-label={`Go to ${slide.label}`}
-                />
-              ))}
-            </div>
+                {slides[activeIndex].link!.replace('https://www.', '')}
+              </a>
+            )}
           </div>
-        )}
+
+          {/* Dots */}
+          <div className="flex gap-2">
+            {slides.map((slide, index) => (
+              <button
+                key={slide.label}
+                onClick={() => {
+                  if (!isStatic && sectionRef.current) {
+                    const sectionTop = sectionRef.current.offsetTop;
+                    const sectionHeight = sectionRef.current.offsetHeight - window.innerHeight;
+                    const targetScroll = sectionTop + (index / (slides.length - 1)) * sectionHeight;
+                    window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+                  } else {
+                    setActiveIndex(index);
+                  }
+                }}
+                className={`h-2 rounded-full transition-all duration-300 ${
+                  index === activeIndex
+                    ? 'bg-foreground w-6'
+                    : 'bg-muted-foreground/40 hover:bg-muted-foreground/60 w-2'
+                }`}
+                aria-label={`Go to ${slide.label}`}
+              />
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );
