@@ -198,52 +198,52 @@ export function ShowcaseCarousel() {
           </div>
         </div>
 
-        {/* Bottom Bar: Label + Link + Dots */}
-        <div className="py-6 flex flex-col items-center gap-3">
-          <div className="text-center min-h-[3rem]">
-            <p
-              className="text-sm font-semibold text-foreground transition-opacity duration-300"
-              key={activeIndex}
-            >
-              {slides[activeIndex]?.label}
-            </p>
-            {slides[activeIndex]?.link && (
-              <a
-                href={slides[activeIndex].link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-xs text-muted-foreground hover:text-foreground transition-colors underline underline-offset-2"
+        {/* Bottom Bar: Label + Link + Dots (desktop only) */}
+        {!isMobile && (
+          <div className="py-6 flex flex-col items-center gap-3">
+            <div className="text-center min-h-[3rem]">
+              <p
+                className="text-sm font-semibold text-foreground transition-opacity duration-300"
+                key={activeIndex}
               >
-                {slides[activeIndex].link!.replace('https://www.', '')}
-              </a>
-            )}
-          </div>
+                {slides[activeIndex]?.label}
+              </p>
+              {slides[activeIndex]?.link && (
+                <a
+                  href={slides[activeIndex].link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs text-muted-foreground hover:text-foreground transition-colors underline underline-offset-2"
+                >
+                  {slides[activeIndex].link!.replace('https://www.', '')}
+                </a>
+              )}
+            </div>
 
-          {/* Dots */}
-          <div className="flex gap-2">
-            {slides.map((slide, index) => (
-              <button
-                key={slide.label}
-                onClick={() => {
-                  if (!isStatic && sectionRef.current) {
-                    const sectionTop = sectionRef.current.offsetTop;
-                    const sectionHeight = sectionRef.current.offsetHeight - window.innerHeight;
-                    const targetScroll = sectionTop + (index / (slides.length - 1)) * sectionHeight;
-                    window.scrollTo({ top: targetScroll, behavior: 'smooth' });
-                  } else {
-                    setActiveIndex(index);
-                  }
-                }}
-                className={`h-2 rounded-full transition-all duration-300 ${
-                  index === activeIndex
-                    ? 'bg-foreground w-6'
-                    : 'bg-muted-foreground/40 hover:bg-muted-foreground/60 w-2'
-                }`}
-                aria-label={`Go to ${slide.label}`}
-              />
-            ))}
+            {/* Dots */}
+            <div className="flex gap-2">
+              {slides.map((slide, index) => (
+                <button
+                  key={slide.label}
+                  onClick={() => {
+                    if (sectionRef.current) {
+                      const sectionTop = sectionRef.current.offsetTop;
+                      const sectionHeight = sectionRef.current.offsetHeight - window.innerHeight;
+                      const targetScroll = sectionTop + (index / (slides.length - 1)) * sectionHeight;
+                      window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+                    }
+                  }}
+                  className={`h-2 rounded-full transition-all duration-300 ${
+                    index === activeIndex
+                      ? 'bg-foreground w-6'
+                      : 'bg-muted-foreground/40 hover:bg-muted-foreground/60 w-2'
+                  }`}
+                  aria-label={`Go to ${slide.label}`}
+                />
+              ))}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </section>
   );
