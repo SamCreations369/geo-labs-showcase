@@ -168,7 +168,7 @@ export function Contact() {
           transition={{ delay: 0.2 }}
           className="max-w-lg mx-auto"
         >
-          <form onSubmit={handleSubmit} className="glass-card p-8 rounded-2xl shadow-card">
+          <form onSubmit={handleSubmit} className="glass-card p-6 sm:p-8 rounded-2xl shadow-card">
             {/* Honeypot field - hidden from users, catches bots */}
             <input
               type="text"

@@ -35,7 +35,7 @@ const posts = [
 
 export function Blog() {
   return (
-    <section id="blog" className="py-24 bg-secondary/30">
+    <section id="blog" className="py-16 sm:py-24 bg-secondary/30">
       <div className="section-container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

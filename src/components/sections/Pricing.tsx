@@ -52,7 +52,7 @@ export function Pricing() {
   const [activeTab, setActiveTab] = useState<'seo' | 'web'>('seo');
   const plans = activeTab === 'seo' ? seoPlans : webPlans;
 
-  return <section id="pricing" className="py-24 bg-background">
+  return <section id="pricing" className="py-16 sm:py-24 bg-background">
       <div className="section-container">
         <motion.div initial={{
         opacity: 0,

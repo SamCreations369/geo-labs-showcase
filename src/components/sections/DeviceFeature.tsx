@@ -17,7 +17,7 @@ export function DeviceFeature() {
   const y1 = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [100, -100]);
   const y2 = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [60, -60]);
   const imageScale = useTransform(scrollYProgress, [0, 0.6], isMobile ? [1, 1] : [0.65, 1.02]);
-  return <section ref={ref} id="features" className="py-24 bg-background overflow-hidden">
+  return <section ref={ref} id="features" className="py-16 sm:py-24 bg-background overflow-hidden">
       <div className="section-container">
         <motion.div initial={{
         opacity: 0,
