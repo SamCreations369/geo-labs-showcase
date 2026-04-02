@@ -76,23 +76,9 @@ export function Hero() {
           </div>
         </motion.div>
 
-        {/* 3D Showcase Carousel */}
-        <motion.div
-          className="mx-auto max-w-5xl"
-          initial={{ opacity: 0, y: 60 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          style={{
-            y: imageY,
-            scale: imageScale,
-            rotateX: imageRotateX,
-            transformStyle: 'preserve-3d',
-            transformOrigin: 'center bottom',
-            perspective: '1200px',
-          }}
-        >
-          <ShowcaseCarousel />
-        </motion.div>
       </div>
+
+      {/* Scroll-driven Showcase Carousel */}
+      <ShowcaseCarousel />
     </section>;
 }
