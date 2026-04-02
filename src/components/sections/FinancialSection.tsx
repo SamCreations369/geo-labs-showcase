@@ -35,8 +35,7 @@ export function FinancialSection() {
 
             </h2>
             <p className="text-lg mb-8 text-secondary-foreground">
-              Traditional SEO isn't enough. AI platforms are answering questions without sending traffic which cuts into the clicks businesses normally earn from search. We optimize your content so you're part of the answer, not left out of the conversation entirely.
-
+              Traditional SEO isn't enough. AI platforms are answering questions without sending traffic which cuts into the clicks businesses normally earn from search. We build websites optimized for both traditional search and AI discovery, so you're part of the answer — not left out of the conversation entirely.
             </p>
             <div className="flex flex-wrap gap-3 mb-8">
               {features.map(feature => <div key={feature} className="chip">

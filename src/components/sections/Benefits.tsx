@@ -20,13 +20,13 @@ const integrationLogos = [{
 }];
 const features = [{
   title: 'Visibility that compounds',
-  description: "We don't chase algorithm hacks or short-term ranking wins. We build search presence that compounds over time through quality content and technical optimization. Rankings that stick after updates, authority that grows, visibility that lasts."
+  description: "We don't chase algorithm hacks or short-term ranking wins. We build search presence that compounds over time through quality content, technical optimization, and websites designed to convert. Rankings that stick after updates, authority that grows, visibility that lasts."
 }, {
   title: 'Transparency',
-  description: "You'll always know what we're doing, why we're implementing specific optimizations, and how your rankings are performing. Clear monthly reporting, regular strategy updates, and honest conversations about what's working and what needs adjustment."
+  description: "You'll always know what we're doing, why we're implementing specific optimizations, and how your site and rankings are performing. Clear monthly reporting, regular strategy updates, and honest conversations about what's working and what needs adjustment."
 }, {
-  title: 'Custom SEO Strategy',
-  description: "No templates. No cookie-cutter SEO approaches. Every technical audit, optimization plan, and content strategy is built around your business goals, your industry, and your specific competitive landscape in the LA market."
+  title: 'Custom Strategy',
+  description: "No templates. No cookie-cutter approaches. Every website, technical audit, optimization plan, and content strategy is built around your business goals, your industry, and your specific competitive landscape in the LA market."
 }];
 export function Benefits() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -67,7 +67,7 @@ export function Benefits() {
         once: true
       }} className="text-center mb-16 max-w-3xl mx-auto">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl text-foreground leading-tight mb-6">
-            Built for businesses that understand customers can't buy what they can't find
+            Premium websites & search visibility for businesses that want to be found
           </h2>
         </motion.div>
 
@@ -85,7 +85,7 @@ export function Benefits() {
         }} whileHover={{
           scale: 1.02
         }} className="bg-secondary/50 p-8 rounded-2xl feature-card">
-            <h3 className="text-2xl font-semibold text-foreground mb-8">Smart, flexible, and built around your business </h3>
+            <h3 className="text-2xl font-semibold text-foreground mb-8">Smart websites, flexible and built around your business</h3>
             
             <div className="bg-white rounded-xl p-4 mb-6 inline-block">
               <div className="flex items-center gap-2 mb-4">
@@ -110,7 +110,7 @@ export function Benefits() {
             </div>
 
             <p className="text-foreground">
-              <strong>Personalize every detail,</strong> From branding and interface layout to colors and menus, so your presence feels like an extension of your brand.
+              <strong>Personalize every detail.</strong> From custom web design and branding to colors, layouts, and SEO structure — your website feels like a true extension of your brand.
             </p>
           </motion.div>
 

@@ -53,7 +53,7 @@ export function Blog() {
           className="text-center mb-16"
         >
           <h2 className="text-3xl sm:text-4xl lg:text-5xl text-foreground leading-tight">
-            Ideas to level-up your local search game
+            Ideas to level-up your web presence & local search game
           </h2>
         </motion.div>
 
