@@ -132,19 +132,44 @@ export function ShowcaseCarousel() {
           >
             {slides.map((slide, index) => {
               // Static layout: show only active on mobile, all stacked for reduced motion
-              if (isStatic) {
-                if (isMobile && index !== activeIndex) return null;
+              if (isStatic && !isMobile) {
+                // Reduced motion only: static stacked
                 return (
                   <div
                     key={slide.label}
-                    className={`${prefersReduced ? 'mb-6' : ''} w-[90%] sm:w-[80%] mx-auto rounded-2xl overflow-hidden shadow-2xl bg-card border border-border`}
-                    style={isMobile ? { aspectRatio: '16/9' } : {}}
+                    className="mb-6 w-[90%] sm:w-[80%] mx-auto rounded-2xl overflow-hidden shadow-2xl bg-card border border-border"
                   >
                     {slide.type === 'image' ? (
                       <img src={slide.src} alt={slide.alt} className="w-full h-full object-cover" loading="lazy" />
                     ) : (
                       <video src={slide.src} autoPlay muted loop playsInline className="w-full h-full object-cover" />
                     )}
+                  </div>
+                );
+              }
+
+              if (isMobile) {
+                // Mobile: all cards shown, animated by GSAP
+                return (
+                  <div
+                    key={slide.label}
+                    ref={(el) => setCardRef(el, index)}
+                    className="mb-6 w-[90%] mx-auto rounded-2xl overflow-hidden shadow-2xl bg-card border border-border"
+                    style={{ aspectRatio: '16/9', willChange: 'transform, opacity' }}
+                  >
+                    {slide.type === 'image' ? (
+                      <img src={slide.src} alt={slide.alt} className="w-full h-full object-cover" loading="lazy" />
+                    ) : (
+                      <video src={slide.src} autoPlay muted loop playsInline className="w-full h-full object-cover" />
+                    )}
+                    <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/60 to-transparent">
+                      <p className="text-sm font-semibold text-primary-foreground">{slide.label}</p>
+                      {slide.link && (
+                        <a href={slide.link} target="_blank" rel="noopener noreferrer" className="text-xs text-primary-foreground/70 underline underline-offset-2">
+                          {slide.link.replace('https://www.', '')}
+                        </a>
+                      )}
+                    </div>
                   </div>
                 );
               }
