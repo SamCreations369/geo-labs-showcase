@@ -66,7 +66,7 @@ export function DeviceFeature() {
             ease: [0.25, 0.1, 0.25, 1]
           }}>
               <img alt="PGR Window Tint mobile website mockup" className="w-1/2 h-full object-cover flex-shrink-0" src={pgrMobileMockup} />
-              <img alt="GEO Labs web dashboard showing AI search results" className="w-1/2 h-full object-cover flex-shrink-0" src="/lovable-uploads/c41029e1-ca56-4b1f-ba7f-b491ff3e7dc1.png" />
+              <img alt="Volt Electric web dashboard showing latest projects" className="w-1/2 h-full object-cover flex-shrink-0" src={voltElectricMockup} />
             </motion.div>
 
             {/* Tab buttons - inside image at bottom */}
