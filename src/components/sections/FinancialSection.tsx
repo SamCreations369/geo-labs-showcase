@@ -44,7 +44,7 @@ export function FinancialSection() {
                 </div>)}
             </div>
             <AnimatedButton href="#contact">
-              Get Your Visibility Audit
+              Book a Free Consultation
             </AnimatedButton>
           </motion.div>
 

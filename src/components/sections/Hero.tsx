@@ -70,7 +70,7 @@ export function Hero() {
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <AnimatedButton href="#contact">
-              Get Your Visibility Audit
+              Book a Free Consultation
             </AnimatedButton>
           </div>
         </motion.div>

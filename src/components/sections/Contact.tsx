@@ -269,7 +269,7 @@ export function Contact() {
                     className="absolute top-full transition-transform duration-300 ease-out group-hover:-translate-y-full flex items-center" 
                     aria-hidden="true"
                   >
-                    {isSubmitting ? 'Submitting...' : submitSuccess ? 'Thank you!' : 'Get Your Visibility Audit'}
+                    {isSubmitting ? 'Submitting...' : submitSuccess ? 'Thank you!' : 'Book a Free Consultation'}
                     {!isSubmitting && !submitSuccess && <Send className="ml-2 w-4 h-4" />}
                   </span>
                 </span>
