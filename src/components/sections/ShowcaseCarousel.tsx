@@ -1,5 +1,6 @@
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect, useCallback, useRef } from 'react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import ahrefsShowcase from '@/assets/ahrefs-showcase.png';
 import gscShowcase from '@/assets/google-search-console.png';
@@ -19,157 +20,165 @@ const slides: SlideItem[] = [
 ];
 
 export function ShowcaseCarousel() {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
   const isMobile = useIsMobile();
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ['start start', 'end end'],
-  });
+  const next = useCallback(() => {
+    setActiveIndex((prev) => (prev + 1) % slides.length);
+  }, []);
 
-  // Map scroll to active index
-  const activeIndexFloat = useTransform(scrollYProgress, [0, 1], [0, slides.length - 1]);
+  const prev = useCallback(() => {
+    setActiveIndex((prev) => (prev - 1 + slides.length) % slides.length);
+  }, []);
+
+  // Scroll-driven: advance slides on scroll within the container
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    let lastScrollY = window.scrollY;
+    let accumulatedDelta = 0;
+    const threshold = 150; // pixels of scroll needed to advance
+
+    const handleScroll = () => {
+      const rect = container.getBoundingClientRect();
+      const inView = rect.top < window.innerHeight && rect.bottom > 0;
+      if (!inView) {
+        accumulatedDelta = 0;
+        return;
+      }
+
+      const delta = window.scrollY - lastScrollY;
+      lastScrollY = window.scrollY;
+      accumulatedDelta += delta;
+
+      if (accumulatedDelta > threshold) {
+        accumulatedDelta = 0;
+        setActiveIndex((prev) => Math.min(prev + 1, slides.length - 1));
+      } else if (accumulatedDelta < -threshold) {
+        accumulatedDelta = 0;
+        setActiveIndex((prev) => Math.max(prev - 1, 0));
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const getSlideStyle = (index: number) => {
+    const diff = index - activeIndex;
+
+    if (isMobile) {
+      return {
+        rotateY: 0,
+        scale: diff === 0 ? 1 : 0.85,
+        x: `${diff * 105}%`,
+        z: diff === 0 ? 0 : -100,
+        opacity: diff === 0 ? 1 : 0,
+      };
+    }
+
+    return {
+      rotateY: diff * -45,
+      scale: diff === 0 ? 1 : 0.75,
+      x: `${diff * 85}%`,
+      z: diff === 0 ? 0 : -250,
+      opacity: Math.abs(diff) > 1 ? 0 : diff === 0 ? 1 : 0.5,
+    };
+  };
 
   return (
-    // Tall container to create scroll space — each slide gets ~100vh
-    <div ref={containerRef} style={{ height: `${slides.length * 100}vh` }} className="relative">
-      {/* Sticky viewport */}
-      <div className="sticky top-0 h-screen flex flex-col items-center justify-center overflow-hidden bg-background z-30">
-        <div
-          className="relative w-full max-w-5xl mx-auto"
-          style={{ perspective: '1200px', height: isMobile ? '60vh' : '65vh' }}
-        >
-          <div className="relative w-full h-full" style={{ transformStyle: 'preserve-3d' }}>
-            {slides.map((slide, index) => (
-              <ScrollSlide
+    <div ref={containerRef} className="relative w-full">
+      {/* 3D Perspective Container */}
+      <div
+        className="relative mx-auto max-w-5xl overflow-hidden"
+        style={{ perspective: '1200px', height: isMobile ? '300px' : '500px' }}
+      >
+        <div className="relative w-full h-full" style={{ transformStyle: 'preserve-3d' }}>
+          {slides.map((slide, index) => {
+            const style = getSlideStyle(index);
+            return (
+              <motion.div
                 key={slide.label}
-                slide={slide}
-                index={index}
-                activeIndexFloat={activeIndexFloat}
-                isMobile={isMobile}
-              />
-            ))}
-          </div>
-        </div>
-
-        {/* Dots + label */}
-        <div className="mt-4 flex flex-col items-center gap-2">
-          <div className="flex gap-2">
-            {slides.map((_, i) => (
-              <ScrollDot key={i} index={i} activeIndexFloat={activeIndexFloat} />
-            ))}
-          </div>
-          <ScrollLabel activeIndexFloat={activeIndexFloat} />
+                className="absolute inset-0 flex items-center justify-center"
+                animate={style}
+                transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+                style={{ transformStyle: 'preserve-3d' }}
+              >
+                <div className="w-[90%] sm:w-[80%] h-full rounded-2xl overflow-hidden shadow-2xl bg-card border border-border">
+                  {slide.type === 'image' ? (
+                    <img
+                      src={slide.src}
+                      alt={slide.alt}
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <video
+                      src={slide.src}
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      className="w-full h-full object-cover"
+                    />
+                  )}
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
+
+      {/* Navigation */}
+      <div className="flex items-center justify-center gap-4 mt-6">
+        <button
+          onClick={prev}
+          className="p-2 rounded-full bg-card border border-border hover:bg-accent transition-colors"
+          aria-label="Previous slide"
+        >
+          <ChevronLeft className="w-5 h-5 text-foreground" />
+        </button>
+
+        {/* Dots */}
+        <div className="flex gap-2">
+          {slides.map((slide, index) => (
+            <button
+              key={slide.label}
+              onClick={() => setActiveIndex(index)}
+              className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                index === activeIndex
+                  ? 'bg-foreground w-6'
+                  : 'bg-muted-foreground/40 hover:bg-muted-foreground/60'
+              }`}
+              aria-label={`Go to ${slide.label}`}
+            />
+          ))}
+        </div>
+
+        <button
+          onClick={next}
+          className="p-2 rounded-full bg-card border border-border hover:bg-accent transition-colors"
+          aria-label="Next slide"
+        >
+          <ChevronRight className="w-5 h-5 text-foreground" />
+        </button>
+      </div>
+
+      {/* Label */}
+      <AnimatePresence mode="wait">
+        <motion.p
+          key={activeIndex}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+          transition={{ duration: 0.3 }}
+          className="text-center text-sm text-muted-foreground mt-3 font-medium"
+        >
+          {slides[activeIndex].label}
+        </motion.p>
+      </AnimatePresence>
     </div>
-  );
-}
-
-function ScrollSlide({
-  slide,
-  index,
-  activeIndexFloat,
-  isMobile,
-}: {
-  slide: SlideItem;
-  index: number;
-  activeIndexFloat: ReturnType<typeof useTransform>;
-  isMobile: boolean;
-}) {
-  const diff = useTransform(activeIndexFloat, (v: number) => index - v);
-
-  const rotateY = useTransform(diff, (d: number) => (isMobile ? 0 : d * -45));
-  const scale = useTransform(diff, (d: number) => {
-    const abs = Math.abs(d);
-    if (abs < 0.05) return 1;
-    return isMobile ? 0.85 : 0.75;
-  });
-  const xPercent = useTransform(diff, (d: number) =>
-    isMobile ? d * 110 : d * 85
-  );
-  const z = useTransform(diff, (d: number) => {
-    const abs = Math.abs(d);
-    if (abs < 0.05) return 0;
-    return isMobile ? -100 : -250;
-  });
-  const opacity = useTransform(diff, (d: number) => {
-    const abs = Math.abs(d);
-    if (abs < 0.05) return 1;
-    if (isMobile) return Math.max(0, 1 - abs * 2);
-    return abs > 1.2 ? 0 : 0.5;
-  });
-
-  return (
-    <motion.div
-      className="absolute inset-0 flex items-center justify-center"
-      style={{
-        rotateY,
-        scale,
-        x: useTransform(xPercent, (v: number) => `${v}%`),
-        z,
-        opacity,
-        transformStyle: 'preserve-3d',
-      }}
-    >
-      <div className="w-[90%] sm:w-[80%] h-[85%] rounded-2xl overflow-hidden shadow-2xl bg-card border border-border">
-        {slide.type === 'image' ? (
-          <img
-            src={slide.src}
-            alt={slide.alt}
-            className="w-full h-full object-cover"
-            loading="lazy"
-          />
-        ) : (
-          <video
-            src={slide.src}
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="w-full h-full object-cover"
-          />
-        )}
-      </div>
-    </motion.div>
-  );
-}
-
-function ScrollLabel({
-  activeIndexFloat,
-}: {
-  activeIndexFloat: ReturnType<typeof useTransform>;
-}) {
-  const label = useTransform(activeIndexFloat, (v: number) => {
-    const idx = Math.round(Math.max(0, Math.min(v, slides.length - 1)));
-    return slides[idx].label;
-  });
-
-  return (
-    <motion.p className="text-sm text-muted-foreground font-medium">{label}</motion.p>
-  );
-}
-
-function ScrollDot({
-  index,
-  activeIndexFloat,
-}: {
-  index: number;
-  activeIndexFloat: ReturnType<typeof useTransform>;
-}) {
-  const activeIdx = useTransform(activeIndexFloat, (v: number) =>
-    Math.round(Math.max(0, Math.min(v, slides.length - 1)))
-  );
-  const isActive = useTransform(activeIdx, (v: number) => v === index);
-  const width = useTransform(isActive, (a: boolean) => (a ? 24 : 8));
-  const bg = useTransform(isActive, (a: boolean) =>
-    a ? 'hsl(var(--foreground))' : 'hsl(var(--muted-foreground) / 0.4)'
-  );
-
-  return (
-    <motion.div
-      className="h-2 rounded-full"
-      style={{ width, backgroundColor: bg }}
-    />
   );
 }
