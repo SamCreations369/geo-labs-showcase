@@ -2,6 +2,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef, useState } from 'react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import decorativeShape from '@/assets/decorative-shape.png';
+import pgrMobileMockup from '@/assets/pgr-mobile-mockup.png';
 
 export function DeviceFeature() {
   const ref = useRef<HTMLDivElement>(null);
