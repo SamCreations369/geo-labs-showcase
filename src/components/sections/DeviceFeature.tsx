@@ -30,7 +30,7 @@ export function DeviceFeature() {
       }} viewport={{
         once: true
       }} className="text-center mb-6">
-          <span className="eyebrow text-card-foreground">Everywhere customers look</span>
+          <span className="eyebrow text-card-foreground">Web Creation & Visibility</span>
         </motion.div>
 
         <motion.div initial={{
