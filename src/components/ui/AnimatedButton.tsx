@@ -36,14 +36,17 @@ export function AnimatedButton({
         )}>
           {children}
         </span>
-        {!isMobile && (
-          <span 
-            className="absolute top-full transition-transform duration-300 ease-out group-hover:-translate-y-full"
-            aria-hidden="true"
-          >
-            {children}
-          </span>
-        )}
+        <span 
+          className={cn(
+            "absolute top-full",
+            isMobile 
+              ? "animate-text-slide will-change-transform" 
+              : "transition-transform duration-300 ease-out group-hover:-translate-y-full"
+          )}
+          aria-hidden="true"
+        >
+          {children}
+        </span>
       </span>
     </a>
   );
